@@ -1,0 +1,40 @@
+# R files
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+*.Rproj
+
+# RMarkdown
+*.html
+*.pdf
+*.docx
+*_cache/
+*_files/
+
+# Data files (optional - keep raw data in git)
+# data/raw/*.csv
+
+# Output files
+output/*.pdf
+output/*.html
+output/*.docx
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporary files
+*.tmp
+*.log
+~$*
+
+# IDE
+.vscode/
+.idea/
+
+# Python (if used)
+__pycache__/
+*.pyc
+.ipynb_checkpoints/

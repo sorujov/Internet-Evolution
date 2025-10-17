@@ -1,0 +1,40 @@
+Project Structure Created 
+======================= 
+ 
+Folder PATH listing
+Volume serial number is A8EA-5892
+C:.
+¦   .gitignore
+¦   PROJECT_STRUCTURE.txt
+¦   README.md
+¦   run_all.R
+¦   
++---.github
++---analysis
+¦       01_data_prep.R
+¦       02_descriptive_stats.R
+¦       03_trend_analysis.R
+¦       04_comparative_analysis.R
+¦       
++---data
+¦   +---processed
+¦   ¦       .gitkeep
+¦   ¦       
+¦   +---raw
+¦           .gitkeep
+¦           
++---docs
+¦       DATA_DICTIONARY.md
+¦       DOCUMENTATION.md
+¦       
++---figures
+¦       .gitkeep
+¦       
++---output
+¦       .gitkeep
+¦       
++---report
+        article.Rmd
+        icta_style.css
+        references.bib
+        
