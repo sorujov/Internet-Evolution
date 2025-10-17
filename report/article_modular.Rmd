@@ -1,0 +1,195 @@
+---
+title: "İnternet Keyfiyyəti: Dünəndən Bu Günə"
+subtitle: "Azərbaycanın Rəqəmsal Transformasiyası (2019-2025)"
+author: "İnformasiya Texnologiyaları və Rabitə Agentliyi (ICTA)"
+date: "`r format(Sys.Date(), '%d %B %Y')`"
+output_dir: "./output"
+output:
+  html_document:
+    toc: true
+    toc_float: 
+      collapsed: false
+      smooth_scroll: true
+    toc_depth: 3
+    theme: flatly
+    highlight: tango
+    code_folding: hide
+    css: icta_style.css
+    number_sections: false
+  pdf_document:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+    latex_engine: xelatex
+    keep_tex: false
+    dev: cairo_pdf
+  word_document:
+    toc: true
+    toc_depth: 3
+always_allow_html: true
+bibliography: references_and_styles/references.bib
+csl: references_and_styles/apa.csl
+---
+
+```{r setup, include=FALSE}
+# Determine output format
+is_word <- !is.null(knitr::opts_knit$get("rmarkdown.pandoc.to")) && 
+           knitr::opts_knit$get("rmarkdown.pandoc.to") == "docx"
+
+# Prefer user-level library to avoid locked system packages during render
+user_lib <- file.path(Sys.getenv("LOCALAPPDATA"), "R", "win-library",
+                      paste0(R.version$major, ".", strsplit(R.version$minor, "\\.")[[1]][1]))
+if (!dir.exists(user_lib)) dir.create(user_lib, recursive = TRUE)
+.libPaths(c(user_lib, .libPaths()))
+
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE,
+  fig.width = 12,
+  fig.height = 7,
+  dpi = 300,
+  dev = if(knitr::is_latex_output()) 'cairo_pdf' else 'png'
+)
+
+# Set fig.align only for non-Word outputs (Word doesn't support it)
+if (!is_word) {
+  knitr::opts_chunk$set(fig.align = "default")
+}
+
+# Fix UTF-8 encoding for PDF plots
+if (knitr::is_latex_output()) {
+  pdf.options(encoding = "UTF-8")
+  options(
+    device = function(...) {
+      cairo_pdf(..., family = "DejaVu Sans")
+    }
+  )
+}
+
+# Load required packages
+suppressPackageStartupMessages({
+  library(tidyverse)
+  library(lubridate)
+  library(knitr)
+  library(kableExtra)
+  library(scales)
+  library(ggthemes)
+  library(flextable)
+  library(officer)
+})
+
+# Resolve namespace conflicts
+filter <- dplyr::filter
+lag <- dplyr::lag
+
+# Set ggplot2 theme with Unicode-safe font for PDF
+if (knitr::is_latex_output()) {
+  theme_set(theme_minimal(base_size = 12, base_family = "DejaVu Sans") +
+    theme(
+      plot.title = element_text(face = "bold", size = 16, hjust = 0.5),
+      plot.subtitle = element_text(size = 12, hjust = 0.5),
+      axis.title = element_text(face = "bold"),
+      legend.position = "bottom",
+      panel.grid.minor = element_blank(),
+      text = element_text(family = "DejaVu Sans")
+    ))
+} else {
+  theme_set(theme_minimal(base_size = 12) +
+    theme(
+      plot.title = element_text(face = "bold", size = 16, hjust = 0.5),
+      plot.subtitle = element_text(size = 12, hjust = 0.5),
+      axis.title = element_text(face = "bold"),
+      legend.position = "bottom",
+      panel.grid.minor = element_blank()
+    ))
+}
+
+# Load all processed data
+fixed_clean <- read_csv("../data/processed/fixed_clean.csv", show_col_types = FALSE)
+cellular_clean <- read_csv("../data/processed/cellular_clean.csv", show_col_types = FALSE)
+az_fixed <- read_csv("../data/processed/azerbaijan_fixed.csv", show_col_types = FALSE)
+az_cellular <- read_csv("../data/processed/azerbaijan_cellular.csv", show_col_types = FALSE)
+az_summary <- read_csv("../data/processed/azerbaijan_summary_stats.csv", show_col_types = FALSE)
+az_yearly <- read_csv("../data/processed/azerbaijan_yearly_stats.csv", show_col_types = FALSE)
+trend_results <- read_csv("../data/processed/trend_analysis_results.csv", show_col_types = FALSE)
+growth_analysis <- read_csv("../data/processed/growth_analysis.csv", show_col_types = FALSE)
+yoy_growth <- read_csv("../data/processed/yoy_growth.csv", show_col_types = FALSE)
+cis_latest <- read_csv("../data/processed/cis_comparison_latest.csv", show_col_types = FALSE)
+cis_overall <- read_csv("../data/processed/cis_comparison_overall.csv", show_col_types = FALSE)
+cis_growth <- read_csv("../data/processed/cis_growth_comparison.csv", show_col_types = FALSE)
+
+# Prepare key variables
+az_fixed_median <- az_fixed %>% filter(MetricType == "median")
+az_cellular_median <- az_cellular %>% filter(MetricType == "median")
+fixed_first <- az_fixed_median %>% arrange(Date) %>% slice(1)
+fixed_last <- az_fixed_median %>% arrange(Date) %>% slice(n())
+cellular_first <- az_cellular_median %>% arrange(Date) %>% slice(1)
+cellular_last <- az_cellular_median %>% arrange(Date) %>% slice(n())
+```
+
+# İcra Xülasəsi
+
+Bu hesabat MDB ölkələrində, xüsusilə Azərbaycanda internet keyfiyyətinin 2019-cu ilin aprelindən 2025-ci ilin sentyabrına qədər olan 6.5 illik təkamülünü araşdırır. Təhlil sabit (fixed) və mobil (cellular) internet xidmətlərinin performans göstəricilərini əhatə edir.
+
+## Əsas Nəticələr
+
+```{r executive-summary, results='asis'}
+cat(sprintf("
+### Sabit İnternet
+
+- **Artım:** %.2f Mbps (2019) → %.2f Mbps (2025) — **%.0f%% artım**
+- **Aylıq orta artım:** %.2f Mbps
+- **Regional sıralama:** 5-ci yer (8 ölkə arasında)
+- **Yükləmə sürəti:** %.2f Mbps → %.2f Mbps
+
+### Mobil İnternet
+
+- **Artım:** %.2f Mbps (2019) → %.2f Mbps (2025) — **%.0f%% artım**
+- **Regional sıralama:** **1-ci yer** (8 ölkə arasında) 🏆
+- **Üstünlük:** MDB-də ən yüksək mobil internet sürəti
+- **Yükləmə sürəti:** %.2f Mbps → %.2f Mbps
+",
+fixed_first$DownloadSpeed, fixed_last$DownloadSpeed,
+((fixed_last$DownloadSpeed - fixed_first$DownloadSpeed) / fixed_first$DownloadSpeed) * 100,
+trend_results %>% filter(Type == "Fixed", Metric == "Download") %>% pull(MonthlyIncrease),
+fixed_first$UploadSpeed, fixed_last$UploadSpeed,
+cellular_first$DownloadSpeed, cellular_last$DownloadSpeed,
+((cellular_last$DownloadSpeed - cellular_first$DownloadSpeed) / cellular_first$DownloadSpeed) * 100,
+cellular_first$UploadSpeed, cellular_last$UploadSpeed
+))
+```
+
+---
+
+```{r introduction, child='sections/01_introduction.Rmd'}
+```
+
+```{r methodology, child='sections/02_methodology.Rmd'}
+```
+
+```{r fixed-internet, child='sections/03_fixed_internet.Rmd'}
+```
+
+```{r mobile-internet, child='sections/04_mobile_internet.Rmd'}
+```
+
+```{r regional-comparison, child='sections/05_regional_comparison.Rmd'}
+```
+
+```{r conclusions, child='sections/06_conclusions.Rmd'}
+```
+
+---
+
+# İstinadlar
+
+<div id="refs"></div>
+
+---
+
+**Hazırladı:** ICTA Azerbaijan - Statistics Unit  
+**Tarix:** `r format(Sys.Date(), '%d.%m.%Y')`  
+**Versiya:** 1.0
+
+© 2025 İnformasiya Texnologiyaları və Rabitə Agentliyi. Bütün hüquqlar qorunur.

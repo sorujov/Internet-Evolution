@@ -1,0 +1,112 @@
+# Sabit İnternet: Təkamül Dinamikası
+
+## Trend Təhlili
+
+```{r fixed-trend-plot, fig.cap="Şəkil 1: Azərbaycan sabit internet sürətinin dinamikası"}
+az_fixed_plot <- az_fixed_median %>%
+  select(Date, DownloadSpeed, UploadSpeed) %>%
+  pivot_longer(cols = c(DownloadSpeed, UploadSpeed),
+               names_to = "Metric",
+               values_to = "Speed")
+
+ggplot(az_fixed_plot, aes(x = Date, y = Speed, color = Metric, group = Metric)) +
+  geom_line(size = 1.2) +
+  geom_point(size = 2, alpha = 0.6) +
+  geom_smooth(method = "lm", se = TRUE, alpha = 0.2, linetype = "dashed") +
+  scale_color_manual(values = c("DownloadSpeed" = "#0066cc", 
+                                  "UploadSpeed" = "#ff6600"),
+                     labels = c("Download", "Upload")) +
+  scale_y_continuous(labels = comma) +
+  labs(title = "Sabit İnternet Sürətinin Dinamikası",
+       subtitle = "Azərbaycan (2019-2025)",
+       x = "Tarix",
+       y = "Sürət (Mbps)",
+       color = "Göstərici")
+```
+
+### Reqressiya Nəticələri
+
+```{r fixed-regression-table}
+fixed_trend_stats <- trend_results %>%
+  filter(Type == "Fixed") %>%
+  select(Metric, MonthlyIncrease, RSquared, PValue)
+if (is_word) {
+  ft3 <- flextable(fixed_trend_stats)
+  ft3 <- set_header_labels(ft3,
+                           Metric = "Göstərici",
+                           MonthlyIncrease = "Aylıq Artım (Mbps)",
+                           RSquared = "R²",
+                           PValue = "p-dəyəri")
+  ft3 <- set_caption(ft3, "Tablo 3: Sabit internet trend statistikası")
+  ft3 <- theme_vanilla(ft3)
+  ft3 <- colformat_num(ft3, j = "MonthlyIncrease", digits = 4)
+  ft3 <- colformat_num(ft3, j = "RSquared", digits = 4)
+  ft3 <- colformat_num(ft3, j = "PValue", digits = 10)
+  ft3 <- add_footer_lines(ft3, values = "Qeyd: Xətti reqressiya modeli nəticələri")
+  ft3 <- align(ft3, align = "center", part = "all")
+  ft3 <- autofit(ft3)
+  ft3
+} else {
+  kable(fixed_trend_stats,
+        col.names = c("Göstərici", "Aylıq Artım (Mbps)", "R²", "p-dəyəri"),
+        caption = "Tablo 3: Sabit internet trend statistikası",
+        digits = c(0, 4, 4, 10)) %>%
+    kable_styling(bootstrap_options = c("striped", "hover"), full_width = FALSE) %>%
+    add_footnote("Qeyd: Xətti reqressiya modeli nəticələri", notation = "none")
+}
+```
+
+**Əsas tapıntılar:**
+
+- Aylıq orta artım: **`r round(trend_results %>% filter(Type == "Fixed", Metric == "Download") %>% pull(MonthlyIncrease), 2)` Mbps**
+- Model uyğunluğu: R² = **`r round(trend_results %>% filter(Type == "Fixed", Metric == "Download") %>% pull(RSquared), 3)`** (yüksək izahedicilik)
+- Statistik əhəmiyyət: p < 0.001 (son dərəcə əhəmiyyətli)
+
+Bu nəticələr qlobal internet infrastruktur inkişaf trendləri ilə uyğunluq təşkil edir [@cisco2024].
+
+## Artım Göstəriciləri
+
+```{r fixed-growth-table}
+fixed_growth_data <- growth_analysis %>% filter(Type == "Fixed")
+
+growth_table <- tibble(
+  Göstərici = c("Başlanğıc (2019)", "Son (2025)", "Ümumi Artım", "İllik CAGR"),
+  Download = c(
+    sprintf("%.2f Mbps", fixed_growth_data$FirstDownload),
+    sprintf("%.2f Mbps", fixed_growth_data$LastDownload),
+    sprintf("%.0f%%", fixed_growth_data$PercentGrowthDownload),
+    sprintf("%.1f%%", fixed_growth_data$CAGRDownload)
+  )
+)
+if (is_word) {
+  ft4 <- flextable(growth_table)
+  ft4 <- set_header_labels(ft4, Göstərici = "Göstərici", Download = "Download Speed")
+  ft4 <- set_caption(ft4, "Tablo 4: Sabit internet artım göstəriciləri")
+  ft4 <- theme_vanilla(ft4)
+  ft4 <- align(ft4, align = "center", part = "all")
+  ft4 <- autofit(ft4)
+  ft4
+} else {
+  kable(growth_table,
+        caption = "Tablo 4: Sabit internet artım göstəriciləri",
+        col.names = c("Göstərici", "Download Speed")) %>%
+    kable_styling(bootstrap_options = c("striped", "hover"), full_width = FALSE)
+}
+```
+
+## İllik Artım Dinamikası
+
+```{r fixed-yoy-plot, fig.cap="Şəkil 2: Sabit internet - illik artım templəri"}
+fixed_yoy_data <- yoy_growth %>%
+  filter(Type == "Fixed", !is.na(YoY_Download))
+
+ggplot(fixed_yoy_data, aes(x = factor(Year), y = YoY_Download)) +
+  geom_col(fill = "#0066cc", alpha = 0.8, width = 0.7) +
+  geom_text(aes(label = sprintf("%.1f%%", YoY_Download)), 
+            vjust = -0.5, size = 4, fontface = "bold") +
+  labs(title = "Sabit İnternet: İl-üzrə-İl (YoY) Artım",
+       subtitle = "Azərbaycan",
+       x = "İl",
+       y = "Artım (%)") +
+  theme(axis.text.x = element_text(angle = 0))
+```

@@ -1,0 +1,6 @@
+Dataset,Observations,Countries,DateFrom,DateTo
+Fixed Internet,1248,8,2019-04,2025-09
+Cellular Internet,1248,8,2019-04,2025-09
+Azerbaijan Fixed,156,1,2019-04,2025-09
+Azerbaijan Cellular,156,1,2019-04,2025-09
+Combined,2496,8,2019-04,2025-09

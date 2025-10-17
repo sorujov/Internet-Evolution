@@ -1,0 +1,76 @@
+# Regional Müqayisə: MDB Konteksti
+
+## Son Vəziyyət (Sentyabr 2025)
+
+```{r cis-comparison-plot, fig.cap="Şəkil 5: MDB ölkələri - internet sürətləri (Sentyabr 2025)"}
+cis_latest_ordered <- cis_latest %>%
+  arrange(Type, desc(DownloadSpeed))
+
+ggplot(cis_latest_ordered, aes(x = reorder(Country, DownloadSpeed), 
+                                 y = DownloadSpeed, fill = Type)) +
+  geom_col(position = position_dodge(width = 0.8), width = 0.7) +
+  coord_flip() +
+  scale_fill_manual(values = c("Fixed" = "#0066cc", "Cellular" = "#ff6600")) +
+  geom_text(aes(label = sprintf("%.1f", DownloadSpeed)), 
+            position = position_dodge(width = 0.8), hjust = -0.2, size = 3) +
+  labs(title = "MDB Ölkələrinin İnternet Sürətləri",
+       subtitle = "Sentyabr 2025",
+       x = "Ölkə",
+       y = "Download Sürəti (Mbps)",
+       fill = "İnternet Növü")
+```
+
+## Regional Reytinq
+
+```{r ranking-table}
+ranking_table <- cis_latest %>%
+  select(Type, Rank, Country, DownloadSpeed, UploadSpeed) %>%
+  arrange(Type, Rank)
+if (is_word) {
+  ft6 <- flextable(ranking_table)
+  ft6 <- set_header_labels(ft6,
+                           Type = "Növ",
+                           Rank = "Sıra",
+                           Country = "Ölkə",
+                           DownloadSpeed = "Download (Mbps)",
+                           UploadSpeed = "Upload (Mbps)")
+  ft6 <- set_caption(ft6, "Tablo 6: MDB ölkələrinin reytinqi (Sentyabr 2025)")
+  ft6 <- theme_vanilla(ft6)
+  ft6 <- colformat_num(ft6, j = c("DownloadSpeed", "UploadSpeed"), digits = 2)
+  az_idx <- which(ranking_table$Country == "Azerbaijan")
+  if (length(az_idx) > 0) {
+    ft6 <- bold(ft6, i = az_idx, bold = TRUE, part = "body")
+    ft6 <- bg(ft6, i = az_idx, bg = "#e7f3ff", part = "body")
+  }
+  ft6 <- align(ft6, align = "center", part = "all")
+  ft6 <- autofit(ft6)
+  ft6
+} else {
+  kable(ranking_table,
+        col.names = c("Növ", "Sıra", "Ölkə", "Download (Mbps)", "Upload (Mbps)"),
+        caption = "Tablo 6: MDB ölkələrinin reytinqi (Sentyabr 2025)",
+        digits = 2) %>%
+    kable_styling(bootstrap_options = c("striped", "hover", "condensed")) %>%
+    row_spec(which(ranking_table$Country == "Azerbaijan"), 
+             bold = TRUE, background = "#e7f3ff")
+}
+```
+
+## Artım Müqayisəsi
+
+```{r growth-comparison-plot, fig.cap="Şəkil 6: MDB ölkələri - artım templəri"}
+cis_growth_ordered <- cis_growth %>%
+  arrange(Type, desc(PercentGrowth))
+
+ggplot(cis_growth_ordered, aes(x = reorder(Country, PercentGrowth), 
+                                 y = PercentGrowth, fill = Type)) +
+  geom_col(position = position_dodge(width = 0.8), width = 0.7) +
+  coord_flip() +
+  scale_fill_manual(values = c("Fixed" = "#0066cc", "Cellular" = "#ff6600")) +
+  geom_text(aes(label = sprintf("%.0f%%", PercentGrowth)), 
+            position = position_dodge(width = 0.8), hjust = -0.2, size = 3) +
+  labs(title = "MDB Ölkələri: Ümumi Artım (2019-2025)",
+       x = "Ölkə",
+       y = "Artım (%)",
+       fill = "İnternet Növü")
+```

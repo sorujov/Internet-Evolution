@@ -1,0 +1,15 @@
+# Giriş
+
+Rəqəmsal transformasiya dövründə internet keyfiyyəti ölkələrin iqtisadi inkişafı, təhsil sistemi, səhiyyə xidmətləri və dövlət idarəçiliyi üçün kritik əhəmiyyət kəsb edir [@itu2024]. İnternet sürəti və etibarlılığı innovasiya potensialını, biznes mühitini və vətəndaşların həyat keyfiyyətini birbaşa təsir edir [@worldbank2024].
+
+Azərbaycan son illərdə rəqəmsal infrastrukturun inkişafına böyük investisiyalar yönəltmişdir [@icta2024]. Bu araşdırma 2019-2025 dövründə əldə edilmiş nailiyyətləri kəmiyyət baxımından qiymətləndirir.
+
+## Araşdırmanın Məqsədi
+
+Bu araşdırmanın əsas məqsədləri:
+
+1. Azərbaycanın internet keyfiyyətinin 2019-2025 dövründəki dinamikasını **kəmiyyət analizi** ilə qiymətləndirmək
+2. Sabit və mobil internet xidmətlərinin təkamül trayektoriyasını müəyyənləşdirmək
+3. MDB regional kontekstində Azərbaycanın mövqeyini və rəqabət qabiliyyətini təhlil etmək
+4. Statistik əsaslarla sübut edilmiş trend və artım tempini hesablamaq
+5. ICTA-nın strateji planlaşdırması üçün məlumat əsaslı tövsiyələr hazırlamaq

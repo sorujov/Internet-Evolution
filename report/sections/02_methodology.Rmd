@@ -1,0 +1,65 @@
+# Məlumat və Metodologiya
+
+```{r data-description}
+data_info <- tibble(
+  Xüsusiyyət = c("Müşahidə dövrü", "Ölkələr sayı", "Zaman aralığı", 
+                 "Ölçmə tezliyi", "Metrik növləri"),
+  Dəyər = c("Aprel 2019 - Sentyabr 2025",
+            "8 MDB ölkəsi",
+            "78 ay (6.5 il)",
+            "Aylıq",
+            "Median və Mean")
+)
+if (is_word) {
+  ft1 <- flextable(data_info)
+  ft1 <- set_caption(ft1, "Tablo 1: Məlumat bazasının xüsusiyyətləri")
+  ft1 <- theme_vanilla(ft1)
+  ft1 <- align(ft1, align = "center", part = "all")
+  ft1 <- autofit(ft1)
+  ft1
+} else {
+  tbl1 <- kable(data_info, 
+                col.names = c("Xüsusiyyət", "Dəyər"),
+                caption = "Tablo 1: Məlumat bazasının xüsusiyyətləri")
+  tbl1 %>%
+    kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
+                  full_width = FALSE,
+                  position = "center")
+}
+```
+
+**Əhatə edilən ölkələr:** Azərbaycan, Ermənistan, Belarus, Qazaxıstan, Qırğızıstan, Rusiya, Tacikistan, Özbəkistan.
+
+**Göstəricilər:** Download Speed (Mbps), Upload Speed (Mbps), Multi-Server Latency (ms), Multi-Server Jitter (ms). Məlumatlar Ookla Speedtest Global Index platformasından əldə edilmişdir [@ookla2025].
+
+**Statistik metodlar:** Təsviri statistika, xətti reqressiya, trend təhlili, müqayisəli təhlil.
+
+---
+
+# 2019: Başlanğıc Nöqtəsi
+
+## Başlanğıc Göstəriciləri
+
+```{r baseline-2019}
+baseline_data <- tibble(
+  `İnternet Növü` = c("Sabit", "Mobil"),
+  `Download (Mbps)` = c(fixed_first$DownloadSpeed, cellular_first$DownloadSpeed),
+  `Upload (Mbps)` = c(fixed_first$UploadSpeed, cellular_first$UploadSpeed)
+)
+if (is_word) {
+  ft2 <- flextable(baseline_data)
+  ft2 <- set_caption(ft2, "Tablo 2: Azərbaycan internet sürətləri - Aprel 2019")
+  ft2 <- theme_vanilla(ft2)
+  ft2 <- colformat_num(ft2, j = c("Download (Mbps)", "Upload (Mbps)"), digits = 2)
+  ft2 <- align(ft2, align = "center", part = "all")
+  ft2 <- autofit(ft2)
+  ft2
+} else {
+  kable(baseline_data,
+        caption = "Tablo 2: Azərbaycan internet sürətləri - Aprel 2019",
+        digits = 2) %>%
+    kable_styling(bootstrap_options = c("striped", "hover"), full_width = FALSE)
+}
+```
+
+2019-cu ildə mobil internetin sabit internetdən **`r round(cellular_first$DownloadSpeed / fixed_first$DownloadSpeed, 2)`x** daha sürətli olması mobil şəbəkə infrastrukturunun o dövrdə daha intensiv inkişaf etdiyini göstərir [@gsma2024].

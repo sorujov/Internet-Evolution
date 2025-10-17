@@ -1,0 +1,74 @@
+# Mobil İnternet: İnkişaf Trayektoriyası
+
+## Trend Təhlili
+
+```{r cellular-trend-plot, fig.cap="Şəkil 3: Azərbaycan mobil internet sürətinin dinamikası"}
+az_cellular_plot <- az_cellular_median %>%
+  select(Date, DownloadSpeed, UploadSpeed) %>%
+  pivot_longer(cols = c(DownloadSpeed, UploadSpeed),
+               names_to = "Metric",
+               values_to = "Speed")
+
+ggplot(az_cellular_plot, aes(x = Date, y = Speed, color = Metric, group = Metric)) +
+  geom_line(size = 1.2) +
+  geom_point(size = 2, alpha = 0.6) +
+  geom_smooth(method = "lm", se = TRUE, alpha = 0.2, linetype = "dashed") +
+  scale_color_manual(values = c("DownloadSpeed" = "#ff6600", 
+                                  "UploadSpeed" = "#00cc66"),
+                     labels = c("Download", "Upload")) +
+  scale_y_continuous(labels = comma) +
+  labs(title = "Mobil İnternet Sürətinin Dinamikası",
+       subtitle = "Azərbaycan (2019-2025)",
+       x = "Tarix",
+       y = "Sürət (Mbps)",
+       color = "Göstərici")
+```
+
+### Statistik Göstəricilər
+
+```{r cellular-statistics}
+cellular_trend_stats <- trend_results %>%
+  filter(Type == "Cellular") %>%
+  select(Metric, MonthlyIncrease, RSquared)
+if (is_word) {
+  ft5 <- flextable(cellular_trend_stats)
+  ft5 <- set_header_labels(ft5,
+                           Metric = "Göstərici",
+                           MonthlyIncrease = "Aylıq Artım (Mbps)",
+                           RSquared = "R²")
+  ft5 <- set_caption(ft5, "Tablo 5: Mobil internet trend statistikası")
+  ft5 <- theme_vanilla(ft5)
+  ft5 <- colformat_num(ft5, j = "MonthlyIncrease", digits = 3)
+  ft5 <- colformat_num(ft5, j = "RSquared", digits = 3)
+  ft5 <- align(ft5, align = "center", part = "all")
+  ft5 <- autofit(ft5)
+  ft5
+} else {
+  kable(cellular_trend_stats,
+        col.names = c("Göstərici", "Aylıq Artım (Mbps)", "R²"),
+        caption = "Tablo 5: Mobil internet trend statistikası",
+        digits = c(0, 3, 3)) %>%
+    kable_styling(bootstrap_options = c("striped", "hover"), full_width = FALSE)
+}
+```
+
+## Sabit vs Mobil Müqayisə
+
+```{r fixed-vs-cellular, fig.cap="Şəkil 4: Sabit və mobil internet müqayisəsi"}
+comparison_data <- bind_rows(
+  az_fixed_median %>% mutate(InternetType = "Sabit"),
+  az_cellular_median %>% mutate(InternetType = "Mobil")
+)
+
+ggplot(comparison_data, aes(x = Date, y = DownloadSpeed, color = InternetType)) +
+  geom_line(size = 1.3) +
+  geom_point(size = 2.5, alpha = 0.6) +
+  scale_color_manual(values = c("Sabit" = "#0066cc", "Mobil" = "#ff6600")) +
+  scale_y_continuous(labels = comma) +
+  labs(title = "Sabit və Mobil İnternet Sürətlərinin Müqayisəsi",
+       subtitle = "Azərbaycan (2019-2025)",
+       x = "Tarix",
+       y = "Download Sürəti (Mbps)",
+       color = "İnternet Növü") +
+  theme(legend.position = "bottom")
+```
