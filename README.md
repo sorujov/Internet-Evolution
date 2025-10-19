@@ -62,7 +62,7 @@ R və RStudio quraşdırılmalıdır. Lazımi paketləri yükləmək üçün:
 ```r
 install.packages(c("tidyverse", "lubridate", "ggplot2", 
                    "rmarkdown", "knitr", "kableExtra", 
-                   "scales", "ggthemes", "here", "broom"))
+                   "scales", "ggthemes", "here", "broom", "flextable"))
 ```
 
 #### Təhlil Prosesi

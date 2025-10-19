@@ -1,0 +1,9 @@
+Type,MetricType,Variable,Tau,P_Value,S_Statistic,Trend
+Fixed,median,DownloadSpeed,0.9397068619728088,0,2821,Significant Increasing
+Fixed,median,UploadSpeed,0.93206787109375,0,2799,Significant Increasing
+Fixed,mean,DownloadSpeed,0.937218964099884,0,2814,Significant Increasing
+Fixed,mean,UploadSpeed,0.93122398853302,0,2796,Significant Increasing
+Cellular,median,DownloadSpeed,0.916083812713623,0,2751,Significant Increasing
+Cellular,median,UploadSpeed,0.6545636057853699,0,1965,Significant Increasing
+Cellular,mean,DownloadSpeed,0.9192339777946472,0,2760,Significant Increasing
+Cellular,mean,UploadSpeed,0.7473771572113037,0,2244,Significant Increasing

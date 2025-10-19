@@ -1,15 +1,49 @@
 # Giriş
 
-Rəqəmsal transformasiya dövründə internet keyfiyyəti ölkələrin iqtisadi inkişafı, təhsil sistemi, səhiyyə xidmətləri və dövlət idarəçiliyi üçün kritik əhəmiyyət kəsb edir [@itu2024]. İnternet sürəti və etibarlılığı innovasiya potensialını, biznes mühitini və vətəndaşların həyat keyfiyyətini birbaşa təsir edir [@worldbank2024].
+Müasir iqtisadiyyatlarda genişzolaqlı internet infrastrukturu iqtisadi inkişafın əsas determinantlarından biridir. Empirik tədqiqatlar göstərir ki, genişzolaqlı internetə çıxışın 10% artımı ÜDM-də 1.21% artıma səbəb olur [@katz2010], həmçinin əmək məhsuldarlığına və məşğulluğa müsbət təsir göstərir [@roller2001; @czernich2011]. Rəqəmsal transformasiya dövründə internet keyfiyyəti təkcə iqtisadi inkişaf üçün deyil, həm də təhsil, səhiyyə və dövlət xidmətlərinin səmərəliliyi üçün kritik əhəmiyyət kəsb edir [@worldbank2021; @itu2023].
 
-Azərbaycan son illərdə rəqəmsal infrastrukturun inkişafına böyük investisiyalar yönəltmişdir [@icta2024]. Bu araşdırma 2019-2025 dövründə əldə edilmiş nailiyyətləri kəmiyyət baxımından qiymətləndirir.
+İnternet sürəti və etibarlılığı innovasiya ekosisteminin formalaşması, rəqəmsal sahibkarlığın inkişafı və beynəlxalq rəqabət qabiliyyətinin artırılması üçün zəruri şərtdir [@oecd2022]. Xüsusilə, pandemiya dövründə uzaqdan işləmə və onlayn təhsilin geniş yayılması internet keyfiyyətinin cəmiyyət rifahına birbaşa təsirini daha da aydınlaşdırdı [@itu2023].
 
-## Araşdırmanın Məqsədi
+## Azərbaycanın Rəqəmsal Transformasiya Konteksti
 
-Bu araşdırmanın əsas məqsədləri:
+Azərbaycan son onillikdə rəqəmsal infrastrukturun modernləşdirilməsinə sistemli investisiyalar yönəltmişdir. "Azərbaycan 2020: Gələcəyə Baxış" İnkişaf Konsepsiyası və ardınca qəbul edilmiş "Telekommunikasiya və İnformasiya Texnologiyalarının İnkişafına dair Strateji Yol Xəritəsi" (2016-2020) ölkənin rəqəmsal transformasiya gündəliyinin əsasını təşkil etmişdir [@mincom2023]. 
 
-1. Azərbaycanın internet keyfiyyətinin 2019-2025 dövründəki dinamikasını **kəmiyyət analizi** ilə qiymətləndirmək
-2. Sabit və mobil internet xidmətlərinin təkamül trayektoriyasını müəyyənləşdirmək
-3. MDB regional kontekstində Azərbaycanın mövqeyini və rəqabət qabiliyyətini təhlil etmək
-4. Statistik əsaslarla sübut edilmiş trend və artım tempini hesablamaq
-5. ICTA-nın strateji planlaşdırması üçün məlumat əsaslı tövsiyələr hazırlamaq
+Bu strategiyaların tərkib hissəsi kimi həyata keçirilən "Onlayn Azərbaycan" layihəsi (2017-2025) ölkənin genişzolaqlı internet infrastrukturunun kökünden yenidən qurulmasını təmin etmişdir. Layihə çərçivəsində köhnə ADSL texnologiyası müasir GPON (Gigabit Passive Optical Networks) ilə əvəz edilmiş, nəticədə sabit genişzolaqlı internetə çıxış imkanı olan təsərrüfatların sayı 13 dəfə artaraq təxminən 3 milyona çatmışdır [@icta2024].
+
+Həmçinin, 2024-cü ildə internet xidmətləri bazarında əhəmiyyətli tarifləşmə dəyişikliyi baş vermişdir. Əsas internet provayderlərinin koordinasiyası ilə standart sürətli paketlərin qiyməti 25 AZN səviyyəsinə endirilmişdir ki, bu da internet xidmətlərinin əlçatanlığını artırmaq məqsədi daşıyırdı.
+
+## Tədqiqatın Məqsəd və Əhatəsi
+
+Bu tədqiqat Azərbaycanın internet keyfiyyətinin 2019-cu ilin aprelindən 2025-ci ilin sentyabrına qədər olan 6.5 illik dövrdə təkamülünü iki əsas ölçüdə təhlil edir:
+
+**1. Ölkə daxili perspektiv**: Sabit və mobil internet xidmətlərinin performans göstəricilərinin zaman dinamikası, trend təhlili və struktur dəyişiklikləri.
+
+**2. Regional müqayisə perspektivi**: Azərbaycanın MDB-nin 8 üzvü (Azərbaycan, Ermənistan, Belarus, Qazaxıstan, Qırğızıstan, Rusiya, Tacikistan, Özbəkistan) arasında mövqeyi və rəqabət qabiliyyəti.
+
+Tədqiqatın **əsas məqsədləri** aşağıdakılardır:
+
+1. Azərbaycanın sabit və mobil internet keyfiyyətinin 2019-2025 dövründəki dinamikasını **təsviri və inferensial statistika metodları** ilə kəmiyyət qiymətləndirmək;
+
+2. MDB regional kontekstində Azərbaycanın internet infrastrukturu üzrə mövqeyini müəyyənləşdirmək və mütləq və nisbi göstəricilər üzrə müqayisəli təhlil aparmaq;
+
+3. **"Onlayn Azərbaycan" layihəsinin (2017-2025) sabit internet sürətinə təsirini** rigorous kəmiyyət metodları (interrupted time series, synthetic control method) vasitəsilə ölçmək;
+
+4. **2024-cü il avqust tarifləşmə siyasətinin təsirini** quasi-experimental dizayn (difference-in-differences, intervention analysis) çərçivəsində statistik qiymətləndirmək;
+
+5. Siyasət tövsiyələri və gələcək tədqiqat istiqamətləri üçün empirik əsas yaratmaq.
+
+## Məqalənin Strukturu
+
+Məqalənin qalan hissəsi aşağıdakı kimi təşkil olunmuşdur. **Bölmə 2** tədqiqatın məlumat mənbələrini, ölçü metodologiyasını və statistik təhlil yanaşmalarını təsvir edir. **Bölmə 3** Azərbaycanın sabit internet xidmətlərinin təkamülünü təhlil edir. **Bölmə 4** mobil internet dinamikasına həsr edilir və sabit-mobil müqayisəsi təqdim olunur. **Bölmə 5** MDB regional kontekstində müqayisəli təhlil aparır. **Bölmə 6** "Onlayn Azərbaycan" və tarifləşmə siyasətinin təsirlərini kəmiyyət qiymətləndirir. Nəhayət, **Bölmə 7** nəticələri ümumiləşdirir və siyasət tövsiyələri təqdim edir.
+
+## Tədqiqatın Əhəmiyyəti
+
+Bu tədqiqat bir neçə aspektdən əhəmiyyətlidir:
+
+**Empirik töhfə**: İlk dəfə olaraq Azərbaycanın internet keyfiyyətinin uzunmüddətli (6.5 il) dinamikası sistematik şəkildə sənədləşdirilir və kəmiyyət təhlil olunur. Ookla Speedtest Intelligence məlumatlarından istifadə edərək həm median, həm də orta göstəricilərlə robust təhlil təqdim edirik.
+
+**Metodoloji töhfə**: "Onlayn Azərbaycan" kimi böyük infrastruktur layihəsinin təsirini ölçmək üçün müasir kauzal inferens metodlarını (ITS, SCM, DID) telekommunikasiya sektoruna tətbiq edirik. Bu, regionda nadir hallarda rast gəlinən metodoloji rigorlluq səviyyəsidir.
+
+**Siyasət relevantlığı**: Tədqiqat nəticələri İKTA və digər dövlət qurumlarının gələcək rəqəmsal infrastruktur investisiyalarının planlaşdırılması və qiymətləndirilməsi üçün empirik əsas təqdim edir. Həmçinin, tarifləşmə siyasətinin təsirlərini ölçərək siyasət dizaynına məlumat əsaslı yanaşma nümunəsi yaradırıq.
+
+**Regional kontekst**: MDB telekommunikasiya bazarları haqqında məhdud akademik ədəbiyyat fonunda, bu tədqiqat regional müqayisəli perspektiv təqdim edir və Azərbaycanın regional benchmark kimi dəyərləndirilməsinə imkan yaradır.

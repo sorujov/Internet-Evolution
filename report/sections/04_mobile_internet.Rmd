@@ -2,7 +2,7 @@
 
 ## Trend Təhlili
 
-```{r cellular-trend-plot, fig.cap="Şəkil 3: Azərbaycan mobil internet sürətinin dinamikası"}
+```{r cellular-trend-plot, fig.cap="\\label{fig:cellular-trend-plot}Azərbaycan mobil internet sürətinin dinamikası"}
 az_cellular_plot <- az_cellular_median %>%
   select(Date, DownloadSpeed, UploadSpeed) %>%
   pivot_longer(cols = c(DownloadSpeed, UploadSpeed),
@@ -36,7 +36,7 @@ if (is_word) {
                            Metric = "Göstərici",
                            MonthlyIncrease = "Aylıq Artım (Mbps)",
                            RSquared = "R²")
-  ft5 <- set_caption(ft5, "Tablo 5: Mobil internet trend statistikası")
+  ft5 <- set_caption(ft5, "Mobil internet trend statistikası\\label{tab:cellular-statistics}")
   ft5 <- theme_vanilla(ft5)
   ft5 <- colformat_num(ft5, j = "MonthlyIncrease", digits = 3)
   ft5 <- colformat_num(ft5, j = "RSquared", digits = 3)
@@ -46,7 +46,7 @@ if (is_word) {
 } else {
   kable(cellular_trend_stats,
         col.names = c("Göstərici", "Aylıq Artım (Mbps)", "R²"),
-        caption = "Tablo 5: Mobil internet trend statistikası",
+        caption = "\\label{tab:cellular-statistics}Mobil internet trend statistikası",
         digits = c(0, 3, 3)) %>%
     kable_styling(bootstrap_options = c("striped", "hover"), full_width = FALSE)
 }
@@ -54,7 +54,7 @@ if (is_word) {
 
 ## Sabit vs Mobil Müqayisə
 
-```{r fixed-vs-cellular, fig.cap="Şəkil 4: Sabit və mobil internet müqayisəsi"}
+```{r fixed-vs-cellular, fig.cap="\\label{fig:fixed-vs-cellular}Sabit və mobil internet müqayisəsi"}
 comparison_data <- bind_rows(
   az_fixed_median %>% mutate(InternetType = "Sabit"),
   az_cellular_median %>% mutate(InternetType = "Mobil")
