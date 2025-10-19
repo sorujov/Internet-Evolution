@@ -13,7 +13,7 @@ output:
     theme: flatly
     highlight: tango
     code_folding: hide
-    css: icta_style.css
+    css: references_and_styles/icta_style.css
     number_sections: false
   pdf_document:
     toc: true
@@ -32,6 +32,15 @@ output:
     toc: true
     toc_depth: 3
 lang: az
+language:
+  label:
+    fig: 'Şəkil '
+    tab: 'Cədvəl '
+  title-block-published: 'Tarix'
+  abstract-title: 'Xülasə'
+  appendix-attribution: 'Əlavə'
+  references-title: 'İstinadlar'
+  section-title: 'Bölmə'
 always_allow_html: true
 bibliography: references_and_styles/references.bib
 csl: references_and_styles/apa.csl
@@ -47,17 +56,20 @@ header-includes:
   - \usepackage{placeins}
 ---
 
+
 ```{r setup, include=FALSE}
 # Determine output format
 is_word <- !is.null(knitr::opts_knit$get("rmarkdown.pandoc.to")) && 
            knitr::opts_knit$get("rmarkdown.pandoc.to") == "docx"
 is_latex <- knitr::is_latex_output()
 
+
 # Prefer user-level library
 user_lib <- file.path(Sys.getenv("LOCALAPPDATA"), "R", "win-library",
                       paste0(R.version$major, ".", strsplit(R.version$minor, "\\.")[[1]][1]))
 if (!dir.exists(user_lib)) dir.create(user_lib, recursive = TRUE)
 .libPaths(c(user_lib, .libPaths()))
+
 
 # Global chunk options
 knitr::opts_chunk$set(
@@ -74,19 +86,23 @@ knitr::opts_chunk$set(
   fig.path = "figures/"
 )
 
+
 # Set fig.align separately (Word doesn't support it)
 if (!is_word) {
   knitr::opts_chunk$set(fig.align = 'center')
 }
 
+
 # Create figures directory
 if (!dir.exists("figures")) dir.create("figures", recursive = TRUE)
+
 
 # UTF-8 encoding for PDF
 if (is_latex) {
   pdf.options(encoding = "UTF-8")
   options(device = function(...) cairo_pdf(..., family = "DejaVu Sans"))
 }
+
 
 # Load packages
 suppressPackageStartupMessages({
@@ -100,36 +116,54 @@ suppressPackageStartupMessages({
   library(officer)
 })
 
+
 # Namespace conflicts
 filter <- dplyr::filter
 lag <- dplyr::lag
 
+
 # Set table format
 if (is_latex) options(knitr.table.format = "latex")
 
-# ggplot2 theme
+
+# ggplot2 theme with colorblind-safe palette per guide
+cb_palette <- c(
+  Fixed = "#0066cc",
+  Mobile = "#ff6600", 
+  Growth = "#00a37a",
+  Neutral = "#8f8f8f"
+)
+
 if (is_latex) {
   theme_set(theme_minimal(base_size = 11, base_family = "DejaVu Sans") +
     theme(
-      plot.title = element_text(face = "bold", size = 14, hjust = 0.5),
-      plot.subtitle = element_text(size = 11, hjust = 0.5),
+      plot.title = element_text(face = "plain", size = 14, hjust = 0),
+      plot.subtitle = element_text(size = 10, hjust = 0, color = "#555555"),
+      plot.caption = element_text(size = 8, hjust = 0, color = "#666666"),
       axis.title = element_text(face = "bold", size = 10),
       axis.text = element_text(size = 9),
       legend.position = "bottom",
       legend.text = element_text(size = 9),
+      legend.title = element_text(size = 10),
       panel.grid.minor = element_blank(),
       text = element_text(family = "DejaVu Sans")
     ))
 } else {
   theme_set(theme_minimal(base_size = 12) +
     theme(
-      plot.title = element_text(face = "bold", size = 16, hjust = 0.5),
-      plot.subtitle = element_text(size = 12, hjust = 0.5),
-      axis.title = element_text(face = "bold"),
+      plot.title = element_text(face = "plain", size = 14, hjust = 0),
+      plot.subtitle = element_text(size = 11, hjust = 0, color = "#555555"),
+      plot.caption = element_text(size = 9, hjust = 0, color = "#666666"),
+      axis.title = element_text(face = "bold", size = 11),
       legend.position = "bottom",
+      legend.title = element_text(size = 10),
       panel.grid.minor = element_blank()
     ))
 }
+
+# Standard caption for consistency
+base_caption <- "Qeyd: Aylıq medianlar istehlakçı tərəfindən başladılan testlərdən; qırıq xətt xətti sazlayıcıdır 95% CI ilə; şaquli xətlər siyasət müdaxilələrini göstərir."
+
 
 # Load data
 fixed_clean <- read_csv("../data/processed/fixed_clean.csv", show_col_types = FALSE)
@@ -145,6 +179,7 @@ cis_latest <- read_csv("../data/processed/cis_comparison_latest.csv", show_col_t
 cis_overall <- read_csv("../data/processed/cis_comparison_overall.csv", show_col_types = FALSE)
 cis_growth <- read_csv("../data/processed/cis_growth_comparison.csv", show_col_types = FALSE)
 
+
 # Prepare variables
 az_fixed_median <- az_fixed %>% filter(MetricType == "median")
 az_cellular_median <- az_cellular %>% filter(MetricType == "median")
@@ -152,38 +187,16 @@ fixed_first <- az_fixed_median %>% arrange(Date) %>% slice(1)
 fixed_last <- az_fixed_median %>% arrange(Date) %>% slice(n())
 cellular_first <- az_cellular_median %>% arrange(Date) %>% slice(1)
 cellular_last <- az_cellular_median %>% arrange(Date) %>% slice(n())
+
+# Intervention markers for consistent plotting
+interventions <- tibble(
+  date = as.Date(c("2022-01-01", "2024-08-01")),
+  label = c("Onlayn Azərbaycan", "Tarif Reforması")
+)
 ```
 
-# İcra Xülasəsi
 
-Bu hesabat MDB ölkələrində, xüsusilə Azərbaycanda internet keyfiyyətinin 2019-cu ilin aprelindən 2025-ci ilin sentyabrına qədər olan 6.5 illik təkamülünü araşdırır. Təhlil sabit (fixed) və mobil (cellular) internet xidmətlərinin performans göstəricilərini əhatə edir.
-
-## Əsas Nəticələr
-
-```{r executive-summary, results='asis'}
-cat(sprintf("
-### Sabit İnternet
-
-- **Artım:** %.2f Mbps (2019) → %.2f Mbps (2025) — **%.0f%% artım**
-- **Aylıq orta artım:** %.2f Mbps
-- **Regional sıralama:** 5-ci yer (8 ölkə arasında)
-- **Yükləmə sürəti:** %.2f Mbps → %.2f Mbps
-
-### Mobil İnternet
-
-- **Artım:** %.2f Mbps (2019) → %.2f Mbps (2025) — **%.0f%% artım**
-- **Regional sıralama:** **1-ci yer** (8 ölkə arasında) 🏆
-- **Üstünlük:** MDB-də ən yüksək mobil internet sürəti
-- **Yükləmə sürəti:** %.2f Mbps → %.2f Mbps
-",
-fixed_first$DownloadSpeed, fixed_last$DownloadSpeed,
-((fixed_last$DownloadSpeed - fixed_first$DownloadSpeed) / fixed_first$DownloadSpeed) * 100,
-trend_results %>% filter(Type == "Fixed", Metric == "Download") %>% pull(MonthlyIncrease),
-fixed_first$UploadSpeed, fixed_last$UploadSpeed,
-cellular_first$DownloadSpeed, cellular_last$DownloadSpeed,
-((cellular_last$DownloadSpeed - cellular_first$DownloadSpeed) / cellular_first$DownloadSpeed) * 100,
-cellular_first$UploadSpeed, cellular_last$UploadSpeed
-))
+```{r executive-summary, child='sections/00_executive_summary.Rmd'}
 ```
 
 ---
@@ -191,34 +204,46 @@ cellular_first$UploadSpeed, cellular_last$UploadSpeed
 ```{r introduction, child='sections/01_introduction.Rmd'}
 ```
 
+
 ```{r methodology, child='sections/02_methodology.Rmd'}
 ```
+
 
 ```{r fixed-internet, child='sections/03_fixed_internet.Rmd'}
 ```
 
+
 ```{r mobile-internet, child='sections/04_mobile_internet.Rmd'}
 ```
+
 
 ```{r regional-comparison, child='sections/05_regional_comparison.Rmd'}
 ```
 
+
 ```{r policy-impact, child='sections/06_policy_impact.Rmd'}
 ```
+
 
 ```{r conclusions, child='sections/07_conclusions.Rmd'}
 ```
 
+
 ---
+
 
 # İstinadlar
 
+
 <div id="refs"></div>
+
 
 ---
 
+
 **Hazırladı:** ICTA Azerbaijan - Statistics Unit  
 **Tarix:** `r format(Sys.Date(), '%d.%m.%Y')`  
-**Versiya:** 1.0
+**Versiya:** 2.0  
+
 
 © 2025 İnformasiya Kommunikasiya Texnologiyaları Agentliyi. Bütün hüquqlar qorunur.
