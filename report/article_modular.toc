@@ -2,11 +2,11 @@
 \contentsline {section}{\numberline {1}Xülasə}{2}{section.1}%
 \contentsline {subsection}{\numberline {1.1}Sabit İnternet: Sürətli Artım və Regional Yaxınlaşma}{2}{subsection.1.1}%
 \contentsline {subsection}{\numberline {1.2}Mobil İnternet: Regional Liderlik və Konvergensiya}{3}{subsection.1.2}%
-\contentsline {subsection}{\numberline {1.3}Siyasət Təsirləri: Kauzal Qiymətləndirmə}{3}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.3}Siyasət Təsirləri: Səbəbiyyət Qiymətləndirməsi}{3}{subsection.1.3}%
 \contentsline {subsection}{\numberline {1.4}Əsas Tapıntılar və Tövsiyələr}{3}{subsection.1.4}%
 \contentsline {section}{\numberline {2}Giriş}{4}{section.2}%
 \contentsline {subsection}{\numberline {2.1}Tədqiqat Sualları və Əhatə Dairəsi}{4}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Azərbaycanın Rəqəmsal Transformasiya Konteksti}{4}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.2}Azərbaycanın Rəqəmsal Transformasiya Konteksti}{5}{subsection.2.2}%
 \contentsline {subsection}{\numberline {2.3}Məqalənin Strukturu}{5}{subsection.2.3}%
 \contentsline {subsection}{\numberline {2.4}Tədqiqatın Əhəmiyyəti}{5}{subsection.2.4}%
 \contentsline {section}{\numberline {3}Metodologiya}{6}{section.3}%

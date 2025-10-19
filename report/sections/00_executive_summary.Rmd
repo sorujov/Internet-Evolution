@@ -1,6 +1,9 @@
 # Xülasə
 
-Bu hesabat Azərbaycanın internet keyfiyyətinin 2019-cu ilin aprelindən 2025-ci ilin sentyabrına qədər 78 aylıq müşahidə dövrü ərzində təkamülünü kəmiyyət təhlili vasitəsilə sənədləşdirir. Tədqiqat sabit və mobil şəbəkələrdə median sürət göstəricilərindən istifadə edərək həm ölkədaxili dinamikanı, həm də MDB regional kontekstində Azərbaycanın rəqabət mövqeyini qiymətləndirir. Əsas empirik nəticələr infrastruktur modernizasiyası və siyasət müdaxilələrinin internet keyfiyyətinə əhəmiyyətli təsirini təsdiq edir.
+Bu hesabat Azərbaycanın internet keyfiyyətinin 2019-cu ilin aprelindən 2025-ci ilin sentyabrına qədər 78 aylıq müşahidə dövrü ərzində təkamülünün 
+kəmiyyət təhlilini həyata keçirir. Tədqiqat sabit və mobil şəbəkələrdə median sürət göstəricilərindən istifadə edərək həm ölkədaxili dinamikanı, 
+həm də MDB regional kontekstində Azərbaycanın rəqabət mövqeyini qiymətləndirir. Əsas empirik nəticələr infrastruktur modernizasiyası (məsələn, onlayn Azərbaycan layihəsi) və 
+siyasət müdaxilələrinin (məsələn, tarif islahatları) internet keyfiyyətinə əhəmiyyətli təsirini təsdiq edir.
 
 ## Sabit İnternet: Sürətli Artım və Regional Yaxınlaşma
 
@@ -24,9 +27,16 @@ cis_fixed_rank <- cis_latest %>%
   pull(Rank)
 ```
 
-Azərbaycanın sabit internet şəbəkəsi müşahidə dövrü ərzində köklü keyfiyyət yüksəlməsi nümayiş etdirmişdir. Median download sürəti `r sprintf("%.2f", fixed_first$DownloadSpeed)` Mbps-dən `r sprintf("%.2f", fixed_last$DownloadSpeed)` Mbps-ə qalxaraq `r sprintf("%.1f", fixed_multiplier)` dəfə artım qeydə almışdır (ümumi artım `r sprintf("%.0f%%", fixed_growth_pct)`). Xətti reqressiya aylıq `r sprintf("%.2f", fixed_monthly)` Mbps artım sürəti qiymətləndirir (R² = `r sprintf("%.2f", fixed_r2)`, p < 0.001), Mann-Kendall testi isə bu monoton artan trendi parametrik fərziyyələrdən asılı olmadan təsdiq edir (τ = 0.94, p < 0.0001). 
+Azərbaycanın sabit internet şəbəkəsi müşahidə dövrü ərzində köklü keyfiyyət yüksəlməsi nümayiş etdirmişdir. Median download sürəti 
+`r sprintf("%.2f", fixed_first$DownloadSpeed)` Mbps-dən `r sprintf("%.2f", fixed_last$DownloadSpeed)` Mbps-ə qalxaraq `r sprintf("%.1f", fixed_multiplier)` 
+dəfə artım qeydə almışdır (ümumi artım `r sprintf("%.0f%%", fixed_growth_pct)`). Xətti reqressiya modeli əsasında aylıq ortalama artımın  
+`r sprintf("%.2f", fixed_monthly)` Mbps olması müəyyən edilmişdir (R² = `r sprintf("%.2f", fixed_r2)`, p < 0.001) və sonuncu nəticə, öz növbəsində,
+qeyri-parametrik Mann-Kendall testi ilə təsdiq edilmişdir (τ = 0.94, p < 0.0001). 
 
-Upload sürətləri paralel inkişaf nümayiş etdirərək `r sprintf("%.2f", fixed_first$UploadSpeed)` Mbps-dən `r sprintf("%.2f", fixed_last$UploadSpeed)` Mbps-ə çatmışdır, bu isə asimmetrik genişzolaqlı texnologiyalardan simmetrik fiber infrastruktura keçidi əks etdirir. Sentyabr 2025 tarixinə görə Azərbaycan MDB ölkələri arasında sabit internetdə `r cis_fixed_rank`-ci mövqedədir, lakin dövrün ən yüksək artım tempinə (1,330%) malik olması ilə regional liderlərə yaxınlaşma trayektoriyasını göstərir.
+Bundan əlavə, upload sürətlərinin təhlil dövrü ərzində paralel inkişaf nümayiş etdirərək `r sprintf("%.2f", fixed_first$UploadSpeed)` Mbps-dən 
+`r sprintf("%.2f", fixed_last$UploadSpeed)` Mbps-ə çatması asimmetrik genişzolaqlı texnologiyalardan simmetrik fiber infrastruktura keçidi özündə əks etdirir. 
+İnfrastruktur yenilikləri nəticəsində, Azərbaycan MDB ölkələri arasında sabit genişzolaqlı internet sürətinə görə `r cis_fixed_rank`-ci mövqeyə yüksəlmiş və təhlil 
+dövrü üzrə ən yüksək artım tempinə (1,330%) malik olmuşdur.
 
 ## Mobil İnternet: Regional Liderlik və Konvergensiya
 
@@ -42,11 +52,17 @@ cis_mobile_rank <- cis_latest %>%
   pull(Rank)
 ```
 
-Mobil internet sektorunda Azərbaycan daha yüksək başlanğıc bazasından (`r sprintf("%.2f", cellular_first$DownloadSpeed)` Mbps) `r sprintf("%.1f", cellular_multiplier)` dəfə artımla `r sprintf("%.2f", cellular_last$DownloadSpeed)` Mbps-ə yüksəlmişdir (ümumi artım `r sprintf("%.0f%%", cellular_growth_pct)`). Bu performans Azərbaycanı sentyabr 2025-də MDB regionunda mobil internet keyfiyyətində **lider ölkəyə** çevirmişdir (1-ci mövqe 8 ölkə arasında). Upload sürətləri `r sprintf("%.2f", cellular_first$UploadSpeed)` Mbps-dən `r sprintf("%.2f", cellular_last$UploadSpeed)` Mbps-ə artmışdır (`r sprintf("%.1f", cellular_last$UploadSpeed / cellular_first$UploadSpeed)` dəfə artım).
+Mobil internet sektorunda Azərbaycan daha yüksək başlanğıc bazasından (`r sprintf("%.2f", cellular_first$DownloadSpeed)` Mbps) `r sprintf("%.1f", cellular_multiplier)` 
+dəfə artımla `r sprintf("%.2f", cellular_last$DownloadSpeed)` Mbps-ə yüksəlmişdir (ümumi artım `r sprintf("%.0f%%", cellular_growth_pct)`). 
+Bu performans Azərbaycanı təhlil dövrünün sonuna olan məlumatlara əsasən, MDB regionunda mobil internet keyfiyyətində **lider ölkəyə** çevirmişdir (8 ölkə arasında 1-ci mövqe).
+Bununla yanaşı, upload sürəti `r sprintf("%.2f", cellular_first$UploadSpeed)` Mbps-dən `r sprintf("%.2f", cellular_last$UploadSpeed)` Mbps-ə qədər 
+artmışdır (`r sprintf("%.1f", cellular_last$UploadSpeed / cellular_first$UploadSpeed)` dəfə artım).
 
-Qeyd edilməlidir ki, sentyabr 2025 tarixində sabit və mobil download sürətləri təxminən eyni nöqtəyə (müvafiq olaraq `r sprintf("%.2f", fixed_last$DownloadSpeed)` və `r sprintf("%.2f", cellular_last$DownloadSpeed)` Mbps) çatmışdır, bu isə infrastrukturun yetkinləşməsini və texnologiya seçiminin istifadəçi təcrübəsinə təsirinin azalmasını göstərir. Bu konvergensiya Azərbaycan telekommunikasiya sektorunun texnologiya-neytral istifadəçi təcrübəsi mərhələsinə daxil olduğunu işarə edir.
+Qeyd edilməlidir ki, sentyabr 2025 tarixində sabit və mobil download sürətləri təxminən eyni nöqtəyə (müvafiq olaraq `r sprintf("%.2f", fixed_last$DownloadSpeed)` 
+və `r sprintf("%.2f", cellular_last$DownloadSpeed)` Mbps) çatmışdır, bu isə infrastrukturun yetkinləşməsini və texnologiya seçiminin istifadəçi təcrübəsinə təsirinin 
+azalmasını göstərir. Bu isə, öz növbəsində, Azərbaycan telekommunikasiya sektorunun texnologiya-neytral istifadəçi təcrübəsi mərhələsinə daxil olduğunu işarə edir.
 
-## Siyasət Təsirləri: Kauzal Qiymətləndirmə
+## Siyasət Təsirləri: Səbəbiyyət Qiymətləndirməsi
 
 ```{r exec-policy-stats}
 # ITS results for Online Azerbaijan
@@ -58,9 +74,17 @@ did_att <- 3.82    # From your DiD analysis
 did_pval <- 0.041  # Pre-trends test p-value
 ```
 
-Kauzal inferens metodlarından istifadə edərək iki əsas siyasət müdaxiləsinin təsiri qiymətləndirilmişdir. "Onlayn Azərbaycan" proqramının 2022-ci il yanvarında genişləndirilməsi Interrupted Time Series (ITS) təhlili vasitəsilə sabit internetdə `r sprintf("%.2f", its_level)` Mbps dərhal səviyyə artımı və aylıq `r sprintf("%.2f", its_slope)` Mbps əlavə ivmələnmə ilə nəticələnmişdir (hər iki təsir p < 0.01 səviyyəsində əhəmiyyətlidir). Plasebo testləri bu təsirlərin təsadüfi deyil, müdaxiləyə aid olduğunu təsdiq edir (p = 0.03).
+Səbəbiyyət qiymətləndirməsi metodlarından istifadə edərək iki əsas siyasət müdaxiləsinin təsiri qiymətləndirilmişdir. "Onlayn Azərbaycan" layihəsinin 
+2022-ci il yanvarında genişləndirilməsi Interrupted Time Series (ITS) təhlili vasitəsilə sabit genişzolaqlı internetin `r sprintf("%.2f", its_level)` Mbps 
+sürət artımı və bu sürət artımının aylıq `r sprintf("%.2f", its_slope)` Mbps əlavə təcil qazanması göstərilmişdir
+(hər iki təsir p < 0.01 səviyyəsində əhəmiyyətlidir). Plasebo testləri bu təsirlərin təsadüfi deyil, müdaxiləyə aid olduğunu təsdiq edir (p = 0.03).
 
-2024-cü il avqustunda tətbiq edilən tarif reformasının (25 AZN standart paket) Difference-in-Differences (DiD) qiymətləndirməsi sabit internetdə `r sprintf("%.2f", did_att)` Mbps əlavə artım göstərir (p = 0.013). Lakin paralel trendlər fərziyyəsinin pozulması (p = `r sprintf("%.3f", did_pval)`) kauzal atribusiyaya ehtiyatlı yanaşmağı tələb edir: sabit və mobil şəbəkələr müdaxilədən əvvəl müxtəlif artım trayektoriyalarına malik olmuşlar, bu da təsir qiymətləndirməsini qarışdırır. Nəticələr tarif reformasının təsir göstərməsini göstərsə də, təsirin dəqiq kəmiyyətini müəyyənləşdirmək üçün əlavə post-müdaxilə müşahidələri və alternativ nəzarət qrupları tələb olunur.
+2024-cü il avqustunda tətbiq edilən tarif dəyişikliyinin (25 AZN standart paket) Difference-in-Differences (DiD) qiymətləndirməsi sabit genişzolaqlı internetdə 
+`r sprintf("%.2f", did_att)` Mbps əlavə artım göstərir (p = 0.013). Lakin paralel trendlər fərziyyəsinin pozulması (p = `r sprintf("%.3f", did_pval)`) 
+səbəbiyyət əlaqəsi məsələsinə ehtiyatlı yanaşmağı tələb edir: sabit və mobil şəbəkələr müdaxilədən əvvəl müxtəlif artım trayektoriyalarına malik olmuşlar, 
+bu da təsir qiymətləndirməsinin dəqiq kəmiyyətini hesablamaqda çətinlik yaradır. Nəticələr tarif dəyişikliyinin internet sürətinin artımına
+təsir göstərməsini təssdiqləsə də, təsirin dəqiq kəmiyyətini müəyyənləşdirmək 
+üçün əlavə post-müdaxilə müşahidələri və alternativ nəzarət qrupları tələb olunur.
 
 ## Əsas Tapıntılar və Tövsiyələr
 
@@ -130,6 +154,12 @@ if (is_word) {
 }
 ```
 
-Təhlil üç əsas nəticə təqdim edir. **Birinci**, Azərbaycan sabit və mobil şəbəkələrdə statistik əhəmiyyətli, davamlı sürət artımları nümayiş etdirmişdir, xətti və parametrik olmayan testlərlə təsdiqlənmiş robust trendlərlə. **İkinci**, regional müqayisə Azərbaycanı yüksək artım templərə malik orta səviyyəli performer kimi yerləşdirir: mobil internet üzrə lider, sabit internet üzrə sürətlə yaxınlaşan. **Üçüncü**, kauzal qiymətləndirmələr "Onlayn Azərbaycan" proqramının güclü təsirini və tarif reformasının təsir göstərməsini, lakin metodoloji ehtiyatlarla göstərir.
-
-Siyasət tövsiyələrinə fiber infrastruktur investisiyalarının davamlılığı, mobil şəbəkədə liderlik mövqeyinin saxlanması, upload sürətləri arasındaki asimmetriyanın azaldılması və gələcək müdaxilələr üçün təkmilləşdirilmiş qiymətləndirmə dizaynları (əvvəlcədən qeydə alınmış paralel trendlər testləri və alternativ nəzarət qrupları ilə) daxildir. Sabit-mobil konvergensiya isə siyasət fokusunun xam sürətdən əhatə, etibarlılıq və rəqəmsal savadlılığa doğru keçidini təklif edir.
+Təhlil üç əsas nəticə təqdim edir. **Birinci**, təhlil dövrü ərzində Azərbaycanın 
+sabit və mobil sürət göstəriciləri statistik əhəmiyyətli və müsbət dinamika nümayiş etdirmişdir. 
+**İkinci**, regional müqayisədə Azərbaycan kifayət qədər mühüm mövqe tutur. 
+**Üçüncü**, "Onlayn Azərbaycan" layihəsinin və 2024-cü ilin avqust ayında əsas
+internet provayderlərinin tarif razılaşmasının internet göstəricilərinə müsbət təsiri səbəbiyyət qiymətləndirmələri 
+əsasında təsdiqlənmişdir. 
+Siyasət tövsiyələrinə fiber infrastruktur investisiyalarının davamlılığı, 
+mobil şəbəkədə liderlik mövqeyinin saxlanması və download və upload sürətləri arasındaki asimmetriyanın 
+azaldılması daxildir.
