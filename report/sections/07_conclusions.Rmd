@@ -1,0 +1,65 @@
+# Nəticə və Tövsiyələr
+
+Bu tədqiqat Azərbaycanın internet keyfiyyətinin 2019-2025 dövründə təkamülünü təsviri statistika, trend təhlili, regional müqayisə və siyasət təsiri qiymətləndirməsi vasitəsilə sistematik şəkildə sənədləşdirmişdir. Əldə edilmiş empirik nəticələr siyasət dizaynı və gələcək investisiya qərarları üçün əsaslı tövsiyələr təqdim edir.
+
+## Əsas Tapıntıların Xülasəsi
+
+### Ölkə daxili dinamika
+
+Azərbaycanın sabit internet median download sürəti 78 aylıq müşahidə dövrü ərzində 13.4 dəfə artaraq 5.2 Mbps-dən 69.8 Mbps-ə çatmışdır. Xətti reqressiya təhlili aylıq 0.92 Mbps artım tempini qiymətləndirir (R² = 0.81, p < 0.001), Mann-Kendall testi isə güclü monoton artan trend təsdiq edir (τ = 0.94, p < 0.0001). Mobil internet daha yüksək başlanğıc bazasından (20.9 Mbps) başlayaraq 3.3 dəfə artış nümayiş etdirmiş və 69.8 Mbps-ə çatmışdır (aylıq artım 0.59 Mbps, R² = 0.91).
+
+2025-ci ilin sentyabr ayına olan məlumata görə sabit və mobil internet sürətləri konvergensiya edərək hər ikisi 69.8 Mbps səviyyəsindədir. Bu konvergensiya sabit infrastrukturun "catch-up" dinamikasını və GPON texnologiyasının uğurlu tətbiqini göstərir.
+
+### Regional müqayisə
+
+MDB kontekstində Azərbaycan mobil internet median download sürətinə görə 1-ci mövqedədir (period orta 32.2 Mbps, son ay 69.8 Mbps), bu liderlik 2021-ci ildən etibarən saxlanılır. Sabit internetdə period orta ilə 7-ci yerdə olsa da (21.5 Mbps), son ayda 5-ci yerə yüksəlmişdir. Artım tempinə görə Azərbaycan sabit internetdə 2-ci (1,243%), mobil internetdə 4-cü yerdədir (235%).
+
+### Siyasət təsirləri
+
+Interrupted Time Series təhlili "Onlayn Azərbaycan" layihəsinin 2022-ci il yanvar ayından etibarən sabit internet sürətində statistik əhəmiyyətli artıma səbəb olduğunu göstərir. Model həm dərhal təsir (səviyyə artımı), həm də trend sürətlənməsi (aylıq artım tempinin yüksəlməsi) aşkar edir. Placebo testlər nəticələrin robust olduğunu təsdiq edir.
+
+2024-cü il avqust tarifləşmə reformasının təsiri Difference-in-Differences metodologiyası ilə qiymətləndirilib. [Nəticə əlavə olunacaq - DID skripti işlədikdən sonra dəqiq rəqəmlər buraya yazılacaq].
+
+## Siyasət Tövsiyələri
+
+### Qısa müddət (1-2 il)
+
+Mobil internet liderlik mövqeyinin saxlanması üçün 5G şəbəkə infrastrukturunun geniş tətbiqi prioritet olmalıdır. Azərbaycan MDB-də mobil internetə görə 1-ci yerdə olsa da, qlobal standartlarla müqayisədə hələ də inkişaf potensialı var.
+
+Sabit internetdə regional fərqlərin azaldılması zəruridir. "Onlayn Azərbaycan" layihəsi uğurlu olsa da, rayon səviyyəsində əhatə və keyfiyyət fərqləri hələ də mövcuddur. Infrastruktur investisiyaları regionlara bərabər paylanmalıdır.
+
+Tarifləşmə siyasətinin effektivliyi monitorizasiya edilməlidir. 2024 avqust reformasının uzunmüddətli təsirlərini izləmək və lazım gəldikdə korrektiv tədbirlər görmək vacibdir.
+
+### Orta müddət (3-5 il)
+
+Fiber-optik şəbəkənin FTTX (Fiber to the X) arxitekturuna keçidi davam etməlidir. GPON texnologiyası müasir standart olsa da, gələcək yüksək sürət tələblərinə cavab vermək üçün XGS-PON (10 Gigabit) kimi növbəti nəsil texnologiyalara keçid planlaşdırılmalıdır.
+
+İnternet keyfiyyəti monitorinq sisteminin qurulması tövsiyə olunur. Ookla məlumatları faydalı olsa da, milli səviyyədə real-time keyfiyyət monitorinqi və şikayət idarəetmə sistemi şəffaflığı artıracaq.
+
+Rəqəmsal əhatə proqramlarının genişləndirilməsi sosial-iqtisadi inkişaf üçün zərurdir. İnternet infrastrukturu təkcə texniki məsələ deyil, həm də rəqəmsal iqtisadiyyatın əsasını təşkil edir.
+
+### Uzun müddət (5+ il)
+
+Beynəlxalq bağlantı diversifikasiyası və bandwidth genişləndirilməsi strateji prioritet olmalıdır. Azərbaycanın geopolitik mövqeyi regional tranzit hub kimi potensialını artırır.
+
+Rəqəmsal texnologiyalar üzrə insan kapitalının inkişafı infrastruktur investisiyaları ilə paralel aparılmalıdır. Telekommunikasiya sektorunda ixtisaslaşmış mütəxəssislərin hazırlanması üçün universitetlərlə əməkdaşlıq proqramları genişləndirilməlidir.
+
+Süni intellekt və IoT (Internet of Things) tətbiqləri üçün ayrılmış şəbəkə layihələri (network slicing, edge computing) planlaşdırılmalıdır. 5G texnologiyası bu növ innovativ xidmətlər üçün platformadır.
+
+## Tədqiqatın Məhdudiyyətləri
+
+Bu tədqiqat bir neçə məhdudiyyətə malikdir. Birincisi, məlumat mənbəyi (Ookla) könüllü testlərə əsaslanır və buna görə seçim bias-ı ola bilər. Daha yüksək sürətə malik istifadəçilər test etməyə daha meylli ola bilərlər. İkincisi, ölkə daxili regional və şəhər-kənd fərqləri ümumi median göstəricilərdə gizlənə bilər. Rayon səviyyəli təhlil bu tədqiqatın əhatəsindən kənardadır. Üçüncüsü, kauzal inferens metodları (ITS, DID) güclü identifikasiya fərziyyələrinə əsaslanır. Müşahidə olunmayan konfaundirlər potensial qalır, baxmayaraq ki, biz robust checks tətbiq etmişik.
+
+## Gələcək Tədqiqat İstiqamətləri
+
+Rayon səviyyəsində internet keyfiyyəti fərqlərinin təhlili və bu fərqlərin sosial-iqtisadi determinantlarının araşdırılması vacib tədqiqat sahəsidir.
+
+İnternet keyfiyyətinin iqtisadi nəticələrə (biznes yaradılması, uzaqdan iş, e-ticarət) təsirinin empirik qiymətləndirilməsi məqalənin natural extension-ıdır.
+
+5G texnologiyasının tətbiqindən sonra müqayisəli təhlil və yeni performans göstəricilərinin (ultra-low latency, massive IoT connectivity) qiymətləndirilməsi gələcək prioritetdir.
+
+Beynəlxalq müqayisə perspektivinin genişləndirilməsi: MDB ölkələri ilə yanaşı, oxşar inkişaf səviyyəsinə malik regionlarla (Mərkəzi Asiya, Qafqaz, Şərqi Avropa) müqayisə Azərbaycanın qlobal mövqeyini daha dəqiq qiymətləndirməyə imkan verər.
+
+## Yekun Qeyd
+
+Bu tədqiqat Azərbaycanın son 6.5 ildə internet infrastrukturu sahəsində əldə etdiyi əhəmiyyətli irəliləyişi sənədləşdirir. Həm sabit, həm də mobil internet xidmətlərində qeydə alınan yüksək artım templəri və "Onlayn Azərbaycan" kimi böyük infrastruktur layihələrinin uğurlu tətbiqi ölkənin rəqəmsal transformasiya strategiyasının effektivliyini təsdiq edir. Regional kontekstdə Azərbaycanın mobil internet liderliyi və sabit internetdə sürətli "catch-up" dinamikası növbəti onillikdə rəqəmsal iqtisadiyyat inkişafı üçün möhkəm baza yaradır. Empirik nəticələr siyasət qərarlarının data-driven qiymətləndirilməsinin əhəmiyyətini və gələcək investisiya prioritetlərinin elmi əsaslarla müəyyən edilməsinin zəruriliyini bir daha vurğulayır.

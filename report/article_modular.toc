@@ -1,0 +1,62 @@
+\babel@toc {nil}{}\relax 
+\contentsline {section}{\numberline {1}İcra Xülasəsi}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Əsas Nəticələr}{2}{subsection.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.1}Sabit İnternet}{2}{subsubsection.1.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.2}Mobil İnternet}{2}{subsubsection.1.1.2}%
+\contentsline {section}{\numberline {2}Giriş}{2}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Azərbaycanın Rəqəmsal Transformasiya Konteksti}{3}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Tədqiqatın Məqsəd və Əhatəsi}{3}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Məqalənin Strukturu}{4}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Tədqiqatın Əhəmiyyəti}{4}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Metodologiya}{4}{subsection.2.5}%
+\contentsline {subsubsection}{\numberline {2.5.1}1. Məlumat Mənbələri}{4}{subsubsection.2.5.1}%
+\contentsline {subsubsection}{\numberline {2.5.2}2. Ölçü Metodları}{4}{subsubsection.2.5.2}%
+\contentsline {subsubsection}{\numberline {2.5.3}3. Təsviri Statistika}{4}{subsubsection.2.5.3}%
+\contentsline {subsubsection}{\numberline {2.5.4}4. Trend Analizi}{5}{subsubsection.2.5.4}%
+\contentsline {paragraph}{\numberline {2.5.4.1}4.1 Xətti Reqressiya}{5}{paragraph.2.5.4.1}%
+\contentsline {paragraph}{\numberline {2.5.4.2}4.2 Mann-Kendall Trend Testi}{5}{paragraph.2.5.4.2}%
+\contentsline {subsubsection}{\numberline {2.5.5}5. Regional Müqayisə Metodologiyası}{5}{subsubsection.2.5.5}%
+\contentsline {subsubsection}{\numberline {2.5.6}6. Siyasət Qiymətləndirməsi Metodları}{5}{subsubsection.2.5.6}%
+\contentsline {paragraph}{\numberline {2.5.6.1}6.1 Interrupted Time Series (ITS)}{5}{paragraph.2.5.6.1}%
+\contentsline {paragraph}{\numberline {2.5.6.2}6.2 Difference-in-Differences (DID)}{5}{paragraph.2.5.6.2}%
+\contentsline {paragraph}{\numberline {2.5.6.3}6.3 Synthetic Control Method (SCM)}{5}{paragraph.2.5.6.3}%
+\contentsline {section}{\numberline {3}Sabit İnternet: Təkamül Dinamikası}{6}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Ümumi Xarakteristika}{6}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Zaman Dinamikası}{6}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Reqressiya Təhlili}{7}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Parametrik Olmayan Trend Təsti}{7}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}İllik Dinamika}{7}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}Qısa Xülasə}{8}{subsection.3.6}%
+\contentsline {section}{\numberline {4}Mobil İnternet: İnkişaf Trayektoriyası}{9}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Trend Təhlili}{9}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}Statistik Göstəricilər}{9}{subsubsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.2}Sabit vs Mobil Müqayisə}{10}{subsection.4.2}%
+\contentsline {section}{\numberline {5}Regional Müqayisə: MDB Konteksti}{10}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Son Vəziyyət (Sentyabr 2025)}{10}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Regional Reytinq}{11}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Artım Müqayisəsi}{11}{subsection.5.3}%
+\contentsline {section}{\numberline {6}Siyasət Təsirinin Qiymətləndirməsi}{11}{section.6}%
+\contentsline {subsection}{\numberline {6.1}``Onlayn Azərbaycan'' Layihəsinin Təsiri}{12}{subsection.6.1}%
+\contentsline {subsubsection}{\numberline {6.1.1}Metodologiya: Interrupted Time Series}{12}{subsubsection.6.1.1}%
+\contentsline {subsubsection}{\numberline {6.1.2}Nəticələr}{12}{subsubsection.6.1.2}%
+\contentsline {subsubsection}{\numberline {6.1.3}Robust}{13}{subsubsection.6.1.3}%
+\contentsline {subsubsection}{\numberline {6.1.4}Pre-Post Müqayisə}{13}{subsubsection.6.1.4}%
+\contentsline {subsection}{\numberline {6.2}2024 Avqust Tarifləşmə Reformasının Təsiri}{14}{subsection.6.2}%
+\contentsline {subsubsection}{\numberline {6.2.1}Metodologiya: Difference-in-Differences}{14}{subsubsection.6.2.1}%
+\contentsline {subsubsection}{\numberline {6.2.2}Parallel Trends Fərziyyəsi}{14}{subsubsection.6.2.2}%
+\contentsline {subsubsection}{\numberline {6.2.3}DID Nəticələri}{14}{subsubsection.6.2.3}%
+\contentsline {subsubsection}{\numberline {6.2.4}Event Study: Dinamik Təsirlər}{14}{subsubsection.6.2.4}%
+\contentsline {subsection}{\numberline {6.3}Xülasə}{15}{subsection.6.3}%
+\contentsline {section}{\numberline {7}Nəticə və Tövsiyələr}{15}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Əsas Tapıntıların Xülasəsi}{15}{subsection.7.1}%
+\contentsline {subsubsection}{\numberline {7.1.1}Ölkə daxili dinamika}{15}{subsubsection.7.1.1}%
+\contentsline {subsubsection}{\numberline {7.1.2}Regional müqayisə}{16}{subsubsection.7.1.2}%
+\contentsline {subsubsection}{\numberline {7.1.3}Siyasət təsirləri}{16}{subsubsection.7.1.3}%
+\contentsline {subsection}{\numberline {7.2}Siyasət Tövsiyələri}{16}{subsection.7.2}%
+\contentsline {subsubsection}{\numberline {7.2.1}Qısa müddət (1-2 il)}{16}{subsubsection.7.2.1}%
+\contentsline {subsubsection}{\numberline {7.2.2}Orta müddət (3-5 il)}{16}{subsubsection.7.2.2}%
+\contentsline {subsubsection}{\numberline {7.2.3}Uzun müddət (5+ il)}{17}{subsubsection.7.2.3}%
+\contentsline {subsection}{\numberline {7.3}Tədqiqatın Məhdudiyyətləri}{17}{subsection.7.3}%
+\contentsline {subsection}{\numberline {7.4}Gələcək Tədqiqat İstiqamətləri}{17}{subsection.7.4}%
+\contentsline {subsection}{\numberline {7.5}Yekun Qeyd}{17}{subsection.7.5}%
+\contentsline {section}{\numberline {8}İstinadlar}{17}{section.8}%

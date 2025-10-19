@@ -1,213 +1,76 @@
 # Regional Müqayisə: MDB Konteksti
 
-Azərbaycanın internet keyfiyyətinin regional kontekstdə qiymətləndirilməsi üçün MDB-nin 8 üzv ölkəsinin 2019-2025 dövründəki performansını müqayisə edirik. Bu bölmə son ay reytinqi, ümumi period dinamikası və artım müqayisəsini təqdim edir.
+## Son Vəziyyət (Sentyabr 2025)
 
-## MDB Ölkələri Ümumi Xarakteristikası
-
-Cədvəl 8 MDB ölkələrinin sabit internet göstəriciləri üzrə ümumi period statistikasını (median seriyalar) təqdim edir.
-
-```{r cis-fixed-summary}
-cis_fixed <- read_csv("../../data/processed/cis_fixed_detailed.csv", show_col_types = FALSE)
-
-if (is_word) {
-  ft <- flextable(cis_fixed)
-  ft <- set_header_labels(ft,
-    Country = "Ölkə",
-    Observations = "N",
-    Mean_Download = "Orta (Mbps)",
-    Median_Download = "Median (Mbps)",
-    SD_Download = "SD",
-    IQR_Download = "IQR",
-    Min_Download = "Min",
-    Max_Download = "Max"
-  )
-  ft <- set_caption(ft, "Cədvəl 8: MDB sabit internet - ümumi statistika (median, 2019-2025)")
-  ft <- theme_vanilla(ft)
-  ft <- colformat_num(ft, j = 2:8, digits = 2)
-  ft <- bold(ft, i = ~ Country == "Azerbaijan", bold = TRUE)
-  ft <- bg(ft, i = ~ Country == "Azerbaijan", bg = "#e7f3ff")
-  ft <- autofit(ft)
-  ft
-} else {
-  kable(cis_fixed,
-        col.names = c("Ölkə", "N", "Orta", "Median", "SD", "IQR", "Min", "Max"),
-        caption = "Cədvəl 8: MDB sabit internet ümumi statistika",
-        digits = 2) %>%
-    kable_styling(bootstrap_options = c("striped", "hover"), full_width = FALSE) %>%
-    row_spec(which(cis_fixed$Country == "Azerbaijan"), bold = TRUE, background = "#e7f3ff")
-}
-```
-
-Rusiya period orta median download sürətinə görə liderdir (70.8 Mbps), Azərbaycan 7-ci yerdədir (21.5 Mbps). Yalnız Tacikistan (20.8 Mbps) Azərbaycandan aşağıdadır. Azərbaycanın standart sapması (23.2 Mbps) yüksək olduğu halda, bu period ərzində güclü artım dinamikasını göstərir.
-
-Cədvəl 9 mobil internet statistikasını təqdim edir.
-
-```{r cis-cellular-summary}
-cis_cellular <- read_csv("../../data/processed/cis_cellular_detailed.csv", show_col_types = FALSE)
-
-if (is_word) {
-  ft <- flextable(cis_cellular)
-  ft <- set_header_labels(ft,
-    Country = "Ölkə",
-    Observations = "N",
-    Mean_Download = "Orta (Mbps)",
-    Median_Download = "Median (Mbps)",
-    SD_Download = "SD",
-    IQR_Download = "IQR",
-    Min_Download = "Min",
-    Max_Download = "Max"
-  )
-  ft <- set_caption(ft, "Cədvəl 9: MDB mobil internet - ümumi statistika (median, 2019-2025)")
-  ft <- theme_vanilla(ft)
-  ft <- colformat_num(ft, j = 2:8, digits = 2)
-  ft <- bold(ft, i = ~ Country == "Azerbaijan", bold = TRUE)
-  ft <- bg(ft, i = ~ Country == "Azerbaijan", bg = "#ffe7e7")
-  ft <- autofit(ft)
-  ft
-} else {
-  kable(cis_cellular,
-        col.names = c("Ölkə", "N", "Orta", "Median", "SD", "IQR", "Min", "Max"),
-        caption = "Cədvəl 9: MDB mobil internet ümumi statistika",
-        digits = 2) %>%
-    kable_styling(bootstrap_options = c("striped", "hover"), full_width = FALSE) %>%
-    row_spec(which(cis_cellular$Country == "Azerbaijan"), bold = TRUE, background = "#ffe7e7")
-}
-```
-
-Mobil internetdə vəziyyət kardinal fərqlidir: Azərbaycan period orta median-ə görə 1-ci yerdədir (32.2 Mbps), Ermənistan 2-cidir (24.2 Mbps), Rusiya 3-cüdür (21.3 Mbps). Bu fərq Azərbaycanın mobil şəbəkə infrastrukturuna investisiya prioritetini əks etdirir.
-
-## Son Ay Reytinqi (Sentyabr 2025)
-
-Şəkil 6 2025-ci ilin sentyabr ayına olan son məlumata görə MDB ölkələrinin reytinqini təsvir edir.
-
-```{r cis-latest-plot, fig.cap="Şəkil 6: MDB ölkələri - internet sürətləri (Sentyabr 2025)", fig.width=10, fig.height=7}
-cis_latest <- read_csv("../../data/processed/cis_comparison_latest.csv", show_col_types = FALSE)
-
+```{r cis-comparison-plot, fig.cap="Şəkil 5: MDB ölkələri - internet sürətləri (Sentyabr 2025)"}
 cis_latest_ordered <- cis_latest %>%
-  arrange(Type, desc(DownloadSpeed)) %>%
-  mutate(Country = factor(Country, levels = unique(Country)))
+  arrange(Type, desc(DownloadSpeed))
 
-ggplot(cis_latest_ordered, aes(x = Country, y = DownloadSpeed, fill = Type)) +
+ggplot(cis_latest_ordered, aes(x = reorder(Country, DownloadSpeed), 
+                                 y = DownloadSpeed, fill = Type)) +
   geom_col(position = position_dodge(width = 0.8), width = 0.7) +
-  geom_text(aes(label = sprintf("%.1f", DownloadSpeed)),
-            position = position_dodge(width = 0.8), vjust = -0.3, size = 3) +
-  scale_fill_manual(values = c("Fixed" = "#0066cc", "Cellular" = "#ff6600"),
-                    labels = c("Sabit", "Mobil")) +
-  labs(x = "Ölkə", y = "Download Sürəti (Mbps)", fill = "Növ") +
-  theme_minimal(base_size = 11) +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1),
-        legend.position = "bottom")
+  coord_flip() +
+  scale_fill_manual(values = c("Fixed" = "#0066cc", "Cellular" = "#ff6600")) +
+  geom_text(aes(label = sprintf("%.1f", DownloadSpeed)), 
+            position = position_dodge(width = 0.8), hjust = -0.2, size = 3) +
+  labs(title = "MDB Ölkələrinin İnternet Sürətləri",
+       subtitle = "Sentyabr 2025",
+       x = "Ölkə",
+       y = "Download Sürəti (Mbps)",
+       fill = "İnternet Növü")
 ```
 
-Son ayda Azərbaycan mobil internetdə 1-ci (69.8 Mbps), sabit internetdə isə 5-ci yerdədir (69.8 Mbps). Sabit və mobil sürətlərin eyni olması konvergensiya nöqtəsinə çatdığını göstərir.
+## Regional Reytinq
 
-Cədvəl 10 dəqiq reytinqi və göstəriciləri təqdim edir.
-
-```{r cis-ranking-table}
-cis_ranking <- cis_latest %>%
-  arrange(Type, Rank) %>%
-  select(Type, Rank, Country, DownloadSpeed, UploadSpeed)
-
+```{r ranking-table}
+ranking_table <- cis_latest %>%
+  select(Type, Rank, Country, DownloadSpeed, UploadSpeed) %>%
+  arrange(Type, Rank)
 if (is_word) {
-  ft <- flextable(cis_ranking)
-  ft <- set_header_labels(ft,
-    Type = "Növ",
-    Rank = "Rank",
-    Country = "Ölkə",
-    DownloadSpeed = "Download (Mbps)",
-    UploadSpeed = "Upload (Mbps)"
-  )
-  ft <- set_caption(ft, "Cədvəl 10: MDB reytinqi (Sentyabr 2025)")
-  ft <- theme_vanilla(ft)
-  ft <- colformat_num(ft, j = 4:5, digits = 2)
-  ft <- bold(ft, i = ~ Country == "Azerbaijan", bold = TRUE)
-  ft <- bg(ft, i = ~ Country == "Azerbaijan", bg = "#fff9e6")
-  ft <- autofit(ft)
-  ft
+  ft6 <- flextable(ranking_table)
+  ft6 <- set_header_labels(ft6,
+                           Type = "Növ",
+                           Rank = "Sıra",
+                           Country = "Ölkə",
+                           DownloadSpeed = "Download (Mbps)",
+                           UploadSpeed = "Upload (Mbps)")
+  ft6 <- set_caption(ft6, "Tablo 6: MDB ölkələrinin reytinqi (Sentyabr 2025)")
+  ft6 <- theme_vanilla(ft6)
+  ft6 <- colformat_num(ft6, j = c("DownloadSpeed", "UploadSpeed"), digits = 2)
+  az_idx <- which(ranking_table$Country == "Azerbaijan")
+  if (length(az_idx) > 0) {
+    ft6 <- bold(ft6, i = az_idx, bold = TRUE, part = "body")
+    ft6 <- bg(ft6, i = az_idx, bg = "#e7f3ff", part = "body")
+  }
+  ft6 <- align(ft6, align = "center", part = "all")
+  ft6 <- autofit(ft6)
+  ft6
 } else {
-  kable(cis_ranking,
-        col.names = c("Növ", "Rank", "Ölkə", "Download", "Upload"),
-        caption = "Cədvəl 10: MDB reytinqi (Sentyabr 2025)",
+  kable(ranking_table,
+        col.names = c("Növ", "Sıra", "Ölkə", "Download (Mbps)", "Upload (Mbps)"),
+        caption = "Tablo 6: MDB ölkələrinin reytinqi (Sentyabr 2025)",
         digits = 2) %>%
-    kable_styling(bootstrap_options = c("striped", "hover"), full_width = FALSE) %>%
-    row_spec(which(cis_ranking$Country == "Azerbaijan"), bold = TRUE, background = "#fff9e6")
+    kable_styling(bootstrap_options = c("striped", "hover", "condensed")) %>%
+    row_spec(which(ranking_table$Country == "Azerbaijan"), 
+             bold = TRUE, background = "#e7f3ff")
 }
 ```
 
-## Zaman Dinamikası: Aylıq Rank Təkamülü
+## Artım Müqayisəsi
 
-Şəkil 7 mobil internet üzrə hər ölkənin aylıq rank dinamikasını bump chart formatında təsvir edir.
-
-```{r cis-rank-bump-cellular, fig.cap="Şəkil 7: MDB mobil internet - aylıq rank dinamikası (1 = ən yüksək)", fig.width=12, fig.height=7}
-# Compute monthly ranks
-rank_series_cellular <- cellular_clean %>%
-  filter(MetricType == "median") %>%
-  group_by(Date) %>%
-  arrange(Date, desc(DownloadSpeed)) %>%
-  mutate(Rank = dense_rank(desc(DownloadSpeed))) %>%
-  ungroup()
-
-# Highlight Azerbaijan
-rank_series_cellular <- rank_series_cellular %>%
-  mutate(
-    is_highlight = Country == "Azerbaijan",
-    line_color = ifelse(is_highlight, "#ff6600", "#bbbbbb"),
-    line_size = ifelse(is_highlight, 1.2, 0.6),
-    line_alpha = ifelse(is_highlight, 1.0, 0.7)
-  )
-
-ggplot(rank_series_cellular, aes(x = Date, y = Rank, group = Country)) +
-  geom_line(aes(color = line_color, size = line_size, alpha = line_alpha)) +
-  scale_y_reverse(breaks = 1:8) +
-  scale_color_identity() +
-  scale_size_identity() +
-  scale_alpha_identity() +
-  geom_text(
-    data = rank_series_cellular %>% group_by(Country) %>% slice_min(Date, n = 1),
-    aes(x = Date - 15, y = Rank, label = Country),
-    hjust = 1, size = 3
-  ) +
-  geom_text(
-    data = rank_series_cellular %>% group_by(Country) %>% slice_max(Date, n = 1),
-    aes(x = Date + 15, y = Rank, label = Country),
-    hjust = 0, size = 3
-  ) +
-  labs(x = "Tarix", y = "Rank (1 = ən yüksək)") +
-  coord_cartesian(clip = "off") +
-  theme_minimal(base_size = 11) +
-  theme(legend.position = "none",
-        plot.margin = margin(5, 80, 5, 80))
-```
-
-Azərbaycan 2019-cu ildə 4-5-ci yerdə olsa da, 2021-ci ildən etibarən tədricən yüksələrək 2022-ci ildə 1-ci yerə çatmış və bu mövqeni saxlamışdır. Rusiya və Belarus əksinə, enişli dinamika nümayiş etdirir.
-
-## Artım Müqayisəsi (2019-2025)
-
-Şəkil 8 MDB ölkələrinin ümumi artım göstəricilərini müqayisə edir.
-
-```{r cis-growth-plot, fig.cap="Şəkil 8: MDB ölkələri - ümumi artım (2019-2025)", fig.width=10, fig.height=6}
-cis_growth <- read_csv("../../data/processed/cis_growth_comparison.csv", show_col_types = FALSE)
-
+```{r growth-comparison-plot, fig.cap="Şəkil 6: MDB ölkələri - artım templəri"}
 cis_growth_ordered <- cis_growth %>%
-  arrange(Type, desc(PercentGrowth)) %>%
-  mutate(Country = factor(Country, levels = unique(Country)))
+  arrange(Type, desc(PercentGrowth))
 
-ggplot(cis_growth_ordered, aes(x = Country, y = PercentGrowth, fill = Type)) +
+ggplot(cis_growth_ordered, aes(x = reorder(Country, PercentGrowth), 
+                                 y = PercentGrowth, fill = Type)) +
   geom_col(position = position_dodge(width = 0.8), width = 0.7) +
-  geom_text(aes(label = sprintf("%.0f%%", PercentGrowth)),
-            position = position_dodge(width = 0.8), vjust = -0.3, size = 3) +
-  scale_fill_manual(values = c("Fixed" = "#0066cc", "Cellular" = "#ff6600"),
-                    labels = c("Sabit", "Mobil")) +
-  labs(x = "Ölkə", y = "Artım (%)", fill = "Növ") +
-  theme_minimal(base_size = 11) +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1),
-        legend.position = "bottom")
+  coord_flip() +
+  scale_fill_manual(values = c("Fixed" = "#0066cc", "Cellular" = "#ff6600")) +
+  geom_text(aes(label = sprintf("%.0f%%", PercentGrowth)), 
+            position = position_dodge(width = 0.8), hjust = -0.2, size = 3) +
+  labs(title = "MDB Ölkələri: Ümumi Artım (2019-2025)",
+       x = "Ölkə",
+       y = "Artım (%)",
+       fill = "İnternet Növü")
 ```
-
-Azərbaycan sabit internetdə 2-ci ən yüksək artım nümayiş etdirir (1,243% - Tacikistan 1,441%-dən sonra). Mobil internetdə artım daha mötədil olsa da (235%), bu yüksək başlanğıc bazasından irəli gəlir. Rusiya və Belarus sabit internetdə çox aşağı artım göstərir (təxminən 50%), çünki onların başlanğıc sürətləri artıq yüksək idi.
-
-## Xülasə
-
-Regional müqayisə göstərir ki:
-
-MDB kontekstində Azərbaycan mobil internet median download sürətinə görə 1-ci mövqedədir (32.2 Mbps period orta, 69.8 Mbps son ay). Sabit internetdə period orta ilə 7-ci yerdə olsa da (21.5 Mbps), son ayda 5-ci yerə yüksəlmişdir (69.8 Mbps). Artım tempinə görə Azərbaycan sabit internetdə 2-ci (1,243%), mobil internetdə 4-cü yerdədir (235%). Bump chart təhlili göstərir ki, Azərbaycan mobil internetdə 2021-ci ildən etibarən 1-ci mövqeyə yüksələrək bu pozisiyanı saxlamışdır. Sabit və mobil sürətlərin 2025-ci ildə konvergensiya etməsi (hər ikisi 69.8 Mbps) "Onlayn Azərbaycan" layihəsinin uğurlu nəticəsini təsdiq edir.

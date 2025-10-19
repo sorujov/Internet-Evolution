@@ -203,7 +203,10 @@ cellular_first$UploadSpeed, cellular_last$UploadSpeed
 ```{r regional-comparison, child='sections/05_regional_comparison.Rmd'}
 ```
 
-```{r conclusions, child='sections/06_conclusions.Rmd'}
+```{r policy-impact, child='sections/06_policy_impact.Rmd'}
+```
+
+```{r conclusions, child='sections/07_conclusions.Rmd'}
 ```
 
 ---
