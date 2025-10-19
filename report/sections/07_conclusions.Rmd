@@ -1,65 +1,89 @@
-# Nəticə və Tövsiyələr
+# Nəticələr, Tövsiyələr və Gələcək İstiqamətlər
 
-Bu tədqiqat Azərbaycanın internet keyfiyyətinin 2019-2025 dövründə təkamülünü təsviri statistika, trend təhlili, regional müqayisə və siyasət təsiri qiymətləndirməsi vasitəsilə sistematik şəkildə sənədləşdirmişdir. Əldə edilmiş empirik nəticələr siyasət dizaynı və gələcək investisiya qərarları üçün əsaslı tövsiyələr təqdim edir.
+Bu tədqiqat Azərbaycanın internet keyfiyyətinin 2019-cu ilin aprelindən 2025-ci ilin sentyabrına qədər 78 aylıq müşahidə dövrü ərzində təkamülünü sistematik empirik təhlil vasitəsilə sənədləşdirmişdir. Tədqiqat dörd əsas komponentdən ibarətdir: təsviri statistika və trend qiymətləndirməsi, regional müqayisə, kauzal siyasət təsiri qiymətləndirməsi və metodoloji rigorluq. Əldə edilmiş nəticələr siyasət dizaynı, investisiya prioritetləşdirməsi və gələcək tədqiqat istiqamətləri üçün empirik əsas təmin edir. Bu bölmə əsas tapıntıları ümumiləşdirir, siyasət tövsiyələri təqdim edir, tədqiqatın məhdudiyyətlərini müzakirə edir və gələcək tədqiqat sahələrini müəyyənləşdirir.
 
-## Əsas Tapıntıların Xülasəsi
+## Əsas Empirik Tapıntıların Xülasəsi
 
-### Ölkə daxili dinamika
+### Ölkədaxili Temporal Dinamika
 
-Azərbaycanın sabit internet median download sürəti 78 aylıq müşahidə dövrü ərzində 13.4 dəfə artaraq 5.2 Mbps-dən 69.8 Mbps-ə çatmışdır. Xətti reqressiya təhlili aylıq 0.92 Mbps artım tempini qiymətləndirir (R² = 0.81, p < 0.001), Mann-Kendall testi isə güclü monoton artan trend təsdiq edir (τ = 0.94, p < 0.0001). Mobil internet daha yüksək başlanğıc bazasından (20.9 Mbps) başlayaraq 3.3 dəfə artış nümayiş etdirmiş və 69.8 Mbps-ə çatmışdır (aylıq artım 0.59 Mbps, R² = 0.91).
+Azərbaycanın sabit internet median download sürəti 78 aylıq müşahidə dövrü ərzində köklü transformasiya keçirmişdir. 5.2 Mbps-dən (Aprel 2019) 84.8 Mbps-ə (Sentyabr 2025) qalxaraq, sürət 16.3 dəfə artmışdır və 79.6 Mbps absolut qazanc qeydə almışdır. Xətti reqressiya təhlili aylıq 0.92 Mbps artım tempini qiymətləndirir (R² = 0.81, p < 0.001), güclü xətti trendi təsdiq edir. Mann-Kendall parametrik olmayan testi monoton artan trendi paylanma fərziyyələrindən asılı olmadan təsdiq edir (τ = 0.94, p < 0.0001), reqressiya tapıntılarına robust təsdiq təmin edir. Durbin-Watson statistikası (DW ≈ 0.04) müsbət avtokorrelyasiya göstərir və Newey-West robust standart xətaların istifadəsini əsaslandırır, lakin statistik əhəmiyyətlilik qalır (p < 0.001).
 
-2025-ci ilin sentyabr ayına olan məlumata görə sabit və mobil internet sürətləri konvergensiya edərək hər ikisi 69.8 Mbps səviyyəsindədir. Bu konvergensiya sabit infrastrukturun "catch-up" dinamikasını və GPON texnologiyasının uğurlu tətbiqini göstərir.
+Upload sürətləri paralel dinamika nümayiş etdirir: 3.2 Mbps-dən 85.3 Mbps-ə (26.7 dəfə artım), aylıq 0.92 Mbps artım tempi və R² = 0.82. Download-upload konvergensiyası (hər ikisi ≈ 85 Mbps) asimmetrik genişzolaqlı texnologiyalardan (ADSL) simmetrik fiber infrastruktura (GPON) uğurlu keçidi əks etdirir, bu da "Onlayn Azərbaycan" proqramının texnoloji yüksəltmə effektivliyini təsdiq edir.
 
-### Regional müqayisə
+Mobil internet daha yüksək başlanğıc bazasından (20.9 Mbps, Aprel 2019) başlayaraq 69.8 Mbps-ə (Sentyabr 2025) çatmışdır, 3.3 dəfə artım və aylıq 0.59 Mbps artım tempi nümayiş etdirir (R² = 0.91, p < 0.001). Yüksək model uyğunluğu mobil şəbəkənin sistematik, planlı yerləşdirilməsini və 4G/5G texnologiyalarının hamar qəbulunu göstərir. Sabit-mobil konvergensiya (hər ikisi ≈ 70 Mbps sentyabr 2025-də) infrastruktur yetkinliyini və texnologiya-neytral istifadəçi təcrübəsi mərhələsinə keçidi nümayiş etdirir, harada texnologiya seçimi (sabit vs mobil) performans fərqinə az təsir edir.
 
-MDB kontekstində Azərbaycan mobil internet median download sürətinə görə 1-ci mövqedədir (period orta 32.2 Mbps, son ay 69.8 Mbps), bu liderlik 2021-ci ildən etibarən saxlanılır. Sabit internetdə period orta ilə 7-ci yerdə olsa da (21.5 Mbps), son ayda 5-ci yerə yüksəlmişdir. Artım tempinə görə Azərbaycan sabit internetdə 2-ci (1,243%), mobil internetdə 4-cü yerdədir (235%).
+### Regional Mövqe və Yaxınlaşma Dinamikası
 
-### Siyasət təsirləri
+MDB kontekstində Azərbaycanın mövqeyi iki cəhətli nəticə nümayiş etdirir: mobil liderlik və sabit internetdə sürətli yaxınlaşma. Mobil internetdə Azərbaycan **1-ci mövqedədir** (69.8 Mbps sentyabr 2025-də), Qazaxıstandan (66.7 Mbps) və Ermənistandan (51.1 Mbps) önə keçərək. Bu liderlik 2021-ci ildən etibarən saxlanılır və erkən 4G yerləşdirmələrini, spektr siyasətinin effektivliyini və mobil operatorların rəqabət dinamikasını əks etdirir. Upload performansı (19.4 Mbps) regionda birinci olub balanslaşdırılmış investisiya prioritetlərini təsdiq edir.
 
-Interrupted Time Series təhlili "Onlayn Azərbaycan" layihəsinin 2022-ci il yanvar ayından etibarən sabit internet sürətində statistik əhəmiyyətli artıma səbəb olduğunu göstərir. Model həm dərhal təsir (səviyyə artımı), həm də trend sürətlənməsi (aylıq artım tempinin yüksəlməsi) aşkar edir. Placebo testlər nəticələrin robust olduğunu təsdiq edir.
+Sabit internetdə Azərbaycan **5-ci mövqedədir** (84.8 Mbps), yuxarı qrupun az gerisində: Özbəkistan (89.1 Mbps), Rusiya (88.8 Mbps), Belarus (85.5 Mbps) və Qırğızıstan (85.3 Mbps). Dar mövqe fərqləri (< 5 Mbps yuxarı 4 ölkə arasında) göstərir ki, Azərbaycan liderlik qrupuna çatmaq üçün təxminən 5 Mbps artım tələb edir və bu, cari artım tempi ilə (0.92 Mbps/ay) təxminən 5-6 ay proyeksiya edir.
 
-2024-cü il avqust tarifləşmə reformasının təsiri Difference-in-Differences metodologiyası ilə qiymətləndirilib. [Nəticə əlavə olunacaq - DID skripti işlədikdən sonra dəqiq rəqəmlər buraya yazılacaq].
+Artım müqayisəsi paradoksal nəticə aşkar edir: Azərbaycan sabit internetdə ən yüksək artım tempinə malikdir (1,330%), lakin 5-ci mövqedə qalır. Bu paradoks başlanğıc baza effektləri ilə izah olunur: Azərbaycan 2019-da aşağı bazadan (5.2 Mbps) başlamış və sürətli yaxınlaşma nümayiş etdirmiş, lakin hələ də regional liderləri (88-89 Mbps) tutmamışdır. Mövcud artım tempi Azərbaycanın 2026-cı ilin əvvəlində liderlik qrupuna qoşulacağını proyeksiya edir və davamlı investisiyaların əhəmiyyətini vurğulayır.
+
+### Siyasət Müdaxilələrinin Kauzal Təsirlər
+
+Kauzal inferens təhlili iki əsas siyasət müdaxiləsinin təsirlərini qiymətləndirmişdir. "Onlayn Azərbaycan" proqramının 2022-ci il yanvar genişləndirilməsi Interrupted Time Series (ITS) təhlili vasitəsilə sabit internet sürətində statistik əhəmiyyətli trend ivmələnməsinə səbəb olmuşdur. Qiymətləndirilmiş maili dəyişiklik β₃ = 1.32 Mbps/ay (p < 0.001) göstərir ki, post-müdaxilə aylıq artım tempi pre-müdaxilədən 1.32 Mbps/ay daha yüksəkdir. Plasebo testləri nəticənin robust olduğunu təsdiq edir (p = 0.03): 100 təsadüfi müdaxilə tarixindən yalnız 3-ü faktiki təsirdən böyük effekt nümayiş etdirir. Pre-post müqayisə post-müdaxilə orta sürətdə 22.3 Mbps artım göstərir (208% nisbi artım), ITS tapıntılarını təsviri olaraq təsdiq edir.
+
+2024-cü il avqust tarif reformasının (25 AZN standart paket) Difference-in-Differences (DiD) qiymətləndirməsi statistik əhəmiyyətli müsbət təsir göstərir (ATT = 3.82 Mbps, p = 0.013). **Lakin paralel trendlər fərziyyəsinin pozulması (p = 0.041) kauzal atribusiyaya ehtiyatlı yanaşmağı tələb edir.** Sabit və mobil internet müdaxilədən əvvəl müxtəlif artım trayektoriyalarına malik olmuşlar (sabit daha sürətli artır) və bu pre-müdaxilə fərq post-müdaxilə qiymətləndirməni qarışdırır. Nəticə təsirin yuxarı sərhəddi kimi şərh olunmalıdır və robust kauzal inferens əlavə post-müdaxilə məlumatları, alternativ nəzarət qrupları və ya sintetik nəzarət metodları tələb edir.
+
+Metodoloji şəffaflıq vacibdir. Biz fərziyyə pozuntularını açıq hesabat edirik, diaqnostik protokolları sənədləşdiririk və qiymətləndirmələri məhdudiyyətlərlə kontekstləşdiririk. Bu yanaşma empirik dürüstlüyü qoruyur və gələcək siyasət qiymətləndirmələri üçün metodoloji rigorluğu nümayiş etdirir.
 
 ## Siyasət Tövsiyələri
 
-### Qısa müddət (1-2 il)
+Empirik nəticələr üç zaman qatında təşkil edilmiş fəaliyyətə yönəldilən siyasət tövsiyələri təqdim edir: qısa müddət (1-2 il), orta müddət (3-5 il) və uzun müddət (5+ il). Hər bir tövsiyə məqalənin empirik tapıntılarından açıq derivasiya olunur.
 
-Mobil internet liderlik mövqeyinin saxlanması üçün 5G şəbəkə infrastrukturunun geniş tətbiqi prioritet olmalıdır. Azərbaycan MDB-də mobil internetə görə 1-ci yerdə olsa da, qlobal standartlarla müqayisədə hələ də inkişaf potensialı var.
+### Qısa Müddət (1-2 İl)
 
-Sabit internetdə regional fərqlərin azaldılması zəruridir. "Onlayn Azərbaycan" layihəsi uğurlu olsa da, rayon səviyyəsində əhatə və keyfiyyət fərqləri hələ də mövcuddur. Infrastruktur investisiyaları regionlara bərabər paylanmalıdır.
+**Sabit internetdə liderlik qrupuna qoşulmaq.** Empirik proyeksiyalar göstərir ki, cari artım tempi (0.92 Mbps/ay) ilə Azərbaycan 5-6 ay ərzində regional liderlərə (88-89 Mbps) çatacaq. Fiber yerləşdirmələrinin davamlılığı, xüsusilə GPON infrastrukturunun regionlara genişləndirilməsi, bu konvergensiyanı sürətləndirəcək. Investisiya prioritetləri rayon səviyyəli əhatə fərqlərini hədəfləməlidir, çünki ümumi median göstəriciləri şəhər-kənd heterogenliyini maskalayır.
 
-Tarifləşmə siyasətinin effektivliyi monitorizasiya edilməlidir. 2024 avqust reformasının uzunmüddətli təsirlərini izləmək və lazım gəldikdə korrektiv tədbirlər görmək vacibdir.
+**Mobil liderlik mövqeyinin saxlanması.** Azərbaycanın mobil internetdə 1-ci mövqeyi (69.8 Mbps) qorumaq 5G şəbəkə infrastrukturunun geniş tətbiqini tələb edir. Mövcud liderlik 4G əhatəsi ilə əldə edilsə də, regional rəqiblər (Qazaxıstan, Ermənistan) 5G-yə investisiya edirlər. Proaktiv 5G yerləşdirmə Azərbaycanın rəqabət üstünlüyünü qoruyacaq və ultra-aşağı gecikməyə (ultra-low latency) və massiv IoT bağlantısına ehtiyac duyan proqramları (avtonomnöqliyyat, ağıllı şəhərlər, səhiyyə telemedisinası) aktivləşdirəcək.
 
-### Orta müddət (3-5 il)
+**Tarif reforması monitorinqi.** 2024 avqust tarifinin (25 AZN) uzunmüddətli təsirlərini izləmək və lazım gəldikdə korrektiv tədbirlər görmək vacibdir. DiD qiymətləndirməsi paralel trendlər pozuntusu ilə məhdudlaşsa da, təsviri nəticələr qiymət azalmasından sonra istifadəçi qəbulunun artmasını göstərir. Real-time monitorizasiya sistemi (istifadəçi şikayətləri, əhatə genişlənməsi, performans metriklər) siyasət effektivliyini kəmiyyətləşdirəcək və iterativ optimallaşdırmanı aktivləşdirəcək.
 
-Fiber-optik şəbəkənin FTTX (Fiber to the X) arxitekturuna keçidi davam etməlidir. GPON texnologiyası müasir standart olsa da, gələcək yüksək sürət tələblərinə cavab vermək üçün XGS-PON (10 Gigabit) kimi növbəti nəsil texnologiyalara keçid planlaşdırılmalıdır.
+### Orta Müddət (3-5 İl)
 
-İnternet keyfiyyəti monitorinq sisteminin qurulması tövsiyə olunur. Ookla məlumatları faydalı olsa da, milli səviyyədə real-time keyfiyyət monitorinqi və şikayət idarəetmə sistemi şəffaflığı artıracaq.
+**Növbəti nəsil fiber texnologiyalarına keçid.** GPON texnologiyası (1 Gigabit) müasir standart olsa da, gələcək yüksək sürət tələblərinə (8K striming, virtual reallıq, massiv məlumat şəbəkə optimallaşdırma) cavab vermək üçün XGS-PON (10 Gigabit) və NG-PON2 (40 Gigabit) kimi növbəti nəsil texnologiyalara keçid planlaşdırılmalıdır. Erkən pilot yerləşdirmələr texnoloji liderlik təmin edəcək və beynəlxalq investisiyaları cəlb edəcək.
 
-Rəqəmsal əhatə proqramlarının genişləndirilməsi sosial-iqtisadi inkişaf üçün zərurdir. İnternet infrastrukturu təkcə texniki məsələ deyil, həm də rəqəmsal iqtisadiyyatın əsasını təşkil edir.
+**Milli internet keyfiyyəti monitorinq sisteminin qurulması.** Ookla məlumatları qiymətlidir, lakin üçüncü tərəfin könüllü testlərinə əsaslanır və seçim bias-ına qarşı həssasdır. Milli səviyyədə real-time keyfiyyət monitorinqi və şikayət idarəetmə sistemi (İKTA tərəfindən idarə olunan) şəffaflığı artıracaq, tənzimləyici müdaxiləni aktivləşdirəcək və istifadəçi hüquqlarını güclən dirəcək. Sistem həm passiv ölçmələri (operator şəbəkə məlumatları), həm də aktiv sınaqları (istifadəçi şikayətləri) birləşdirməlidir, çoxfaktorlu keyfiyyət indeksini təmin etməlidir.
 
-### Uzun müddət (5+ il)
+**Rəqəmsal əhatə proqramlarının genişləndirilməsi.** İnternet infrastrukturu təkcə texniki məsələ deyil, həm də rəqəmsal iqtisadiyyatın əsasını təşkil edir. Rəqəmsal savadlılıq proqramları, uyğun cihazlar üçün subsidiyalar və əlçatanlıq ödəniş planları (layihələndirilmiş tarif strukturları) infrastruktur investisiyalarına tamamlayıcıdır. Əgər istifadəçilər təkmilləşdirilmiş infrastrukturdan əsas xidmətlərə çıxış üçün (təhsil, səhiyyə, dövlət xidmətləri, e-ticarət) istifadə etməsələr, infrastruktur təkmilləşdirmələri sənət potensialı həyata keçirməyəcək.
 
-Beynəlxalq bağlantı diversifikasiyası və bandwidth genişləndirilməsi strateji prioritet olmalıdır. Azərbaycanın geopolitik mövqeyi regional tranzit hub kimi potensialını artırır.
+### Uzun Müddət (5+ İl)
 
-Rəqəmsal texnologiyalar üzrə insan kapitalının inkişafı infrastruktur investisiyaları ilə paralel aparılmalıdır. Telekommunikasiya sektorunda ixtisaslaşmış mütəxəssislərin hazırlanması üçün universitetlərlə əməkdaşlıq proqramları genişləndirilməlidir.
+**Beynəlxalq bağlantı diversifikasiyası və bandwidth genişləndirilməsi.** Azərbaycanın geopolitik mövqeyi (Avropa-Asiya qovşağı) regional tranzit hub kimi potensialını artırır. Trans-Xəzər fiber kabel layihələri, çoxlu beynəlxalq bağlantı nöqtələri və redundant routing arxitekturları Azərbaycanı regional rəqəmsal şlüz kimi yerləşdirəcək. Bandwidth genişləndirilməsi ixrac xidmətlərini (məlumat mərkəzləri, cloud computing, mədəni məzmun paylaşımı) aktivləşdirəcək və rəqəmsal iqtisadiyyat gəlirlərini diversifikasiya edəcək.
 
-Süni intellekt və IoT (Internet of Things) tətbiqləri üçün ayrılmış şəbəkə layihələri (network slicing, edge computing) planlaşdırılmalıdır. 5G texnologiyası bu növ innovativ xidmətlər üçün platformadır.
+**Rəqəmsal texnologiyalar üzrə insan kapitalının inkişafı.** İnfrastruktur investisiyaları insan kapitalı investisiyaları ilə paralel aparılmalıdır. Telekommunikasiya sektorunda ixtisaslaşmış mütəxəssislərin (şəbəkə mühəndisləri, məlumat alimləri, kibertəhlükəsizlik mütəxəssisləri) hazırlanması üçün universitetlərlə əməkdaşlıq proqramları, peşə təhsil kursları və beynəlxalq sertifikasiya şəbəkələri genişləndirilməlidir. İnsan kapitalı infrastrukturun həyat qabiliyyətini və innovasiya potensialını təmin edir.
 
-## Tədqiqatın Məhdudiyyətləri
+**Süni intellekt və IoT tətbiqləri üçün şəbəkə layihələri.** 5G texnologiyası network slicing (müxtəlif xidmətlər üçün ayrılmış virtual şəbəkələr) və edge computing (məlumat emalı istifadəçiyə yaxın yerdə) kimi innovativ arxitekturları aktivləşdirir. Süni intellekt (AI) tətbiqləri (avtonoml nəqliyyat, smart city sensorları, sənaye avtomatlaşdırması) və IoT əlaqələri (milyon cihaz km² başına) ayrılmış şəbəkə dilimləri tələb edir, ultra-aşağı gecikməli, yüksək etibarlı və geniş bant genişlikli bağlantı ilə. Azərbaycan erkən movers üstünlüyündən istifadə edərək AI və IoT ekosistemləri üçün test proqramını yerləşdirə bilər.
 
-Bu tədqiqat bir neçə məhdudiyyətə malikdir. Birincisi, məlumat mənbəyi (Ookla) könüllü testlərə əsaslanır və buna görə seçim bias-ı ola bilər. Daha yüksək sürətə malik istifadəçilər test etməyə daha meylli ola bilərlər. İkincisi, ölkə daxili regional və şəhər-kənd fərqləri ümumi median göstəricilərdə gizlənə bilər. Rayon səviyyəli təhlil bu tədqiqatın əhatəsindən kənardadır. Üçüncüsü, kauzal inferens metodları (ITS, DID) güclü identifikasiya fərziyyələrinə əsaslanır. Müşahidə olunmayan konfaundirlər potensial qalır, baxmayaraq ki, biz robust checks tətbiq etmişik.
+## Tədqiqatın Məhdudiyyətləri və Metodoloji Ehtiyatlar
+
+Bu tədqiqat bir neçə məhdudiyyətə malikdir və bu məhdudiyyətlərin açıq etirafı nəticələrin şərhini məsuliyyətlə kontekstləşdirir.
+
+**Birinci, məlumat mənbəyi məhdudiyyətləri.** Ookla məlumatları könüllü istifadəçi tərəfindən başladılan testlərə əsaslanır və seçim bias-ına qarşı həssasdır. Daha yüksək sürətə malik istifadəçilər test etməyə daha meylli ola bilərlər və əhatə fərqləri (şəhər vs kənd) və cihaz heterogenliyini (smartfon vs noutbuk) maskalaya bilər. Median dəyərlərin istifadəsi ekstrem dəyərlərə qarşı robustluğu artırsa da, seçim bias-ını tam aradan qaldırmır. Gələcək tədqiqatlar operator şəbəkə məlumatlarını, tənzimləyici hesabatları və ya aktiv ölçmə kampaniyalarını Ookla məlumatlarını təsdiq etmək və ya tamamlamaq üçün birləşdirməlidir.
+
+**İkinci, aqreqasiya maskalama.** Ölkə səviyyəli ümumi median göstəriciləri rayon daxili, şəhər-kənd və sosial-iqtisadi heterogenliyini gizlədir. Bakı və əyalət regionları arasında əhatə və keyfiyyət fərqləri əhəmiyyətli ola bilər, lakin məqalənin əhatə dairəsindən kənarda qalır. Rayon səviyyəli təhlil (məsələn, rayon-spesifik median sürətlər, paylanma təhlili) infrastruktur investisiyalarının regional bərabərliyini və ədalət implikasiyalarını daha dəqiq qiymətləndirəcək.
+
+**Üçüncü, kauzal inferens fərziyyələri.** ITS və DiD metodları güclü identifikasiya fərziyyələrinə əsaslanır: xətti pre-trendlər (ITS), paralel trendlər (DiD), müdaxilə ekzogenliyə və eyni vaxtda baş verən şokların olmaması. DiD paralel trendlər pozuntusu (p = 0.041) kauzal şərhi məhdudlaşdırır və biz bu məhdudiyyəti açıq hesabat edirik. Müşahidə olunmayan konfaundirlər (məsələn, makroiqtisadi şoklar, texnoloji spilloverlar, rəqib operatorların reaksiyaları) potensial qalır, baxmayaraq ki, biz robust yoxlamalar (plasebo testləri, həssaslıq təhlili) tətbiq etmişik. Təkmilləşdirilmiş dizaynlar (randomized control trials, synthetic control, instrumental variables) daha güclü kauzal təsdiq təmin edəcək.
+
+**Dördüncü, temporal əhatə məhdudiyyətləri.** Tarif reforması qiymətləndirməsi (Avqust 2024) yalnız iki post-müdaxilə ayına (Avqust, Sentyabr 2025) malikdir, uzunmüddətli təsirləri və ya dinamik heterojenliyi qiymətləndirmək üçün kifayət deyil. Əlavə post-müdaxilə məlumatları (12+ ay) daha robust DiD qiymətləndirməsi aktivləşdirəcək, həssaslıq təhlili və dinamik treatment effektləri (event study) ilə.
 
 ## Gələcək Tədqiqat İstiqamətləri
 
-Rayon səviyyəsində internet keyfiyyəti fərqlərinin təhlili və bu fərqlərin sosial-iqtisadi determinantlarının araşdırılması vacib tədqiqat sahəsidir.
+Məqalənin empirik tapıntıları gələcək tədqiqat üçün bir neçə prioritet sahəsini müəyyənləşdirir.
 
-İnternet keyfiyyətinin iqtisadi nəticələrə (biznes yaradılması, uzaqdan iş, e-ticarət) təsirinin empirik qiymətləndirilməsi məqalənin natural extension-ıdır.
+**Rayon səviyyəsində heterogenlik təhlili.** Rayon-spesifik internet keyfiyyəti fərqlərinin və bu fərqlərin sosial-iqtisadi determinantlarının (gəlir, təhsil, urbanizasiya) araşdırılması infrastruktur bərabərliyinə dair siyasət dizaynını məlumatlandıracaq. Məkan təhlili (spatial econometrics, GIS mapping) heterojenlik nümunələrini vizuallaşdıracaq və hədəflənmiş müdaxilələri identifikasiya edəcək.
 
-5G texnologiyasının tətbiqindən sonra müqayisəli təhlil və yeni performans göstəricilərinin (ultra-low latency, massive IoT connectivity) qiymətləndirilməsi gələcək prioritetdir.
+**İnternet keyfiyyətinin iqtisadi nəticələrə təsiri.** İnternet sürətinin iqtisadi nəticələrə (biznes yaradılması, uzaqdan iş, e-ticarət fəaliyyəti, rəqəmsal ihracat) kauzal təsirinin empirik qiymətləndirilməsi məqalənin təbii genişləndirilməsidir. İnstrumental dəyişənlər (məsələn, fiber əlaqə kabel proximity), regres kəsilməsi (regression discontinuity) və ya panel data fixed effects dizaynları ters kauzallığı (reverse causality) həll edə bilər və siyasət dizaynı üçün iqtisadi gəlirliliyi (ROI) kəmiyyətləşdirə bilər.
 
-Beynəlxalq müqayisə perspektivinin genişləndirilməsi: MDB ölkələri ilə yanaşı, oxşar inkişaf səviyyəsinə malik regionlarla (Mərkəzi Asiya, Qafqaz, Şərqi Avropa) müqayisə Azərbaycanın qlobal mövqeyini daha dəqiq qiymətləndirməyə imkan verər.
+**5G tətbiqindən sonra müqayisəli təhlil.** 5G texnologiyasının geniş yerləşdirilməsindən sonra (proyeksiya: 2026-2028) müqayisəli təhlil və yeni performans göstəricilərinin (ultra-aşağı gecikməyə, massive connectivity, şəbəkə dilimləmə effektivliyi) qiymətləndirilməsi prioritet sahədir. 5G-yə xas metrikalar (millisaniyə-səviyyəli gecikməyə, cihaz sıxlığı dəstəyi, enerji səmərəliliyi) 4G-yə fokuslanmış mövcud təhlilə tamamlayıcıdır.
+
+**Beynəlxalq müqayisə perspektivinin genişləndirilməsi.** MDB ölkələri ilə müqayisəyə əlavə olaraq, oxşar inkişaf səviyyəsinə malik regionlarla (Mərkəzi Asiya, Qafqaz, Şərqi Avropa, Orta Şərq) müqayisə Azərbaycanın qlobal mövqeyini daha dəqiq kontekstləşdirəcək. Əgər Azərbaycan MDB-də liderdirsə, o qlobal benchmark-lara nisbətən harada dayanır? Müqayisəli perspektiv investisiya prioritetlərini məlumatlandıracaq və siyasət öyrənmə imkanlarını identifikasiya edəcək.
 
 ## Yekun Qeyd
 
-Bu tədqiqat Azərbaycanın son 6.5 ildə internet infrastrukturu sahəsində əldə etdiyi əhəmiyyətli irəliləyişi sənədləşdirir. Həm sabit, həm də mobil internet xidmətlərində qeydə alınan yüksək artım templəri və "Onlayn Azərbaycan" kimi böyük infrastruktur layihələrinin uğurlu tətbiqi ölkənin rəqəmsal transformasiya strategiyasının effektivliyini təsdiq edir. Regional kontekstdə Azərbaycanın mobil internet liderliyi və sabit internetdə sürətli "catch-up" dinamikası növbəti onillikdə rəqəmsal iqtisadiyyat inkişafı üçün möhkəm baza yaradır. Empirik nəticələr siyasət qərarlarının data-driven qiymətləndirilməsinin əhəmiyyətini və gələcək investisiya prioritetlərinin elmi əsaslarla müəyyən edilməsinin zəruriliyini bir daha vurğulayır.
+Bu tədqiqat Azərbaycanın 2019-2025 dövründə internet infrastrukturu sahəsində əldə etdiyi əhəmiyyətli irəliləyişi sistematik empirik dəlillərlə sənədləşdirir. Sabit internet 16.3 dəfə artım (5.2 → 84.8 Mbps), mobil internet regional liderlik (1-ci mövqe, 69.8 Mbps) və "Onlayn Azərbaycan" proqramının robust kauzal təsiri (β₃ = 1.32 Mbps/ay, p < 0.001) Azərbaycanın rəqəmsal transformasiya strategiyasının effektivliyini təsdiq edir. Regional kontekstdə Azərbaycanın mobil liderliyi və sabit internetdə sürətli yaxınlaşma dinamikası növbəti onillikdə rəqəmsal iqtisadiyyat inkişafı üçün möhkəm baza yaradır.
+
+Metodoloji rigorluq məqalənin əsas töhfəsidir. Robust diaqnostikalar (Newey-West SE, Mann-Kendall testləri, plasebo yoxlamaları), fərziyyə pozuntularının şəffaf hesabatı (paralel trendlər pozuntusu p = 0.041) və məhdudiyyətlərin açıq müzakirəsi empirik dürüstlüyü qoruyur və təkrarlana bilənliyə töhfə verir. Siyasət qiymətləndirməsində data-driven, metodoloji cəhətdən rigorous yanaşma daha geniş tətbiq gələcək infrastruktur investisiyalarının və siyasət prioritetləşdirməsinin elmi əsaslarını möhkəmləndirir.
+
+Empirik nəticələr siyasət qərarlarının data-driven qiymətləndirməsinin əhəmiyyətini və gələcək investisiya prioritetlərinin elmi əsaslarla müəyyən edilməsinin zəruriliyini vurğulayır. Tədqiqat akademiklər, siyasətçilər və praktiklər üçün üç əsas töhfə təqdim edir: (1) Azərbaycan internet infrastrukturunun sistematik empirik xarakteristikası, (2) regional müqayisə perspektivlə kontekstləşdirilmiş performans və (3) kauzal siyasət təsirinin rigorous qiymətləndirməsi şəffaf metodoloji yanaşma ilə. Bu töhfələr gələcək tədqiqatlar, siyasət iterasiyaları və regional əməkdaşlıq təşəbbüsləri üçün empirik əsas təmin edir.
