@@ -1,35 +1,101 @@
 # Giriş
 
-Genişzolaqlı internet infrastrukturu müasir iqtisadiyyatlarda iqtisadi inkişafın fundamental determinantlarından biridir. Empirik ədəbiyyat genişzolaqlı internetə çıxışın 10% artımının ÜDM-də 1.21% artıma səbəb olduğunu sənədləşdirir [@katz2010], həmçinin əmək məhsuldarlığı, məşğulluq nəticələri və rəqəmsal sahibkarlığın həyat qabiliyyətinə müsbət təsirlərini təsdiq edir [@czernich2011; @roller2001]. COVID-19 pandemiyası bu əlaqələri daha da güclü şəkildə vurğuladı: uzaqdan iş rejimi və onlayn təhsil etibarlı, yüksək sürətli bağlantıdan asılı olan əsas iqtisadi fəaliyyətlərə çevrildi [@itu2023]. İnternet sürəti və etibarlılığı innovasiya ekosisteminin formalaşması, rəqəmsal sahibkarlığın inkişafı və beynəlxalq rəqabət qabiliyyətinin artırılması üçün zəruri şərtdir [@oecd2022].
+Sabit genişzolaqlı internet infrastrukturu müasir iqtisadiyyatlarda iqtisadi inkişafın fundamental determinantlarından biridir. 
+Elmi ədəbiyyatda genişzolaqlı internetə çıxışın 10% artımının ÜDM-də 1.21% artıma səbəb olduğu göstərilir [@katz2010], 
+həmçinin əmək məhsuldarlığı, məşğulluq nəticələri və rəqəmsal sahibkarlığın həyat qabiliyyətinə müsbət təsirlərini 
+təsdiq edir [@czernich2011; @roller2001]. Maraqlısı budur ki, COVID-19 pandemiyası internet və iqtisadi fəaliyyət arasındakı 
+əlaqəni daha da gücləndirdi. Belə ki, uzaqdan iş rejimi və onlayn təhsil etibarlı, yüksək sürətli bağlantıdan asılı olan 
+əsas iqtisadi fəaliyyətlərə çevrildi [@itu2023]. Bundan əlavə, İnternet sürəti və etibarlılığının innovasiya ekosisteminin formalaşması, 
+rəqəmsal sahibkarlığın inkişafı və beynəlxalq rəqabət qabiliyyətinin artırılması üçün zəruri şərt olması hər kəsə məlumdur [@oecd2022].
 
-Azərbaycan son onillikdə sistematik rəqəmsal infrastruktur inkişafını həyata keçirmiş, əsas siyasət təşəbbüsləri arasında "Onlayn Azərbaycan" proqramı (2017-ci ildə başladılmış, 2022-ci ildə genişləndirilmiş) və bazar orientasiyalı tarif islahatları (2024) yer almışdır. Bu tədqiqat 2019-cu ilin aprelindən 2025-ci ilin sentyabrına qədər həm sabit, həm də mobil şəbəkələrdə internet keyfiyyətinin təkamülünü kəmiyyətləşdirir. Məlumat mənbəyi Ookla-nın Speedtest Intelligence platformasından əldə edilmiş aylıq median sürət ölçmələridir, bu da ümumi istifadəçi təcrübəsini əks etdirən robust mərkəzi tendensiyanı təmin edir [@ookla2025].
+Qeyd edilən müasir çağırışları nəzərə alaraq, Azərbaycan da son onillikdə öz rəqəmsal infrastrukturunu əhəmiyyətli dərəcədə inkişaf etdirmişdir. 
+Bu təşəbbüslərdən biri 2017-ci ildə başladılmış, 2022-ci ildə genişləndirilmiş və sabit genişzolaqlı 
+internetin əhatə dairəsinin və keyfiyyətinin artırılmasında mühüm rol oynamış "Onlayn Azərbaycan" layihəsidir [@icta2024]. Cari araşdırmanın
+əsas məqsədlərindən biri qeyd olanunan layihənin internet sürətinə təsirini qiymətləndirməkdir.
+
+Bundan başqa, 2024-cü ilin avqustunda əsas internet provayderlərinin koordinasiyası ilə standart paketlər üçün
+internet xidmətlərinin qiyməti 25 manat təyin edilmişdir. Cari təhlildə sonuncu tarif dəyişikliyinin internet sürətinə təsirinin
+kəmiyyət qiymətləndirilməsi də həyata keçirilir.
+
+Qeyd olunanları ümumiləşdirərək deyə bilərik ki, cari tədqiqat işinin əsas məqsədi 2019-cu ilin aprelindən 2025-ci ilin sentyabrına qədər 
+həm sabit, həm də mobil şəbəkələrdə internet keyfiyyətinin təkamülünü kəmiyyət etibarı ilə qiymətləndirməkdir. Təhlildə istifadə edilən 
+məlumatlar Ookla şirkətinin Speedtest Intelligence platformasından əldə edilmişdir [@ookla2025].
 
 ## Tədqiqat Sualları və Əhatə Dairəsi
 
-Təhlil üç konkret tədqiqat sualını ünvanlar. **Birinci, temporal dinamika:** Azərbaycanda download və upload sürətləri 78 aylıq müşahidə dövrü ərzində necə təkamül etmişdir və trendlər davamlı və ya epizodikdir? Xətti reqressiya və parametrik olmayan Mann-Kendall testlərindən istifadə edərək aylıq artım tempini və trend istiqamətini qiymətləndiririk, robust diaqnostiklər (Newey-West standart xətalar, Durbin-Watson statistikası) ilə müşayiət edirik.
+Təhlil üç konkret tədqiqat sualına cavab verməyi hədəfləyir. **Birinci sual,** Azərbaycanda sabit və mobil internetin download və upload sürətlərinin 78 aylıq 
+müşahidə dövrü ərzində necə təkamül etməsi və artım dinamikasının davamlı və ya epizodik olmasının müəyyən edilməsilə bağlıdır. Bu suala cavab vermək üçün, xətti reqressiya və 
+qeyri-parametrik Mann-Kendall testlərindən istifadə edilərək aylıq artım tempi və trend istiqaməti müəyyən edilmiş və qiymətləndirmələr həssaslıq analizi ilə dəstəklənmişdir
+(Newey-West standart xətalar, Durbin-Watson statistikası).
 
-**İkinci, regional rəqabət qabiliyyəti:** Azərbaycan sabit və mobil internet keyfiyyəti üzrə MDB ölkələri arasında hansı mövqedədir və nisbi mövqeyi yaxşılaşmışdır? Müqayisəli təhlil sentyabr 2025 tarixinə görə son vəziyyət reytinqləri, dövr ortalamalarını və ümumi artım metrikalarını əhatə edir, Azərbaycanın iki cəhətliliyini—yüksək artım templəri lakin orta səviyyə absolut performans—kontekstləşdirir.
+**İkinci sual,** Azərbaycanda telekom bazarının regional rəqabət qabiliyyətinin dəyərləndirilməsilə bağlıdır. Daha dəqiq desək, sualın məqsədi 
+Azərbaycanın sabit genişzolaqlı və mobil internet keyfiyyəti üzrə MDB ölkələri arasında hansı 
+mövqedə dayanması və nisbi mövqeyinin zaman üzrə necə dəyişməsini müəyyən etməkdir. Qeyd edilən suala cavab vermək üçün,
+müqayisəli təhlillər aparılmış və bu məqsədlə fərqli fərqli zaman tezliyində fərqli təsviri statistik metodlardan istifadə edilmişdir.
 
-**Üçüncü, siyasət effektivliyi:** "Onlayn Azərbaycan" proqramı və 2024-cü il tarif islahatı internet sürətində ölçülə bilən, statistik əhəmiyyətli təkmilləşmələr gətirmişdirmi? Kauzal inferens metodları—Interrupted Time Series (ITS) "Onlayn Azərbaycan" üçün və Difference-in-Differences (DiD) tarif reformu üçün—sekulyar trendlərdən, mövsümi nümunələrdən və eyni vaxtda baş verən şoklardan qaynaqlanan qarışıqlıqları həll etmək üçün açıq kontrafaktual qurma yolu ilə tətbiq edilir [@bernal2017; @callaway2021].
+**Üçüncü sual,** telekom bazarında həyata keçirilmiş müdaxilələrin effektinin kəmiyyət qiymətləndirilməsilə bağlıdır. Xüsusən də, sualın məqsədi 
+"Onlayn Azərbaycan" layihəsi və 
+2024-cü ildə baş vermiş tarif dəyişikliklərinin internet sürətinə ölçülə bilən, statistik əhəmiyyətli təsir edib-etməməsinin aşkara çıxarılmasıdır. 
+Sonuncu suala cavab vermək üçün statistik nəticəçıxarma metodlarından — Interrupted Time Series (ITS) və Difference-in-Difference (DiD) metodlarından 
+istifadə edilmişdir [@bernal2017; @callaway2021].
 
 ## Azərbaycanın Rəqəmsal Transformasiya Konteksti
 
-Azərbaycan 2000-ci illərin əvvəllərində genişzolaqlı internetin ilkin mərhələsindən başlayaraq fiber infrastrukturunun sürətli genişlənməsinə və 4G/5G mobil şəbəkələrinin yerləşdirilməsinə doğru inkişaf etmişdir. "Azərbaycan 2020: Gələcəyə Baxış" İnkişaf Konsepsiyası və "Telekommunikasiya və İnformasiya Texnologiyalarının İnkişafına dair Strateji Yol Xəritəsi" (2016-2020) bu transformasiyanın strateji çərçivəsini təmin etmişdir [@mincom2023]. 2017-ci ildə başladılan "Onlayn Azərbaycan" dövlət proqramı köhnə ADSL texnologiyasının müasir GPON (Gigabit Passive Optical Networks) ilə əvəz edilməsini təmin etmiş, nəticədə sabit genişzolaqlı internetə çıxış imkanı olan təsərrüfatların sayı 13 dəfə artaraq təxminən 3 milyona çatmışdır [@icta2024].
+Azərbaycan 2000-ci illərin əvvəllərində genişzolaqlı internetin ilkin mərhələsindən başlayaraq fiber infrastrukturunun 
+sürətli genişlənməsinə və 4G/5G mobil şəbəkələrinin yerləşdirilməsinə doğru inkişaf etmişdir. 
+"Azərbaycan 2020: Gələcəyə Baxış" İnkişaf Konsepsiyası və "Telekommunikasiya və İnformasiya Texnologiyalarının 
+İnkişafına dair Strateji Yol Xəritəsi" (2016-2020) bu transformasiyanın strateji çərçivəsini təmin etmişdir [@mincom2023]. 
+2017-ci ildə başladılan "Onlayn Azərbaycan" dövlət proqramı köhnə ADSL texnologiyasının müasir 
+GPON (Gigabit Passive Optical Networks) ilə əvəz edilməsini təmin etmiş, nəticədə sabit genişzolaqlı 
+internetə çıxış imkanı olan təsərrüfatların sayı 13 dəfə artaraq təxminən 3 milyona çatmışdır [@icta2024].
 
-2024-cü ilin avqustunda əsas internet provayderlərinin koordinasiyası ilə standart paketlər üçün qiymətlərin 25 AZN səviyyəsinə endirən tarif islahatı həyata keçirilmiş və əlçatanlığı artırmaq məqsədi güdülmüşdür. Bu siyasət müdaxilələri tədqiqatın təbii müdaxilə nöqtələrini təşkil edir və kauzal təsir qiymətləndirməsini mümkün edir. Bununla belə, Azərbaycanın təcrübəsi daha geniş regional kontekstdə baş verir: MDB ölkələrinin əksəriyyəti müxtəlif sürətlərlə və investisiya prioritetləri ilə oxşar infrastruktur təkmilləşdirmələrini həyata keçirir. Beləliklə, regional müqayisə Azərbaycan-spesifik siyasət təsirlərini ümumi MDB trendlərindən ayırmaq üçün vacibdir.
+2024-cü ilin avqustunda əsas internet provayderlərinin koordinasiyası ilə standart paketlər üçün qiymətlərin 
+25 AZN səviyyəsində təyin edilməsi internet keyfiyyətinin artırılması məqsədi güdmüşdür. 
+Telekom bazarında baş vermiş dəyişikliklər (siyasət müdaxilələriç ingiliscə policy interventions) 
+tədqiqat işi üçün təbii ekzogen müdaxilə nöqtələri təşkil edir ki, bu da öz növbəsində, səbəbiyyət qiymətləndirməsinin aparılmasını 
+və müdaxilələrin kəmiyyət təhlilini statistik baxımdan mümkün edir. Bununla belə, Azərbaycanda internet sürətinin dinamikası
+daha geniş regional kontekstdə 
+baş verir: MDB ölkələrinin 
+əksəriyyəti müxtəlif sürətlərlə və investisiya prioritetləri ilə oxşar infrastruktur təkmilləşdirmələrini həyata keçirir. 
+Beləliklə, regional müqayisə Azərbaycanın telekom bazarına məxsus təsirlərin ümumi MDB trendlərindən ayırmaq üçün vacibdir.
 
 ## Məqalənin Strukturu
 
-Məqalə aşağıdakı kimi təşkil olunmuşdur. Bölmə 2 məlumat mənbələrini və analitik metodologiyanı sənədləşdirir: təsviri statistika, trend qiymətləndirməsi (xətti reqressiya və Mann-Kendall testləri ilə), regional müqayisə, və kauzal inferens dizaynları (ITS və DiD spesifikasiyaları, fərziyyə testləri və diaqnostik protokolları ilə). Bölmə 3 sabit internet üçün ölkədaxili trenləri təqdim edir, ətraflı reqressiya diaqnostikası və parametrik olmayan təsdiqlərlə. Bölmə 4 mobil internet dinamikasına həsr edilir və sabit-mobil konvergensiya nümunəsini müzakirə edir. Bölmə 5 Azərbaycanı MDB kontekstində yerləşdirir, həm son performans, həm də dövrün artım metrikaları üzrə sıralama və müqayisə aparır, yüksək artım lakin orta səviyyə liderlik paradoksunu izah edir.
+Məqalə aşağıdakı kimi təşkil olunmuşdur. Bölmə 2 məlumat mənbələrini və analitik metodologiyanı 
+özündə ehtiva edir: təsviri statistika, trend qiymətləndirməsi (xətti reqressiya və Mann-Kendall testləri ilə),
+ regional müqayisə, və kauzal inferens dizaynları (ITS və DiD spesifikasiyaları, fərziyyə testləri və diaqnostik protokolları ilə). 
+ Bölmə 3 sabit internet üçün ölkədaxili trendləri müəyyən edir, ətraflı reqressiya diaqnostikası və qeyri-parametrik 
+ təsdiqlərlə. Bölmə 4 mobil internet dinamikasına həsr edilir və sabit-mobil konvergensiya nümunəsini müzakirə edir. 
+ Bölmə 5 Azərbaycanı MDB kontekstində yerləşdirir, həm son performans, həm də dövrün artım metrikaları üzrə sıralama 
+ və müqayisə aparır, yüksək artım lakin orta səviyyə liderlik paradoksunu izah edir.
 
-Bölmə 6 "Onlayn Azərbaycan" və 2024 tarif islahatının kauzal təsir qiymətləndirmələrini təqdim edir. ITS təhlili Yanvar 2022 müdaxiləsini izləyən səviyyə və maili dəyişiklikləri qiymətləndirir, plasebo testləri və mövsümilik diaqnostikası ilə. DiD təhlili sabit (müalicə) və mobil (nəzarət) şəbəkələri müqayisə edir, paralel trendlər fərziyyəsini açıq şəkildə yoxlayır və pozuntular halında ehtiyatlı şərh təqdim edir. Bölmə 7 əsas tapıntıları ümumiləşdirir, siyasət tövsiyələri təqdim edir və gələcək tədqiqat istiqamətlərini müəyyənləşdirir, metodoloji məhdudiyyətlərin və təkmilləşdirmə imkanlarının səmimi müzakirəsi ilə.
+Bölmə 6 "Onlayn Azərbaycan" və 2024 tarif islahatının kauzal təsir qiymətləndirmələrini təqdim edir. ITS təhlili 
+Yanvar 2022 müdaxiləsini izləyən səviyyə və maili dəyişiklikləri qiymətləndirir, plasebo testləri və mövsümilik 
+diaqnostikası ilə. DiD təhlili sabit (müalicə) və mobil (nəzarət) şəbəkələri müqayisə edir, paralel trendlər 
+fərziyyəsini açıq şəkildə yoxlayır və pozuntular halında ehtiyatlı şərh təqdim edir. Bölmə 7 əsas tapıntıları 
+ümumiləşdirir, siyasət tövsiyələri təqdim edir və gələcək tədqiqat istiqamətlərini müəyyənləşdirir, metodoloji 
+məhdudiyyətlərin və təkmilləşdirmə imkanlarının səmimi müzakirəsi ilə.
 
 ## Tədqiqatın Əhəmiyyəti
 
-Bu təhlil Azərbaycanda internet keyfiyyəti təkamülünün ilk sistematik, kəmiyyətli sənədləşdirilməsini təqdim edir və empirik nəticələri siyasət dizaynı və investisiya prioritetləşdirməsi üçün əlaqələndirir. Median ölçmələrin istifadəsi Ookla-nın metodologiya standartları ilə uyğunlaşır, bu da 50-ci persentil performansı Sürət Skorunda vurğulayır və beynəlxalq müqayisəlilik təmin edir [@ookla2025; @ookla2024]. Robust inferens metodlarına (Newey-West standart xətalar, Mann-Kendall testləri) diqqət serial korrelyasiya və paylanma fərziyyələri ilə bağlı narahatlıqları həll edir.
+Bu təhlil Azərbaycanda internet keyfiyyəti təkamülünün ilk sistematik, kəmiyyətli sənədləşdirilməsini təqdim edir və 
+empirik nəticələri siyasət dizaynı və investisiya prioritetləşdirməsi üçün əlaqələndirir. Median ölçmələrin istifadəsi 
+Ookla-nın metodologiya standartları ilə uyğunlaşır, bu da 50-ci persentil performansı Sürət Skorunda vurğulayır və 
+beynəlxalq müqayisəlilik təmin edir [@ookla2025; @ookla2024]. Robust inferens metodlarına (Newey-West standart xətalar, 
+Mann-Kendall testləri) diqqət serial korrelyasiya və paylanma fərziyyələri ilə bağlı narahatlıqları həll edir.
 
-Kauzal təsir qiymətləndirmələrinə diqqət siyasət effektivliyinə dair sübut əldə etmək üçün şəffaf, təkrarlana bilən yanaşma nümayiş etdirir, eyni zamanda paralel trendlər pozuntusu kimi fərziyyə pozuntularının səmimi müzakirəsini daxil edir. Bu şəffaflıq təkcə mövcud tədqiqat üçün etibarlılığı gücləndirmir, həm də təkmilləşdirilmiş dizaynlar və əlavə post-müdaxilə müşahidələri ilə gələcək təsdiq tədqiqatları üçün yol göstərir.
+Kauzal təsir qiymətləndirmələrinə diqqət siyasət effektivliyinə dair sübut əldə etmək üçün şəffaf, təkrarlana bilən 
+yanaşma nümayiş etdirir, eyni zamanda paralel trendlər pozuntusu kimi fərziyyə pozuntularının səmimi müzakirəsini 
+daxil edir. Bu şəffaflıq təkcə mövcud tədqiqat üçün etibarlılığı gücləndirmir, həm də təkmilləşdirilmiş dizaynlar və 
+əlavə post-müdaxilə müşahidələri ilə gələcək təsdiq tədqiqatları üçün yol göstərir.
 
-Tapıntılar tənzimləyicilər (İKTA və əlaqəli agentliklər), operatorlar (investisiya və tutum planlaması qərarlarında), və rəqəmsal infrastruktur investisiya qərarlarında iştirak edən inkişaf tərəfdaşları üçün əhəmiyyətlidir. Təsviri trendlər infrastruktur yetkinliyini sənədləşdirir, regional müqayisələr rəqabət mövqeyini kontekstləşdirir və müdaxilə qiymətləndirmələri siyasət alətlərinin nisbi effektivliyini işıqlandırır—fiber genişləndirilməsinin davamlı təsirlərini və tarif islahatlarının qarışıq təsdiqini göstərir.
+Tapıntılar tənzimləyicilər (İKTA və əlaqəli agentliklər), operatorlar (investisiya və tutum planlaması qərarlarında), 
+və rəqəmsal infrastruktur investisiya qərarlarında iştirak edən inkişaf tərəfdaşları üçün əhəmiyyətlidir. 
+Təsviri trendlər infrastruktur yetkinliyini sənədləşdirir, regional müqayisələr rəqabət mövqeyini kontekstləşdirir və 
+müdaxilə qiymətləndirmələri siyasət alətlərinin nisbi effektivliyini işıqlandırır—fiber genişləndirilməsinin davamlı 
+təsirlərini və tarif islahatlarının qarışıq təsdiqini göstərir.
 
-Metodoloji cəhətdən, bu tədqiqat MDB regionunda nadir hallarda rast gəlinən kəmiyyət rigorluq səviyyəsini nümayiş etdirir, ITS və DiD metodlarının təkrarlana bilən tətbiqi ilə birlikdə açıq diaqnostik hesabatı və məhdudiyyət müzakirələri ilə. Bu yanaşma oxşar regional infrastruktur qiymətləndirmələri üçün metodoloji nümunə təmin edir və siyasət qiymətləndirməsində empirik standartların yüksəldilməsinə töhfə verir.
+Metodoloji cəhətdən, bu tədqiqat MDB regionunda nadir hallarda rast gəlinən kəmiyyət rigorluq səviyyəsini nümayiş 
+etdirir, ITS və DiD metodlarının təkrarlana bilən tətbiqi ilə birlikdə açıq diaqnostik hesabatı və məhdudiyyət 
+müzakirələri ilə. Bu yanaşma oxşar regional infrastruktur qiymətləndirmələri üçün metodoloji nümunə təmin edir və 
+siyasət qiymətləndirməsində empirik standartların yüksəldilməsinə töhfə verir.
