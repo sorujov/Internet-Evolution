@@ -34,7 +34,7 @@ harada:
 
 ### ITS Nəticələri
 
-```{r its-results-table}
+```{r its-results-table, tab.cap="ITS təhlili — Onlayn Azərbaycan müdaxiləsi"}
 # Load ITS results from policy analysis script
 if (file.exists("../data/processed/its_results.csv")) {
   its_results <- read_csv("../data/processed/its_results.csv", show_col_types = FALSE)
@@ -67,7 +67,6 @@ its_table <- data.frame(
 # Display table
 if (is_word) {
   ft <- flextable(its_table)
-  ft <- set_caption(ft, "Cədvəl 8: ITS təhlili — Onlayn Azərbaycan müdaxiləsi")
   ft <- set_header_labels(ft,
                           Dəyişən = "Dəyişən",
                           Beta2_Səviyyə = "β₂ Səviyyə",
@@ -86,22 +85,12 @@ if (is_word) {
   ft <- add_footer_lines(ft, "Qeyd: β₂ = dərhal səviyyə dəyişikliyi; β₃ = maili ivmələnmə. Newey-West robust SE. *** p < 0.001.")
   ft
 } else {
-  kable(its_table,
-        caption = "Cədvəl 8: ITS təhlili — Onlayn Azərbaycan müdaxiləsi",
+  knitr::kable(its_table,
         align = c("l", rep("c", 7)),
         digits = 2,
         col.names = c("Dəyişən", "β₂ Səviyyə", "SE", "p", "β₃ Maili", "SE", "p", "R²"),
-        booktabs = TRUE) %>%
-    kable_styling(
-      bootstrap_options = c("striped", "condensed"),
-      full_width = FALSE,
-      position = "center",
-      latex_options = c("hold_position", "striped")
-    ) %>%
-    column_spec(1, bold = TRUE, width = "3cm") %>%
-    row_spec(0, bold = TRUE, background = "#e3f2fd") %>%
-    add_footnote("β₂ = dərhal səviyyə dəyişikliyi; β₃ = maili ivmələnmə. Newey-West robust SE. *** p < 0.001.",
-                 notation = "none")
+        format = "html",
+        table.attr = "class='table table-striped'")
 }
 ```
 
@@ -113,7 +102,7 @@ Upload sürəti oxşar nümunə göstərir: \(\hat{\beta}_3 = 1.185\) Mbps/ay (p
 
 Şəkil 6 faktiki sürət (bərk xətt) ilə kontrafaktual proqnoz (qırıq xətt) arasında müqayisəni təqdim edir. Kontrafaktual pre-müdaxilə trendin post-müdaxilə ekstrapolyasiyasıdır və "Onlayn Azərbaycan" olmasaydı nə baş verəcəyini təmsil edir.
 
-```{r its-visual, fig.cap="Şəkil 6: ITS təhlili — Onlayn Azərbaycan təsiri (faktiki vs kontrafaktual)"}
+```{r its-visual, fig.cap="Onlineaz.com domeninin qeydiyyatının internet sürətinə təsiri"}
 # Create ITS visual with actual vs counterfactual
 # This requires prediction from ITS model
 intervention_date <- as.Date("2022-01-01")
@@ -180,7 +169,7 @@ Plasebo testlərin nəticəsi: faktiki \(\beta_3 = 1.32\) Mbps/ay təsiri plaseb
 
 Cədvəl 9 layihədən əvvəl (Aprel 2019 - Dekabr 2021, N=33) və sonra (Yanvar 2022 - Sentyabr 2025, N=45) orta göstəriciləri müqayisə edir.
 
-```{r its-prepost-table}
+```{r its-prepost-table, tab.cap="Pre-post müqayisə — Onlayn Azərbaycan"}
 # Calculate pre-post statistics
 pre_data <- az_fixed_median %>% filter(Date < intervention_date)
 post_data <- az_fixed_median %>% filter(Date >= intervention_date)
@@ -203,7 +192,6 @@ prepost_table <- data.frame(
 # Display table
 if (is_word) {
   ft <- flextable(prepost_table)
-  ft <- set_caption(ft, "Cədvəl 9: Pre-post müqayisə — Onlayn Azərbaycan")
   ft <- set_header_labels(ft,
                           Dövr = "Dövr",
                           N = "N",
@@ -221,23 +209,12 @@ if (is_word) {
   ft <- add_footer_lines(ft, "Qeyd: Orta dəyərlər; DL = Download, UL = Upload. Post-pre fərq `r sprintf('%.1f', prepost_table$Median_DL[3])` Mbps-dir.")
   ft
 } else {
-  kable(prepost_table,
-        caption = "Cədvəl 9: Pre-post müqayisə — Onlayn Azərbaycan",
+  knitr::kable(prepost_table,
         align = c("l", rep("c", 5)),
         digits = 2,
         col.names = c("Dövr", "N", "Orta DL (Mbps)", "SD", "Orta UL (Mbps)", "SD"),
-        booktabs = TRUE) %>%
-    kable_styling(
-      bootstrap_options = c("striped", "hover"),
-      full_width = FALSE,
-      position = "center",
-      latex_options = c("hold_position")
-    ) %>%
-    column_spec(1, bold = TRUE) %>%
-    row_spec(3, bold = TRUE) %>%  # Bold difference row
-    row_spec(0, bold = TRUE, background = "#e8f5e9") %>%
-    add_footnote(sprintf("Orta dəyərlər; DL = Download, UL = Upload. Post-pre fərq %.1f Mbps-dir.", prepost_table$Median_DL[3]),
-                 notation = "none")
+        format = "html",
+        table.attr = "class='table table-striped'")
 }
 ```
 
@@ -278,7 +255,7 @@ Pre-treatment diferensial trend əmsalı \(\hat{\beta}_2 = `r sprintf("%.2f", pr
 
 ### DiD Nəticələri və Məhdudiyyətlər
 
-```{r did-results-table}
+```{r did-results-table, tab.cap="DiD təhlili — Tarif reforması"}
 # Load DiD results (placeholder)
 did_table <- data.frame(
   Əmsal = c("Sabit (δ)", "Post (θ)", "Sabit × Post (γ)", "Müalicə Təsiri (ATT)"),
@@ -292,7 +269,6 @@ did_table <- data.frame(
 # Display table
 if (is_word) {
   ft <- flextable(did_table)
-  ft <- set_caption(ft, "Cədvəl 10: DiD təhlili — Tarif reforması")
   ft <- set_header_labels(ft,
                           Əmsal = "Əmsal",
                           Qiymətləndirmə = "Qiymət",
@@ -310,23 +286,12 @@ if (is_word) {
   ft <- add_footer_lines(ft, "Qeyd: ATT = orta müalicə təsiri. Paralel trendlər pozulur (p = 0.041), ATT qiymətləndirməsinə ehtiyatla yanaşılmalıdır.")
   ft
 } else {
-  kable(did_table,
-        caption = "Cədvəl 10: DiD təhlili — Tarif reforması",
+  knitr::kable(did_table,
         align = c("l", rep("c", 5)),
         digits = 2,
         col.names = c("Əmsal", "Qiymət", "SE", "p", "95% CI (alt)", "95% CI (üst)"),
-        booktabs = TRUE) %>%
-    kable_styling(
-      bootstrap_options = c("striped", "condensed"),
-      full_width = FALSE,
-      position = "center",
-      latex_options = c("hold_position")
-    ) %>%
-    column_spec(1, bold = TRUE) %>%
-    row_spec(4, bold = TRUE) %>%  # Bold ATT row
-    row_spec(0, bold = TRUE, background = "#fff3e0") %>%
-    add_footnote("ATT = orta müalicə təsiri. Paralel trendlər pozulur (p = 0.041), ATT qiymətləndirməsinə ehtiyatla yanaşılmalıdır.",
-                 notation = "none")
+        format = "html",
+        table.attr = "class='table table-striped'")
 }
 ```
 

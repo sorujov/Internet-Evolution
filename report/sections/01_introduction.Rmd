@@ -92,10 +92,10 @@ Bu təhlil Azərbaycanda internet keyfiyyətinin təkamülünün ilk sistematik,
 əldə edilən empirik nəticələri siyasət qərarları və investisiya prioritetlərinin müəyyənləşdirilməsi ilə əlaqələndirir. 
 Təhlildə median göstəricilərindən istifadə edilməsi, Ookla tərəfindən tətbiq edilən və sürət paylanmasının 50-ci persentilini əsas 
 götürən *Speed Score* metodologiyası ilə tam uyğunluq təşkil edir, bu da nəticələrin beynəlxalq müqayisəliliyini 
-təmin edir [@ookla2024methodology]. 
+təmin edir [@ookla2024]. 
 Tədqiqatda ardıcıl korrelyasiya və heteroskedastiklik kimi ekonometrik problemləri aradan qaldırmaq üçün 
 Newey-West standart xətaları [@newey1987simple] və paylanma fərziyyələrindən asılı olmayan Mann-Kendall 
-trend testi [@mann1945nonparametric; @kendall1975rank] kimi gücləndirilmiş (robust) qərarvermə 
+trend testi [@mann1945nonparametric; @kendall1975] kimi gücləndirilmiş (robust) qərarvermə 
 statistikası metodlarına üstünlük verilir.
 
 Tədqiqatın səbəbiyyət təhlilinə fokuslanması siyasətin effektivliyinə dair sübuta əsaslı dəlillər 

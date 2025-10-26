@@ -16,9 +16,9 @@ if "%FORMAT%"=="" set FORMAT=all
 
 if /i "%FORMAT%"=="all" (
     echo Rendering all formats...
-    Rscript -e "rmarkdown::render('report/article_modular.Rmd', output_dir = 'output', output_format = 'html_document')"
-    Rscript -e "rmarkdown::render('report/article_modular.Rmd', output_dir = 'output', output_format = 'pdf_document')"
-    Rscript -e "rmarkdown::render('report/article_modular.Rmd', output_dir = 'output', output_format = 'word_document')"
+    Rscript -e "rmarkdown::render('report/article_modular.Rmd', output_dir = 'output', output_format = 'bookdown::html_document2')"
+    Rscript -e "rmarkdown::render('report/article_modular.Rmd', output_dir = 'output', output_format = 'bookdown::pdf_document2')"
+    Rscript -e "rmarkdown::render('report/article_modular.Rmd', output_dir = 'output', output_format = 'bookdown::word_document2')"
     echo All formats rendered successfully!
     goto :end
 )
@@ -28,17 +28,17 @@ if "%1"=="" goto :end
 
 if /i "%1"=="html" (
     echo Rendering HTML...
-    Rscript -e "rmarkdown::render('report/article_modular.Rmd', output_dir = 'output', output_format = 'html_document')"
+    Rscript -e "rmarkdown::render('report/article_modular.Rmd', output_dir = 'output', output_format = 'bookdown::html_document2')"
 )
 
 if /i "%1"=="pdf" (
     echo Rendering PDF...
-    Rscript -e "rmarkdown::render('report/article_modular.Rmd', output_dir = 'output', output_format = 'pdf_document')"
+    Rscript -e "rmarkdown::render('report/article_modular.Rmd', output_dir = 'output', output_format = 'bookdown::pdf_document2')"
 )
 
 if /i "%1"=="word" (
     echo Rendering Word...
-    Rscript -e "rmarkdown::render('report/article_modular.Rmd', output_dir = 'output', output_format = 'word_document')"
+    Rscript -e "rmarkdown::render('report/article_modular.Rmd', output_dir = 'output', output_format = 'bookdown::word_document2')"
 )
 
 shift

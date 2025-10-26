@@ -59,7 +59,7 @@ həmçinin paylanma xarakteristikalarını və kənar qiymətləri aşkarlamağa
 - **Artım göstəriciləri:** illik (YoY) faiz dəyişikliyi
 
 İllik artım aşağıdakı düsturla hesablanır:
-\[ \text{YoY Artım (%)} = \left( \frac{Y_t - Y_{t-12}}{Y_{t-12}} \right) \times 100 \]
+\[ \text{YoY Artım (\%)} = \left( \frac{Y_t - Y_{t-12}}{Y_{t-12}} \right) \times 100 \]
 Burada \(Y_t\) cari ayın dəyəri, \(Y_{t-12}\) isə bir il əvvəlki ayın dəyəridir. Bu göstərici mövsümi təsirləri neytrallaşdırmağa imkan verir.
 
 ## Trend Təhlili Metodologiyası

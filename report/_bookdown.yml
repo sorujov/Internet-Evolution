@@ -1,0 +1,10 @@
+book_filename: "article_modular"
+language:
+  label:
+    fig: "Şəkil "
+    tab: "Cədvəl "
+  ui:
+    chapter_name: ""
+    edit: "Redaktə et"
+delete_merged_file: true
+number_sections: false

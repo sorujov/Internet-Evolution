@@ -2,7 +2,7 @@
 
 ## Son Vəziyyət (Sentyabr 2025)
 
-```{r cis-comparison-plot, fig.cap="Şəkil 5: MDB ölkələri - internet sürətləri (Sentyabr 2025)"}
+```{r cis-comparison-plot, fig.cap="MDB ölkələrində internet sürətlərinin müqayisəsi (2019-2025)"}
 cis_latest_ordered <- cis_latest %>%
   arrange(Type, desc(DownloadSpeed))
 
@@ -22,7 +22,7 @@ ggplot(cis_latest_ordered, aes(x = reorder(Country, DownloadSpeed),
 
 ## Regional Reytinq
 
-```{r ranking-table}
+```{r ranking-table, tab.cap="MDB ölkələrinin reytinqi (Sentyabr 2025)"}
 ranking_table <- cis_latest %>%
   select(Type, Rank, Country, DownloadSpeed, UploadSpeed) %>%
   arrange(Type, Rank)
@@ -34,7 +34,6 @@ if (is_word) {
                            Country = "Ölkə",
                            DownloadSpeed = "Download (Mbps)",
                            UploadSpeed = "Upload (Mbps)")
-  ft6 <- set_caption(ft6, "Tablo 6: MDB ölkələrinin reytinqi (Sentyabr 2025)")
   ft6 <- theme_vanilla(ft6)
   ft6 <- colformat_num(ft6, j = c("DownloadSpeed", "UploadSpeed"), digits = 2)
   az_idx <- which(ranking_table$Country == "Azerbaijan")
@@ -46,19 +45,17 @@ if (is_word) {
   ft6 <- autofit(ft6)
   ft6
 } else {
-  kable(ranking_table,
+  knitr::kable(ranking_table,
         col.names = c("Növ", "Sıra", "Ölkə", "Download (Mbps)", "Upload (Mbps)"),
-        caption = "Tablo 6: MDB ölkələrinin reytinqi (Sentyabr 2025)",
-        digits = 2) %>%
-    kable_styling(bootstrap_options = c("striped", "hover", "condensed")) %>%
-    row_spec(which(ranking_table$Country == "Azerbaijan"), 
-             bold = TRUE, background = "#e7f3ff")
+        digits = 2,
+        format = "html",
+        table.attr = "class='table table-striped'")
 }
 ```
 
 ## Artım Müqayisəsi
 
-```{r growth-comparison-plot, fig.cap="Şəkil 6: MDB ölkələri - artım templəri"}
+```{r growth-comparison-plot, fig.cap="MDB ölkələrində internet sürət artımının müqayisəsi"}
 cis_growth_ordered <- cis_growth %>%
   arrange(Type, desc(PercentGrowth))
 

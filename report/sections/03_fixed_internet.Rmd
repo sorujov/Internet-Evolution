@@ -1,12 +1,21 @@
 # Sabit İnternet: Təkamül Dinamikası
 
-Azərbaycanın sabit internet infrastrukturu 2019-2025 dövründə əhəmiyyətli transformasiya keçirmişdir. Bu bölmə təsviri statistika, trend təhlili və reqressiya nəticələri əsasında sabit internetin təkamül dinamikasını təqdim edir.
+Bu bölmə, əhəmiyyətli transformasiya ilə səciyyələnən 2019–2025-ci illər dövrü 
+üzrə Azərbaycanın sabit internet infrastrukturunun təkamül dinamikasının ətraflı 
+kəmiyyət təhlilini təqdim edir. 
+Bu inkişaf, artımın miqyasını və trayektoriyasını səciyyələndirmək məqsədilə təsviri statistika, 
+trend təhlili və reqressiya modelləri vasitəsilə empirik olaraq qiymətləndirilir.
 
 ## Ümumi Xarakteristika
 
-Cədvəl 1 Azərbaycanın sabit internet göstəricilərinin 78 aylıq müşahidə dövrü (2019.04-2025.09) üzrə ümumi statistikasını təqdim edir.
+Cədvəl \@ref(tab:fixed-summary-stats) Azərbaycanın sabit internet göstəricilərinin
+78 aylıq müşahidə dövrü (2019.04-2025.09) üzrə ümumi statistikasını təqdim edir.
 
-```{r fixed-summary-stats}
+Bu göstəricilər, zaman sırasının mərkəzi tendensiya, 
+dəyişkənlik və paylanma xüsusiyyətləri haqqında ilkin məlumat təqdim edir.
+
+
+```{r fixed-summary-stats, tab.cap="Sabit internet - ümumi statistika (2019-2025)"}
 az_detailed <- read_csv("../../data/processed/azerbaijan_detailed_stats.csv", show_col_types = FALSE)
 
 fixed_stats <- az_detailed %>% 
@@ -27,27 +36,30 @@ if (is_word) {
     Max_Download = "Max",
     CV_Download = "CV"
   )
-  ft <- set_caption(ft, "Cədvəl 1: Sabit internet - ümumi statistika (2019-2025)")
   ft <- theme_vanilla(ft)
   ft <- colformat_num(ft, j = 3:9, digits = 2)
   ft <- autofit(ft)
   ft
 } else {
-  kable(fixed_stats,
+  knitr::kable(fixed_stats,
         col.names = c("Metrik", "N", "Orta", "Median", "SD", "IQR", "Min", "Max", "CV"),
-        caption = "Cədvəl 1: Sabit internet - ümumi statistika (2019-2025)",
-        digits = 2) %>%
-    kable_styling(bootstrap_options = c("striped", "hover"), full_width = FALSE)
+        digits = 2,
+        format = "html",
+        table.attr = "class='table table-striped'")
 }
 ```
 
-Median download sürəti (21.5 Mbps) orta dəyərdən (29.3 Mbps) əhəmiyyətli dərəcədə aşağıdır, bu da seriyada sağa meyl olduğunu (right-skewed distribution) göstərir. Son ayların yüksək sürətləri orta dəyəri yuxarı çəkir, lakin median daha robust mərkəz tendensiyası ölçüsüdür[@hampel1986]. Dəyişmə əmsalı (CV) 0.79 təxminən orta dərəcəli dəyişkənliyi göstərir.
+Median download sürəti (21.5 Mbps) orta dəyərdən (29.3 Mbps) əhəmiyyətli dərəcədə aşağıdır,
+ bu da zaman sırasında sağa meyl olduğunu (right-skewed distribution) göstərir. 
+ Son ayların yüksək sürətləri orta dəyəri yuxarı çəkir, 
+ lakin median daha robust mərkəz tendensiyası ölçüsüdür[@hampel1986]. 
+ Dəyişmə əmsalı (CV) 0.79 təxminən orta dərəcəli dəyişkənliyi göstərir.
 
 ## Zaman Dinamikası
 
 Şəkil 1 sabit internet download və upload sürətlərinin aylıq dinamikasını təsvir edir.
 
-```{r fixed-trend-plot, fig.cap="Şəkil 1: Sabit internet sürətinin dinamikası (median, 2019-2025)", fig.width=10, fig.height=6}
+```{r fixed-trend-plot, fig.cap="Sabit internet sürətinin dinamikası (median, 2019-2025)", fig.width=10, fig.height=6}
 az_fixed_median <- az_fixed %>% filter(MetricType == "median")
 
 az_fixed_long <- az_fixed_median %>%
@@ -73,7 +85,7 @@ Qrafik aydın artan xətti trend göstərir. 2019-cu ilin aprelində median down
 
 Xətti reqressiya modelinin nəticələri Cədvəl 2-də təqdim olunur.
 
-```{r fixed-regression-table}
+```{r fixed-regression-table, tab.cap="Sabit internet - xətti reqressiya nəticələri"}
 reg_results <- read_csv("../../data/processed/regression_diagnostics.csv", show_col_types = FALSE)
 
 fixed_reg <- reg_results %>% 
@@ -92,19 +104,18 @@ if (is_word) {
     R_Squared = "R²",
     DW_Statistic = "DW stat"
   )
-  ft <- set_caption(ft, "Cədvəl 2: Sabit internet - xətti reqressiya nəticələri")
   ft <- theme_vanilla(ft)
   ft <- colformat_num(ft, j = 2:5, digits = 2)
-  ft <- colformat_num(ft, j = 6, digits = 4)
+  ft <- colformat_double(ft, j = 6, digits = 4, big.mark = "")
   ft <- colformat_num(ft, j = 7:8, digits = 2)
   ft <- autofit(ft)
   ft
 } else {
-  kable(fixed_reg,
+  knitr::kable(fixed_reg,
         col.names = c("Dəyişən", "β₁", "SE", "CI₉₅ aşağı", "CI₉₅ yuxarı", "p", "R²", "DW"),
-        caption = "Cədvəl 2: Sabit internet - xətti reqressiya",
-        digits = c(0, 2, 2, 2, 2, 4, 2, 2)) %>%
-    kable_styling(bootstrap_options = c("striped", "hover"), full_width = FALSE)
+        digits = c(0, 2, 2, 2, 2, 4, 2, 2),
+        format = "html",
+        table.attr = "class='table table-striped'")
 }
 ```
 
@@ -116,7 +127,7 @@ Durbin-Watson statistikası (DW ≈ 0.11) birinci dərəcədən müsbət avtokor
 
 Mann-Kendall trend testinin nəticələri xətti reqressiya fərziyyələrindən asılı olmayan təsdiq təqdim edir.
 
-```{r fixed-mannkendall}
+```{r fixed-mannkendall, tab.cap="Mann-Kendall trend testi nəticələri"}
 mk_results <- read_csv("../../data/processed/mann_kendall_results.csv", show_col_types = FALSE)
 
 fixed_mk <- mk_results %>%
@@ -126,18 +137,17 @@ fixed_mk <- mk_results %>%
 if (is_word) {
   ft <- flextable(fixed_mk)
   ft <- set_header_labels(ft, Variable = "Dəyişən", Tau = "τ", P_Value = "p-dəyəri", Trend = "Trend interpretasiyası")
-  ft <- set_caption(ft, "Cədvəl 3: Mann-Kendall trend testi nəticələri")
   ft <- theme_vanilla(ft)
   ft <- colformat_num(ft, j = 2, digits = 2)
   ft <- colformat_num(ft, j = 3, digits = 4)
   ft <- autofit(ft)
   ft
 } else {
-  kable(fixed_mk,
+  knitr::kable(fixed_mk,
         col.names = c("Dəyişən", "τ", "p", "İnterpretasiya"),
-        caption = "Cədvəl 3: Mann-Kendall trend testi",
-        digits = c(0, 2, 4, 0)) %>%
-    kable_styling(bootstrap_options = c("striped", "hover"), full_width = FALSE)
+        digits = c(0, 2, 4, 0),
+        format = "html",
+        table.attr = "class='table table-striped'")
 }
 ```
 
@@ -147,7 +157,7 @@ Hər iki sürət göstəricisi üçün Kendall τ statistikası 0.93-dən yuxar�
 
 Şəkil 2 il-üzrə-il (YoY) artım templərini təsvir edir.
 
-```{r fixed-yoy-plot, fig.cap="Şəkil 2: Sabit internet - illik artım templəri", fig.width=8, fig.height=5}
+```{r fixed-yoy-plot, fig.cap="Sabit internet - illik artım templəri", fig.width=8, fig.height=5}
 yearly_data <- read_csv("../../data/processed/azerbaijan_yearly_detailed.csv", show_col_types = FALSE)
 
 fixed_yearly <- yearly_data %>%

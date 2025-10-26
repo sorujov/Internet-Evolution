@@ -3,8 +3,10 @@ title: "İnternet Keyfiyyəti: Dünəndən Bu Günə"
 subtitle: "Azərbaycanın Rəqəmsal Transformasiyası (2019-2025)"
 author: "İnformasiya Kommunikasiya Texnologiyaları Agentliyi (IKTA)"
 date: "`r format(Sys.Date(), '%d %B %Y')`"
+site: bookdown::bookdown_site
+documentclass: article
 output:
-  html_document:
+  bookdown::html_document2:
     toc: true
     toc_float: 
       collapsed: false
@@ -14,26 +16,37 @@ output:
     highlight: tango
     code_folding: hide
     css: references_and_styles/icta_style.css
-    number_sections: false
-  pdf_document:
+    number_sections: true
+    fig_caption: true
+    self_contained: true
+  bookdown::pdf_document2:
     toc: true
     toc_depth: 3
     number_sections: true
     latex_engine: xelatex
     keep_tex: false
     dev: cairo_pdf
+    fig_caption: true
     extra_dependencies:
       - float
       - caption
       - booktabs
       - longtable
       - tabu
-  word_document:
+  bookdown::word_document2:
     toc: true
     toc_depth: 3
+    number_sections: true
+    fig_caption: true
+    global_numbering: true
 lang: az
 language:
   label:
+    fig: 'Şəkil '
+    tab: 'Cədvəl '
+  ui:
+    chapter_name: 'Fəsil '
+    edit: 'Redaktə et'
     fig: 'Şəkil '
     tab: 'Cədvəl '
   title-block-published: 'Tarix'
@@ -44,6 +57,7 @@ language:
 always_allow_html: true
 bibliography: references_and_styles/references.bib
 csl: references_and_styles/apa.csl
+link-citations: true
 header-includes:
   - \usepackage{fontspec}
   - \setmainfont{DejaVu Sans}
@@ -54,6 +68,8 @@ header-includes:
   - \captionsetup[figure]{font=small,labelfont=bf,name=Şəkil}
   - \captionsetup[table]{font=small,labelfont=bf,position=top,name=Cədvəl}
   - \usepackage{placeins}
+  - \counterwithout{table}{section}
+  - \counterwithout{figure}{section}
 ---
 
 
