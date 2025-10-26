@@ -179,6 +179,10 @@ cis_latest <- read_csv("../data/processed/cis_comparison_latest.csv", show_col_t
 cis_overall <- read_csv("../data/processed/cis_comparison_overall.csv", show_col_types = FALSE)
 cis_growth <- read_csv("../data/processed/cis_growth_comparison.csv", show_col_types = FALSE)
 
+# Load policy impact data
+onlineaz_its_results <- read_csv("../data/processed/onlineaz_its_results.csv", show_col_types = FALSE)
+tariff_did_results <- read_csv("../data/processed/tariff_did_results.csv", show_col_types = FALSE)
+
 
 # Prepare variables
 az_fixed_median <- az_fixed %>% filter(MetricType == "median")

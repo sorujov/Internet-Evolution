@@ -129,8 +129,10 @@ cat("Step 5: Regression-based DID with robust SE...\n")
 did_formula <- DownloadSpeed ~ Treated + Post + Treated:Post
 did_model <- lm(did_formula, data = panel_data)
 
-# Robust standard errors (clustered by InternetType)
-did_robust_se <- sqrt(diag(vcovCL(did_model, cluster = panel_data$InternetType)))
+# Heteroskedasticity-robust standard errors (HC1)
+# Note: Not clustering by InternetType as we only have 2 groups
+did_robust_vcov <- vcovHC(did_model, type = "HC1")
+did_robust_se <- sqrt(diag(did_robust_vcov))
 
 did_coefs <- tidy(did_model) %>%
   mutate(
@@ -167,7 +169,8 @@ if (att_p < 0.05) {
 cat("Step 6: Robustness check - Upload speed...\n")
 
 did_upload <- lm(UploadSpeed ~ Treated + Post + Treated:Post, data = panel_data)
-upload_robust_se <- sqrt(diag(vcovCL(did_upload, cluster = panel_data$InternetType)))
+upload_robust_vcov <- vcovHC(did_upload, type = "HC1")
+upload_robust_se <- sqrt(diag(upload_robust_vcov))
 upload_coefs <- tidy(did_upload) %>%
   mutate(Robust_SE = upload_robust_se)
 
@@ -190,7 +193,8 @@ did_results_final <- did_coefs %>%
   mutate(
     Variable = "DownloadSpeed",
     CI_Lower = ATT - 1.96 * SE,
-    CI_Upper = ATT + 1.96 * SE
+    CI_Upper = ATT + 1.96 * SE,
+    PreTrends_P = interaction_coef$p.value  # Add parallel trends test p-value
   )
 
 write_csv(did_results_final, "data/processed/tariff_did_results.csv")

@@ -38,8 +38,8 @@ if (is_word) {
                            RSquared = "R²")
   ft5 <- set_caption(ft5, "Tablo 5: Mobil internet trend statistikası")
   ft5 <- theme_vanilla(ft5)
-  ft5 <- colformat_num(ft5, j = "MonthlyIncrease", digits = 3)
-  ft5 <- colformat_num(ft5, j = "RSquared", digits = 3)
+  ft5 <- colformat_num(ft5, j = "MonthlyIncrease", digits = 2)
+  ft5 <- colformat_num(ft5, j = "RSquared", digits = 2)
   ft5 <- align(ft5, align = "center", part = "all")
   ft5 <- autofit(ft5)
   ft5
@@ -47,7 +47,7 @@ if (is_word) {
   kable(cellular_trend_stats,
         col.names = c("Göstərici", "Aylıq Artım (Mbps)", "R²"),
         caption = "Tablo 5: Mobil internet trend statistikası",
-        digits = c(0, 3, 3)) %>%
+        digits = c(0, 2, 2)) %>%
     kable_styling(bootstrap_options = c("striped", "hover"), full_width = FALSE)
 }
 ```

@@ -94,16 +94,16 @@ if (is_word) {
   )
   ft <- set_caption(ft, "Cədvəl 2: Sabit internet - xətti reqressiya nəticələri")
   ft <- theme_vanilla(ft)
-  ft <- colformat_num(ft, j = 2:5, digits = 3)
-  ft <- colformat_num(ft, j = 6, digits = 10, suffix = "")
-  ft <- colformat_num(ft, j = 7:8, digits = 3)
+  ft <- colformat_num(ft, j = 2:5, digits = 2)
+  ft <- colformat_num(ft, j = 6, digits = 4)
+  ft <- colformat_num(ft, j = 7:8, digits = 2)
   ft <- autofit(ft)
   ft
 } else {
   kable(fixed_reg,
         col.names = c("Dəyişən", "β₁", "SE", "CI₉₅ aşağı", "CI₉₅ yuxarı", "p", "R²", "DW"),
         caption = "Cədvəl 2: Sabit internet - xətti reqressiya",
-        digits = c(0, 3, 3, 3, 3, 10, 3, 3)) %>%
+        digits = c(0, 2, 2, 2, 2, 4, 2, 2)) %>%
     kable_styling(bootstrap_options = c("striped", "hover"), full_width = FALSE)
 }
 ```
@@ -128,7 +128,7 @@ if (is_word) {
   ft <- set_header_labels(ft, Variable = "Dəyişən", Tau = "τ", P_Value = "p-dəyəri", Trend = "Trend interpretasiyası")
   ft <- set_caption(ft, "Cədvəl 3: Mann-Kendall trend testi nəticələri")
   ft <- theme_vanilla(ft)
-  ft <- colformat_num(ft, j = 2, digits = 3)
+  ft <- colformat_num(ft, j = 2, digits = 2)
   ft <- colformat_num(ft, j = 3, digits = 4)
   ft <- autofit(ft)
   ft
@@ -136,7 +136,7 @@ if (is_word) {
   kable(fixed_mk,
         col.names = c("Dəyişən", "τ", "p", "İnterpretasiya"),
         caption = "Cədvəl 3: Mann-Kendall trend testi",
-        digits = c(0, 3, 4, 0)) %>%
+        digits = c(0, 2, 4, 0)) %>%
     kable_styling(bootstrap_options = c("striped", "hover"), full_width = FALSE)
 }
 ```

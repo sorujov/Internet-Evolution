@@ -81,7 +81,7 @@ if (is_word) {
   ft <- bg(ft, i = 1, bg = "#e3f2fd", part = "header")
   ft <- bold(ft, j = 1, part = "body")
   ft <- align(ft, j = 2:8, align = "center", part = "all")
-  ft <- colformat_double(ft, j = c(2, 3, 5, 6), digits = 3)
+  ft <- colformat_double(ft, j = c(2, 3, 5, 6), digits = 2)
   ft <- autofit(ft)
   ft <- add_footer_lines(ft, "Qeyd: β₂ = dərhal səviyyə dəyişikliyi; β₃ = maili ivmələnmə. Newey-West robust SE. *** p < 0.001.")
   ft
@@ -89,7 +89,7 @@ if (is_word) {
   kable(its_table,
         caption = "Cədvəl 8: ITS təhlili — Onlayn Azərbaycan müdaxiləsi",
         align = c("l", rep("c", 7)),
-        digits = 3,
+        digits = 2,
         col.names = c("Dəyişən", "β₂ Səviyyə", "SE", "p", "β₃ Maili", "SE", "p", "R²"),
         booktabs = TRUE) %>%
     kable_styling(

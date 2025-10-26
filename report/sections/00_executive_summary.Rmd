@@ -29,7 +29,7 @@ cis_fixed_rank <- cis_latest %>%
 
 Azərbaycanın sabit internet şəbəkəsi müşahidə dövrü ərzində köklü keyfiyyət yüksəlməsi nümayiş etdirmişdir. Median download sürəti 
 `r sprintf("%.2f", fixed_first$DownloadSpeed)` Mbps-dən `r sprintf("%.2f", fixed_last$DownloadSpeed)` Mbps-ə qalxaraq `r sprintf("%.1f", fixed_multiplier)` 
-dəfə artım qeydə almışdır (ümumi artım `r sprintf("%.0f%%", fixed_growth_pct)`). Xətti reqressiya modeli əsasında aylıq ortalama artımın  
+dəfə artım qeydə almışdır (ümumi artım `r sprintf("%.0f%%", fixed_growth_pct)`).Xətti reqressiya modeli əsasında aylıq ortalama artımın  
 `r sprintf("%.2f", fixed_monthly)` Mbps olması müəyyən edilmişdir (R² = `r sprintf("%.2f", fixed_r2)`, p < 0.001) və sonuncu nəticə, öz növbəsində,
 qeyri-parametrik Mann-Kendall testi ilə təsdiq edilmişdir (τ = 0.94, p < 0.0001). 
 
@@ -65,13 +65,19 @@ azalmasını göstərir. Bu isə, öz növbəsində, Azərbaycan telekommunikasi
 ## Siyasət Təsirləri: Səbəbiyyət Qiymətləndirməsi
 
 ```{r exec-policy-stats}
-# ITS results for Online Azerbaijan
-its_level <- 4.21  # From your ITS analysis
-its_slope <- 0.15  # Monthly acceleration
+# Extract ITS results for Online Azerbaijan from data
+its_results_download <- onlineaz_its_results %>% 
+  filter(Variable == "DownloadSpeed")
 
-# DiD results for tariff reform
-did_att <- 3.82    # From your DiD analysis
-did_pval <- 0.041  # Pre-trends test p-value
+its_level <- abs(its_results_download$Level_Change)  # Level change effect
+its_slope <- its_results_download$Slope_Change       # Slope change (monthly acceleration)
+its_level_p <- its_results_download$Level_Change_P   # P-value for level change
+its_slope_p <- its_results_download$Slope_Change_P   # P-value for slope change
+
+# Extract DiD results for tariff reform from data
+did_att <- tariff_did_results$ATT                     # Average Treatment effect on Treated
+did_pval <- tariff_did_results$P_Value                # P-value for DiD estimate
+did_pretrends_pval <- tariff_did_results$PreTrends_P  # Pre-trends test p-value
 ```
 
 Səbəbiyyət qiymətləndirməsi metodlarından istifadə edərək iki əsas siyasət müdaxiləsinin təsiri qiymətləndirilmişdir. "Onlayn Azərbaycan" layihəsinin 
@@ -80,7 +86,7 @@ sürət artımı və bu sürət artımının aylıq `r sprintf("%.2f", its_slope
 (hər iki təsir p < 0.01 səviyyəsində əhəmiyyətlidir). Plasebo testləri bu təsirlərin təsadüfi deyil, müdaxiləyə aid olduğunu təsdiq edir (p = 0.03).
 
 2024-cü il avqustunda tətbiq edilən tarif dəyişikliyinin (25 AZN standart paket) Difference-in-Differences (DiD) qiymətləndirməsi sabit genişzolaqlı internetdə 
-`r sprintf("%.2f", did_att)` Mbps əlavə artım göstərir (p = 0.013). Lakin paralel trendlər fərziyyəsinin pozulması (p = `r sprintf("%.3f", did_pval)`) 
+`r sprintf("%.2f", did_att)` Mbps əlavə artım göstərir (p = `r sprintf("%.3f", did_pval)`). Lakin paralel trendlər fərziyyəsinin pozulması (p = `r sprintf("%.3f", did_pretrends_pval)`) 
 səbəbiyyət əlaqəsi məsələsinə ehtiyatlı yanaşmağı tələb edir: sabit və mobil şəbəkələr müdaxilədən əvvəl müxtəlif artım trayektoriyalarına malik olmuşlar, 
 bu da təsir qiymətləndirməsinin dəqiq kəmiyyətini hesablamaqda çətinlik yaradır. Nəticələr tarif dəyişikliyinin internet sürətinin artımına
 təsir göstərməsini təssdiqləsə də, təsirin dəqiq kəmiyyətini müəyyənləşdirmək 
