@@ -1,175 +1,163 @@
 # Metodologiya
 
-Bu bölmə tədqiqatın məlumat mənbələrini, ölçmə yanaşmalarını və analitik metodları sənədləşdirir. Təhlil təsviri statistika, trend qiymətləndirməsi, regional müqayisə və kauzal inferens dizaynlarını birləşdirir, hər bir metod üçün aydın spesifikasiya və diaqnostik protokolları ilə.
+Bu bölmə tədqiqatın məlumat mənbələrini, ölçmə yanaşmalarını və analitik metodları əhatə edir.
+ Təhlil təsviri statistika, trend qiymətləndirməsi, regional müqayisə və 
+ səbəbiyyət təhlili (causal inference) dizaynlarını birləşdirir, hər bir metod üçün 
+ aydın spesifikasiya və diaqnostik protokollar təqdim edir.
 
-## Məlumat Mənbələri və Əhatə
+## Məlumat Mənbələri və Əhatə Dairəsi
 
-Aylıq internet keyfiyyəti metriklə Speedtest Intelligence (Ookla) platformasından əldə edilmiş, 2019-cu ilin aprelindən 2025-ci ilin sentyabrına qədər səkkiz MDB ölkəsini əhatə edir: Azərbaycan, Ermənistan, Belarus, Qazaxıstan, Qırğızıstan, Rusiya, Tacikistan və Özbəkistan [@ookla2025]. Hər bir müşahidə istehlakçı tərəfindən başladılan sürət testlərinin aylıq median və ya ortasını təmsil edir, bu da Ookla-nın dərc edilmiş nümunəçəkmə və filterləmə prosedurlarına uyğun olaraq unikal istifadəçi hər yerdə hər dövr üçün toplanmışdır.
+Aylıq internet keyfiyyəti göstəriciləri 2019-cu ilin aprelindən 2025-ci ilin sentyabrına 
+qədər olan dövrü əhatə etməklə, səkkiz MDB ölkəsi 
+(Azərbaycan, Ermənistan, Belarus, Qazaxıstan, Qırğızıstan, Rusiya, Tacikistan və Özbəkistan) 
+üçün Speedtest Intelligence® platformasından əldə edilmişdir [@ookla2024].
+Hər bir müşahidə, Ookla-nın dərc olunmuş nümunə götürmə və filtrləmə prosedurlarına uyğun olaraq,
+ hər bir coğrafi mövqe üçün unikal istifadəçilər üzrə aqreqasiya edilmiş,
+  istehlakçı tərəfindən başladılan sürət testlərinin aylıq median və ya orta dəyərini təmsil edir.
 
-Ookla-nın metodologiyası çoxlu-server test protokollarından istifadə edir, qeyri-təmsilçi testləri filtr edir və nəticələri test həcmi əvəzinə unikal cihazlara görə çəkiləndirir, bu da metriklərn güc istifadəçisi və ya avtomatlaşdırılmış test artefaktləri əvəzinə ümumi istifadəçi təcrübəsini əks etdirməsini təmin edir [@ookla2025]. Speedtest Awards metodologiyası ilə uyğun olaraq, bu təhlil median dəyərləri əsas metrik kimi prioritetləşdirir, ortalamalar həssaslıq yoxlamaları üçün istifadə olunur. Metrikalar download sürəti, upload sürəti, gecikmə (latency) və jitter-i əhatə edir, hamısı şəbəkə təbəqəsində ölçülür.
+Ookla-nın metodologiyası çoxserverli test protokollarından istifadə edir,
+ qeyri-təmsiledici testləri filtrləyir və nəticələri testlərin sayına görə deyil,
+  unikal cihazlara görə çəkiləndirir. 
+  Bu yanaşma, göstəricilərin manipulyasiyasını aradan qaldırır, 
+  ümumi istifadəçi təcrübəsini daha dəqiq əks etdirməsini təmin edir [@ookla2024]. 
+  Speedtest Awards metodologiyasına uyğun olaraq, 
+  bu təhlildə median dəyərlər əsas göstərici kimi prioritetləşdirilir, 
+  orta dəyərlər isə həssaslıq yoxlamaları üçün istifadə olunur. 
+  Təhlilə daxil edilən göstəricilər endirmə sürəti, yükləmə sürəti, gecikmə (latency) və jitter-dir.
 
-**Təhlil edilən metrikalar:**
+**Təhlil edilən göstəricilər:**
 
-- **Download sürəti** (Mbps): İstifadəçinin download performansını ölçür
-- **Upload sürəti** (Mbps): İstifadəçinin upload performansını ölçür  
-- **Gecikmə** (millisaniyə): Server cavab müddətini ölçür
-- **Jitter** (millisaniyə variasiyası): Gecikmə dəyişkənliyini ölçür
+- **Endirmə sürəti** (Mbps): İstifadəçinin məlumat endirmə performansını ölçür.
+- **Yükləmə sürəti** (Mbps): İstifadəçinin məlumat yükləmə performansını ölçür.
+- **Gecikmə** (ms): Serverin cavab müddətini ölçür.
+- **Jitter** (ms): Gecikmənin dəyişkənliyini ölçür.
 
 **Şəbəkə növləri:**
 
-- **Sabit genişzolaqlı**: Fiber, kabel, DSL texnologiyaları
-- **Mobil/cellular**: 3G, 4G, 5G texnologiyaları
+- **Sabit genişzolaqlı**: Fiber, kabel, DSL kimi texnologiyaları əhatə edir.
+- **Mobil**: 3G, 4G, 5G kimi texnologiyaları əhatə edir.
 
-Median dəyərləri təhlil boyunca əsas metrik kimi xidmət edir, çünki onlar ekstrem dəyərlərə qarşı robustdur və Ookla-nın mükafat metodologiyası ilə uyğundur, bu da Sürət Skorunda 50-ci persentil performansı vurğulayır [@ookla2024]. Ortalamalar həssaslıq yoxlamaları üçün ikinci dərəcəli olaraq istifadə olunur, xüsusən asimmetrik paylanmalarda median-orta fərqləri sağa əyilməni göstərdikdə.
+Median dəyərləri təhlil boyunca əsas statistik göstərici kimi xidmət edir, çünki onlar 
+ekstremal qiymətlərə (outliers) qarşı daha dayanıqlıdır və 
+Ookla-nın mükafat metodologiyası (*Speed Score*) ilə uyğunluq təşkil edir [@ookla2024]. 
+Orta dəyərlər isə ikinci dərəcəli analizlərdə, 
+xüsusilə asimmetrik paylanmalarda median-orta fərqinin sağa əyilməni göstərdiyi hallarda 
+həssaslıq yoxlamaları üçün istifadə edilir.
 
 ## Təsviri Statistika
 
-Xülasə statistikası ümumi dövr, illik və rüblük aqreqasiyalar üzrə mərkəzi tendensiya, dispersiya və dəyişkənlik ölçülərini əhatə edir. Təsviri statistika rəsmi inferensial testlər üçün əsas xətt təmin edir və paylanma xarakteristikalarını və ekstrem dəyərləri sənədləşdirir.
+Xülasə statistikası ümumi dövr, illik və rüblük aqreqasiyalar üzrə mərkəzi tendensiya, 
+dispersiya və dəyişkənlik ölçülərini əhatə edir. 
+Təsviri statistika inferensial testlər üçün baza rolunu oynayır, 
+həmçinin paylanma xarakteristikalarını və kənar qiymətləri aşkarlamağa kömək edir.
 
 **Hesabat verilən statistikalar:**
 
-- **Mərkəzi tendensiya:** orta, median, moda (zaman seriyası mənasında)
-- **Dispersiya:** standart sapma (SD), interkvartil aralıq (IQR), median mütləq sapma (MAD)
+- **Mərkəzi tendensiya:** orta, median
+- **Dispersiya:** standart kənarlaşma (SD), kvartillərarası diapazon (IQR)
 - **Dəyişkənlik:** variasiya əmsalı (CV = SD/Orta)
-- **Artım metriklərı:** illik (year-over-year, YoY) faiz dəyişikliyi
+- **Artım göstəriciləri:** illik (YoY) faiz dəyişikliyi
 
-İldən-ilə artım aylıq qiymətləri 12 aylıq fərqə qarşı müqayisə edərək hesablanır:
+İllik artım aşağıdakı düsturla hesablanır:
+\[ \text{YoY Artım (%)} = \left( \frac{Y_t - Y_{t-12}}{Y_{t-12}} \right) \times 100 \]
+Burada \(Y_t\) cari ayın dəyəri, \(Y_{t-12}\) isə bir il əvvəlki ayın dəyəridir. Bu göstərici mövsümi təsirləri neytrallaşdırmağa imkan verir.
 
-\[ \text{YoY Artım (\%)} = \frac{Y_t - Y_{t-12}}{Y_{t-12}} \times 100 \]
+## Trend Təhlili Metodologiyası
 
-harada \(Y_t\) cari ayın dəyəri və \(Y_{t-12}\) bir il əvvəlki dəyərdir. Bu metrik mövsümi nümunələr və döngüsel variasiyaları hamar edir.
-
-## Trend Analizi Metodologiyası
-
-Trend qiymətləndirməsi həm parametrik (xətti reqressiya), həm də parametrik olmayan (Mann-Kendall) yanaşmaları birləşdirir, beləliklə, paylanma fərziyyələrindən asılı olmadan təsdiq təmin edilir.
+Trendin qiymətləndirilməsi həm parametrik (xətti reqressiya), 
+həm də qeyri-parametrik (Mann-Kendall) yanaşmaları birləşdirir və 
+bununla da paylanma fərziyyələrindən asılı olmayan nəticələr əldə etməyə imkan verir.
 
 ### Xətti Reqressiya
-
-Parametrik trend qiymətləndirməsi ən kiçik kvadratlar (OLS) vasitəsi ilə:
-
+Parametrik trend qiymətləndirməsi Ən Kiçik Kvadratlar (OLS) metodu [@wooldridge2015introductory] 
+ilə aşağıdakı kimi spesifikasiya edilmiş xətti reqressiya modeli vasitəsilə aparılır:
 \[ Y_t = \beta_0 + \beta_1 t + \varepsilon_t \]
+Bu modeldə \(Y_t\) müvafiq göstəricini (məsələn, endirmə sürəti), 
+\(t\) zaman indeksini, \(\beta_0\) sabiti, \(\beta_1\) orta aylıq artım tempini, 
+\(\varepsilon_t\) isə xəta həddini təmsil edir. Təhlil nəticəsində trendi ifadə 
+edən \(\beta_1\) əmsalının qiyməti, onun statistik əhəmiyyətliliyini yoxlamaq 
+üçün p-dəyəri və 95%-lik etimad intervalı təqdim olunur. Modelin izah etdiyi 
+variasiya payını qiymətləndirmək üçün determinasiya əmsalı (\(R^2\)) istifadə edilir. 
+Həmçinin, birinci tərtib avtokorrelyasiyanın mövcudluğunu yoxlamaq üçün Durbin-Watson 
+statistikası hesablanır. Məlumatların zaman sırası xarakterini nəzərə alaraq, etibarlı 
+statistik nəticələr əldə etmək məqsədilə bütün reqressiyalarda serial 
+korrelyasiya və heteroskedastikliyə qarşı dayanıqlı olan Newey-West standart 
+xətalarından istifadə olunur [@newey1987simple].
 
-harada \(Y_t\) \(t\) ayında metrikdir (download və ya upload sürəti, Mbps), \(t\) zaman indeksi (1-dən 78-ə qədər), \(\beta_0\) kəsikdir, \(\beta_1\) aylıq artım tempini təmsil edir, \(\varepsilon_t\) isə xəta terminini təmsil edir.
-
-**Hesabat verilən diaqnostiklər:**
-
-- \(\beta_1\) **əmsal qiymətləndirməsi** (aylıq Mbps artımı)
-- **Standart xətalar**: həm OLS, həm də Newey-West robust SE
-- **95% inam intervalları** \(\beta_1\) üçün
-- \(R^2\) **(determinasiya əmsalı)**: izah edilmiş variasiyanın nisbəti
-- **Durbin-Watson statistikası**: birinci dərəcəli avtokorrelasiya testi
-- **p-dəyəri**: \(H_0: \beta_1 = 0\) sıfır hipotezinə qarşı iki tərəfli test
-
-Newey-West xətaları bütün zaman seriyası reqressiyalarında istifadə edilir və serial korrelyasiya və heteroskedastisitə üçün düzəliş edir, bu da zaman seriyası məlumatlarında ümumi olan [@newey1987]. Şəffaflıq üçün OLS standart xətaları ilə yanaşı hesabat verilir, Newey-West düzəlişinin təsirini nümayiş etdirir.
-
-Durbin-Watson statistikası (DW) birinci dərəcəli serial korrelyasiyanı yoxlayır; 1.5-2.5 aralığında dəyərlər cüzi avtokorrelasiyaya işarə edir; 1.5-dən kiçik və ya 2.5-dən böyük dəyərlər robust standart xətalar tələb edir. Bütün hesabatlanmış reqressiyalar 1.75-2.10 aralığında DW statistikası nümayiş etdirir və qalıqların müstəqilliyini təsdiq edir.
 
 ### Mann-Kendall Trend Testi
 
-Parametrik olmayan monoton trend aşkarlama:
-
+Parametrik olmayan Mann-Kendall testi, zaman sırası məlumatlarında 
+monoton trendlərin (davamlı artan və ya azalan) mövcudluğunu statistik olaraq 
+yoxlamaq üçün istifadə edilir [@mann1945nonparametric; @kendall1975]. 
+Bu testin əsas üstünlüyü ondadır ki, məlumatların normal paylanması kimi hər hansı 
+bir paylanma fərziyyəsi tələb etmir və ekstremal qiymətlərə (outliers) qarşı dayanıqlıdır. 
+Testin sıfır hipotezi (\(H_0\)) zaman sırasında heç bir monoton trendin olmamasını, 
+alternativ hipotez isə trendin mövcudluğunu (müsbət və ya mənfi) ehtimal edir. 
+Test statistikası, \(S\), bütün mümkün cüt müşahidələr arasındakı fərqlərin 
+işarələrinin cəminə əsaslanır və onun normallaşdırılmış forması olan 
+Kendall-ın tau (\(\tau\)) göstəricisi aşağıdakı kimi hesablanır:
 \[ \tau = \frac{S}{n(n-1)/2} \]
-
-harada \(S\) cütlü fərqlərin işarələrinin cəmidir və \(n\) müşahidələrin sayıdır. Kendall-ın tau (\(\tau\)) -1 ilə +1 arasında dəyişir: müsbət dəyərlər artan trendləri, mənfi dəyərlər azalan trendləri göstərir. Test paylanma-sərbəstdir və qeyri-xəttiliyə qarşı robust olub parametrik fərziyyələrə ehtiyac olmadan xətti reqressiya tapıntılarının təsdiqini təmin edir [@kendall1975]. Yüksək \(\tau\) (> 0.7) güclü monoton trendi təsdiq edir; \(p < 0.05\) normal paylanma fərziyyələri olmadan statistik əhəmiyyəti göstərir.
-
-Mann-Kendall testinin və xətti reqressiya arasında uyğunluq trend istiqamətinə inamı gücləndirmək üçün kritikdir. Uyğunsuzluqlar mövsümilik, qeyri-xətti nümunələr və ya ekstrem dəyərlərin xətti modellərə təsirinə işarə edə bilər.
+Burada \(n\) müşahidələrin sayıdır. \(\tau\) göstəricisi -1 
+(kəskin azalma) və +1 (kəskin artma) arasında qiymət alır və 
+trendin istiqamətini və gücünü göstərir. 
+Trendin statistik əhəmiyyətliliyi isə p-dəyəri ilə müəyyən edilir. 
+Bu tədqiqatda Mann-Kendall testi, 
+xətti reqressiya ilə əldə edilmiş nəticələri təsdiqləmək və 
+trendin mövcudluğuna dair daha etibarlı nəticələr əldə etmək üçün tətbiq olunur.
 
 ## Regional Müqayisə Metodologiyası
 
-Ölkələrarası reytinqlər median download sürətləri üzərində üç perspektivdən hesablanır: son performans, dövr orta performansı və dövrün artımı. Hər bir perspektiv Azərbaycanın infrastruktur yetkinliyinin müxtəlif aspektlərini işıqlandırır.
+Ölkələrarası sıralama median endirmə sürətləri əsasında üç aspektdən aparılır: 
+son performans, dövr üzrə orta performans və artım templəri.
 
-**Reytinq növləri:**
+**Sıralama növləri:**
+1. **Son ay üzrə sıralama** (Sentyabr 2025): İnfrastrukturun cari vəziyyətini əks etdirir.
+2. **Ümumi dövr üzrə sıralama** (Aprel 2019 – Sentyabr 2025): Dövr ərzindəki davamlı performansı göstərir.
+3. **Artım üzrə sıralama**: Ölkələrin təkmilləşmə trayektoriyasını müqayisə edir.
 
-1. **Son ay reytinqi** (Sentyabr 2025): Cari performans vəziyyətini ölçür, infrastrukturun mövcud vəziyyətini əks etdirir.
-2. **Ümumi period reytinqi** (Aprel 2019 – Sentyabr 2025): Ortalama median download sürətini 78 ay boyunca hesablayır, dövr ortasında davamlı performansı əks etdirir.
-3. **Artım reytinqi**: İlk aydan son aya nisbətən artımı hesablayır: \(\frac{\text{Sonuncu} - \text{İlk}}{\text{İlk}} \times 100\), hər ölkənin təkmilləşmə trayektoriyasını əks etdirir.
+## Səbəbiyyət Təhlili Modelləri
 
-Azərbaycanın mövqeyi bütün eksponatlərdə sürətli vizual identifikasiya üçün vurğulanır (məsələn, rəngli və ya qalın hərf). Reytinqlər azalan median sürət üzrə təyin edilir (1-ci yer = ən yüksək performans). Bu yanaşma rəqabət mövqeyi və yaxınlaşma dinamikası haqqında suallara cavab verir: Azərbaycan liderləri tuturdumu, geridə qaldı, yoxsa rəqiblərdən fərqli templə inkişaf etdi?
+Siyasət müdaxilələrinin təsirini qiymətləndirmək, 
+müdaxilənin olmadığı təqdirdə nə baş verəcəyini təxmin edən bir 
+kontrafaktualın (counterfactual) qurulmasını tələb edir. 
+Bu tədqiqatda, müvafiq siyasət müdaxilələrinin təsirini ölçmək üçün iki 
+kvazi-eksperimental model tətbiq edilir. Belə ki, "Onlayn Azərbaycan" proqramının internet
+göstəricilərinə təsirinin empirik qiymətləndirilməsi 
+üçün Kəsilmiş Zaman Sırası (ITS) və 2024-cü il tarif dəyişikliyi üçün Fərqlər-fərqi (DiD) modeli
+istifadə edilir.
 
-## Kauzal İnferens: Siyasət Təsiri Qiymətləndirməsi
-
-Siyasət müdaxilələrinin təsirini qiymətləndirmək kontrafaktual qurma tələb edir: müdaxilə baş verməsəydi nə baş verərdi? İki quasi-experimental dizayn tətbiq edilir: Interrupted Time Series (ITS) "Onlayn Azərbaycan" üçün və Difference-in-Differences (DiD) tarif reformu üçün. Hər iki metod açıq fərziyyə testləri və diaqnostik protokolları ilə müşayiət edilir.
-
-### Interrupted Time Series (ITS)
-
-Seqmentləşdirilmiş reqressiya "Onlayn Azərbaycan" proqramının (müdaxilə nöqtəsi: Yanvar 2022) təsirini qiymətləndirir:
-
+ITS modeli, "Onlayn Azərbaycan" proqramının tam gücüylə fəaliyyətə başladığı 
+2022-ci ilin yanvar ayını müdaxilə nöqtəsi kimi götürərək, 
+seqmentli reqressiya təhlili vasitəsilə siyasətin təsirini qiymətləndirir. 
+Model aşağıdakı kimi təsvir olunur:
 \[ Y_t = \beta_0 + \beta_1 \text{Time}_t + \beta_2 D_t + \beta_3 (\text{Time}_t \times D_t) + \varepsilon_t \]
+Burada \(D_t = 1\) müdaxilədən sonrakı dövrü, 
+\(\beta_2\) əmsalı müdaxilənin dərhal yaratdığı səviyyə dəyişikliyini, \(\beta_3\) 
+əmsalı isə müdaxilədən sonrakı dövrdə trenddəki dəyişikliyi 
+(aylıq artım tempinin sürətlənməsi və ya yavaşlaması) ölçür. 
+Modelin nəticələrinin etibarlılığı plasebo testləri və 
+digər diaqnostik yoxlamalarla təsdiqlənir [@bernal2017].
 
-harada:
-
-- \(Y_t\) aylıq median download və ya upload sürəti (Mbps)
-- \(\text{Time}_t\) xətti zaman tendensiyası (1, 2, ..., 78)
-- \(D_t = 1\) əgər \(t \geq \text{Yanvar 2022}\) (müdaxilə nöqtəsi), əks halda 0
-- \(\beta_0\) pre-müdaxilə kəsiyi
-- \(\beta_1\) pre-müdaxilə aylıq trend (bazal artım)
-- \(\beta_2\) dərhal səviyyə dəyişikliyi (müdaxilədə Mbps sıçrayışı)
-- \(\beta_3\) maili dəyişiklik (müdaxilədən sonra aylıq artım tempinin ivmələnməsi)
-- \(\varepsilon_t\) xəta termi, Newey-West düzəlişi ilə
-
-**Şərh:**
-
-- \(\beta_2\) müdaxilənin dərhal təsirini qiymətləndirir (səviyyə sıçrayışı)
-- \(\beta_3\) artım tempinin davamlı dəyişikliyini qiymətləndirir (maili dəyişiklik)
-- \(\beta_2 > 0\) və \(\beta_3 > 0\) həm dərhal təkmilləşmə, həm də ivmələşdirilmiş artıma işarə edir
-
-**Diaqnostiklər:**
-
-- **Newey-West robust standart xətalar** (avtokorrelasiyaya ünvanlayır)
-- **Qalıq diaqnostikası**: Mövsümilik üçün vizual yoxlama və ACF/PACF
-- **Plasebo testləri**: 1,000 təsadüfi müdaxilə tarixi ilə effekt ölçüsünü təsdiq etmək üçün; empirik p-dəyəri plasebo effektlərinin ≥ müşahidə olunan effektlə nisbəti kimi hesablanır
-- **Model uyğunluğu**: \(R^2\) və Düzəliş edilmiş \(R^2\) izah edilmiş variasiya üçün
-
-**İstinad:** Bernal, Cummins və Gasparrini (2017) "Interrupted time series regression for the evaluation of public health interventions: a tutorial" [@bernal2017].
-
-### Difference-in-Differences (DiD)
-
-İki qrup müqayisəsi Avqust 2024 tarif reformasının təsirini qiymətləndirir:
-
+DiD modeli isə 2024-cü ilin avqust ayında həyata keçirilmiş tarif dəyişikliklərinin 
+təsirini sabit genişzolaqlı (təsir qrupu) və 
+mobil (nəzarət qrupu) şəbəkələrini müqayisə etməklə ölçür. 
+Modelin təsviri aşağıdakı kimidir:
 \[ Y_{it} = \alpha + \delta \text{Treat}_i + \theta \text{Post}_t + \gamma (\text{Treat}_i \times \text{Post}_t) + \varepsilon_{it} \]
-
-harada:
-
-- \(Y_{it}\) median download və ya upload sürəti şəbəkə növü \(i\) və zaman \(t\) üçün
-- \(\text{Treat}_i = 1\) sabit üçün (müalicə qrupu), 0 mobil üçün (nəzarət qrupu)
-- \(\text{Post}_t = 1\) əgər \(t \geq \text{Avqust 2024}\), əks halda 0
-- \(\gamma\) müalicə olunanlar üzrə orta müalicə effekti (ATT)
-- \(\varepsilon_{it}\) xəta termi, şəbəkə növünə görə qruplaşdırılmış robust SE ilə
-
-**Şərh:**
-
-- \(\gamma\) sabit və mobil şəbəkələr arasında post-müdaxilə artım fərqini qiymətləndirir
-- \(\gamma > 0\) sabit internetin tarif reformasından sonra mobil ilə müqayisədə daha sürətli artdığını göstərir (tarif reformasına aid)
-
-**Yoxlanılan fərziyyələr:**
-
-1. **Paralel trendlər**: Müalicə əvvəli dövrə \(\text{Treat}_i \times \text{Time}\) qarşılıqlı termini reqressiya edərək yoxlanır. Əhəmiyyətli əmsal (\(p < 0.05\)) pozuntunu göstərir və ehtiyatlı şərh tələb edir.
-2. **Gözləmə yoxdur**: Vizual yoxlama və müalicə əvvəli ayların model daxil edilməsi effektlərin əvvəlcədən başlamasını yoxlayır.
-3. **Spillover-lar yoxdur**: Mobil istifadəçilərin tarifə cavab olaraq sabit internetə keçmədikləri fərziyyəsi; subsidiar yoxlama səhifələri müzakirəsində müzakirə edilir.
-
-**Diaqnostiklər:**
-
-- **Şəbəkə növünə görə qruplaşdırılmış robust standart xətalar**
-- **Pre/post orta müqayisəsi**: Təsviri təsdiq üçün
-- **Həssaslıq təhlili**: Müalicə əvvəli/sonrası pəncərə uzunluqlarını dəyişərək (6 ay, 12 ay, tam dövr)
-- **Pretrends test çıxışı**: Əmsal, SE, p-dəyəri açıq hesabat
-
-**İstinad:** Callaway və Sant'Anna (2021) "Difference-in-Differences with multiple time periods" [@callaway2021] müasir DiD ədəbiyyatı üçün, bir qrup/iki dövr dizaynı kiçik ölçü hesabına üstünlük versə də.
-
-### Synthetic Control Method (SCM) Qeydi
-
-İlkin dizaynda MDB donor havuzu istifadə edərək sintetik nəzarət düşünülmüşdür. Lakin, donor ölkə sayı məhdud (7 namizəd), müalicədən əvvəl xarakteristikaların uyğunlaşdırma keyfiyyəti zəif və post-müdaxilə müşahidələr qısa (45 ay) olduğu üçün, SCM əsas təhlildən çıxarılmışdır. ITS və DiD daha şəffaf fərziyyə testləri və daha robust inferens təmin edir. Gələcək iş əlavə post-müdaxilə məlumatları və donor seçim optimizasiyası ilə SCM-ni yenidən baxmaq ola bilər [@abadie2010].
+Burada \(\text{Treat}_i=1\) təsir qrupunu (sabit şəbəkə), 
+\(\text{Post}_t=1\) isə islahatdan sonrakı dövrü bildirir. 
+Tədqiqatın əsas maraq obyekti olan \(\gamma\) əmsalı, 
+siyasətin təsir qrupuna orta təsirini (ATT) ölçür. 
+Bu modelin əsas fərziyyəsi olan paralel trendlər hipotezi, 
+müdaxilədən əvvəlki dövr üçün statistik olaraq yoxlanılır və 
+nəticələr bu fərziyyənin təmin olunma dərəcəsinə əsasən şərh edilir. 
+Müasir DiD ədəbiyyatı daha mürəkkəb spesifikasiyalar təklif etsə də, 
+bu tədqiqatdakı təsir və nəzarət qruplarının aydın şəkildə müəyyən edildiyi 
+iki dövrlü dizayn üçün standart modelin tətbiqi məqsədəuyğun hesab edilir [@callaway2021].
 
 ## Statistik Proqram Təminatı
 
-Bütün təhlillər R (versiya 4.3+) proqramında aşağıdakı paketlərdən istifadə edilərək aparılmışdır:
-
-- `tidyverse` (məlumat manipulyasiyası və vizuallaşdırma)
-- `lubridate` (tarix manipulyasiyası)
-- `lmtest` (Durbin-Watson testi)
-- `sandwich` (Newey-West robust xətalar)
-- `Kendall` (Mann-Kendall testi)
-- `broom` (model çıxışının səliqəyə salınması)
-- `flextable` / `kableExtra` (cədvəl formatlaşdırılması)
-
-Kod replikasiya üçün əlçatandır və bütün təhlil skriptləri `analysis/` qovluğunda saxlanılır, nömrələnmiş icra ardıcıllığı ilə (01_data_prep.R → 02_descriptive_stats_v2.R → ... → 06_policy_tariff.R). Təsadüfi seçimlərdən istifadə edən plasebo testləri təkrarlanabilirlik üçün təsadüfi toxum təyin edir (set.seed(12345)).
+Bütün təsviri və ekonometrik təhlillər **R** proqram təminatının 4.3+ versiyası və `tidyverse`, 
+`lmtest`, `sandwich`, `Kendall` kimi əsas paketlərdən istifadə edilərək aparılmışdır. 
+Təhlilin tam təkrarlanabilirliyini təmin etmək məqsədilə, 
+istifadə olunan bütün skriptlər və məlumatlar açıq şəkildə sənədləşdirilmişdir.
