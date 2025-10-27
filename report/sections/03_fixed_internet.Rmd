@@ -15,13 +15,18 @@ Bu göstəricilər, zaman sırasının mərkəzi tendensiya,
 dəyişkənlik və paylanma xüsusiyyətləri haqqında ilkin məlumat təqdim edir.
 
 
-```{r fixed-summary-stats, tab.cap="Sabit internet - ümumi statistika (2019-2025)"}
+```{r fixed-summary-stats, echo=FALSE, tab.cap="Sabit internet - ümumi statistika (2019-2025)"}
 az_detailed <- read_csv("../../data/processed/azerbaijan_detailed_stats.csv", show_col_types = FALSE)
 
 fixed_stats <- az_detailed %>% 
   filter(str_detect(Type, "Fixed")) %>%
   select(Type, Observations, Mean_Download, Median_Download, SD_Download, 
          IQR_Download, Min_Download, Max_Download, CV_Download)
+
+# Store values for inline text
+fixed_median_dl <- fixed_stats %>% filter(Type == "Fixed_Median") %>% pull(Median_Download)
+fixed_mean_dl <- fixed_stats %>% filter(Type == "Fixed_Median") %>% pull(Mean_Download)
+fixed_cv <- fixed_stats %>% filter(Type == "Fixed_Median") %>% pull(CV_Download)
 
 if (is_word) {
   ft <- flextable(fixed_stats)
@@ -37,27 +42,37 @@ if (is_word) {
     CV_Download = "CV"
   )
   ft <- theme_vanilla(ft)
-  ft <- colformat_num(ft, j = 3:9, digits = 2)
-  ft <- autofit(ft)
+  ft <- bg(ft, bg = "#e3f2fd", part = "header")
+  ft <- colformat_double(ft, j = c("Mean_Download", "Median_Download", "SD_Download", 
+                                    "IQR_Download", "Min_Download", "Max_Download", "CV_Download"), 
+                         digits = 2)
+  ft <- fit_to_width(ft, max_width = 7)
   ft
 } else {
   knitr::kable(fixed_stats,
         col.names = c("Metrik", "N", "Orta", "Median", "SD", "IQR", "Min", "Max", "CV"),
         digits = 2,
-        format = "html",
-        table.attr = "class='table table-striped'")
+        booktabs = TRUE) %>%
+    kable_styling(latex_options = c("striped", "hold_position"))
 }
 ```
 
-Median download sürəti (21.5 Mbps) orta dəyərdən (29.3 Mbps) əhəmiyyətli dərəcədə aşağıdır,
- bu da zaman sırasında sağa meyl olduğunu (right-skewed distribution) göstərir. 
- Son ayların yüksək sürətləri orta dəyəri yuxarı çəkir, 
- lakin median daha robust mərkəz tendensiyası ölçüsüdür[@hampel1986]. 
- Dəyişmə əmsalı (CV) 0.79 təxminən orta dərəcəli dəyişkənliyi göstərir.
+Cədvəl \@ref(tab:fixed-summary-stats)-dəki göstəricilər, 
+sabit internet sürəti paylanmasının xarakteristikasını anlamaq üçün vacibdir. 
+Bütün dövr üzrə median endirmə sürətinin (`r round(fixed_median_dl, 1)` Mbps) 
+orta dəyərdən (`r round(fixed_mean_dl, 1)` Mbps) əhəmiyyətli dərəcədə aşağı olması, 
+zaman sırasında sağa əyilmiş paylanmanın (right-skewed distribution) mövcudluğuna işarə edir. 
+Bu fərq, son illərdəki infrastruktur təkmilləşdirmələri nəticəsində əldə edilən yüksək sürət 
+göstəricilərinin orta dəyəri yuxarıya doğru təhrif etməsindən irəli gəlir. 
+Belə hallarda, kənar qiymətlərə qarşı daha dayanıqlı olan median, 
+mərkəzi tendensiyanın daha etibarlı (robast) ölçüsü hesab olunur [@hampel1986]. 
+Dəyişmə əmsalının (CV) `r round(fixed_cv, 2)` olması isə, 
+tədqiqat dövrü ərzində sürət göstəricilərində orta dərəcəli nisbi dəyişkənliyi təsdiq edir.
+
 
 ## Zaman Dinamikası
 
-Şəkil 1 sabit internet download və upload sürətlərinin aylıq dinamikasını təsvir edir.
+Şəkil \@ref(fig:fixed-trend-plot) sabit internet endirmə (download) və yükləmə (upload) sürətlərinin aylıq dinamikasını təsvir edir.
 
 ```{r fixed-trend-plot, fig.cap="Sabit internet sürətinin dinamikası (median, 2019-2025)", fig.width=10, fig.height=6}
 az_fixed_median <- az_fixed %>% filter(MetricType == "median")
@@ -77,20 +92,41 @@ ggplot(az_fixed_long, aes(x = Date, y = Speed, color = Metric)) +
   labs(x = "Tarix", y = "Sürət (Mbps)", color = "Göstərici") +
   theme_minimal(base_size = 11) +
   theme(legend.position = "bottom")
+
+# Calculate trend statistics for inline text
+fixed_start <- az_fixed_median %>% filter(Date == min(Date))
+fixed_end <- az_fixed_median %>% filter(Date == max(Date))
+fixed_dl_growth <- ((fixed_end$DownloadSpeed / fixed_start$DownloadSpeed - 1) * 100)
+fixed_ul_growth <- ((fixed_end$UploadSpeed / fixed_start$UploadSpeed - 1) * 100)
 ```
 
-Qrafik aydın artan xətti trend göstərir. 2019-cu ilin aprelində median download sürəti 5.2 Mbps olduğu halda, 2025-ci ilin sentyabrında 69.8 Mbps-yə çatmışdır, bu da 1,243% artım deməkdir. Upload sürəti də paralel dinamika nümayiş etdirir: 5.9 Mbps-dən 72.8 Mbps-ə (1,134% artım).
+Şəkil \@ref(fig:fixed-trend-plot)-də təsvir edilən zaman sırası qrafiki, 
+həm endirmə, həm də yükləmə sürətləri üçün aydın və güclü artan trendin 
+mövcudluğunu vizual olaraq təsdiq edir. 
+Tədqiqat dövrünün əvvəlində, 2019-cu ilin aprelində, median endirmə 
+sürəti cəmi `r round(fixed_start$DownloadSpeed, 1)` Mbps təşkil edirdisə, 2025-ci ilin 
+sentyabrına qədər bu göstərici `r round(fixed_end$DownloadSpeed, 1)` Mbps-ə çatmışdır ki, 
+bu da `r format(round(fixed_dl_growth, 0), big.mark=",")`%-lik artım deməkdir. 
+Yükləmə sürəti də demək olar ki, sinxron bir dinamika nümayiş etdirərək, 
+müvafiq dövr ərzində `r round(fixed_start$UploadSpeed, 1)` Mbps-dən
+ `r round(fixed_end$UploadSpeed, 1)` Mbps-ə 
+ yüksəlmişdir (`r format(round(fixed_ul_growth, 0), big.mark=",")`% artım).
 
 ## Reqressiya Təhlili
 
-Xətti reqressiya modelinin nəticələri Cədvəl 2-də təqdim olunur.
+Xətti reqressiya modelinin nəticələri, sabit internet sürətinin zamanla dəyişməsinin kəmiyyət 
+təhlili üçün Cədvəl \@ref(tab:fixed-regression-table)-də təqdim olunur. 
 
-```{r fixed-regression-table, tab.cap="Sabit internet - xətti reqressiya nəticələri"}
+```{r fixed-regression-table, echo=FALSE, tab.cap="Sabit internet - xətti reqressiya nəticələri"}
 reg_results <- read_csv("../../data/processed/regression_diagnostics.csv", show_col_types = FALSE)
 
 fixed_reg <- reg_results %>% 
   filter(Type == "Fixed", MetricType == "median") %>%
   select(Variable, Slope, SE_Slope_Robust, CI_Lower, CI_Upper, P_Value, R_Squared, DW_Statistic)
+
+# Store regression values for inline text
+fixed_dl_reg <- fixed_reg %>% filter(Variable == "DownloadSpeed")
+fixed_ul_reg <- fixed_reg %>% filter(Variable == "UploadSpeed")
 
 if (is_word) {
   ft <- flextable(fixed_reg)
@@ -105,57 +141,94 @@ if (is_word) {
     DW_Statistic = "DW stat"
   )
   ft <- theme_vanilla(ft)
-  ft <- colformat_num(ft, j = 2:5, digits = 2)
-  ft <- colformat_double(ft, j = 6, digits = 4, big.mark = "")
-  ft <- colformat_num(ft, j = 7:8, digits = 2)
-  ft <- autofit(ft)
+  ft <- bg(ft, bg = "#e3f2fd", part = "header")
+  ft <- colformat_double(ft, j = c("Slope", "SE_Slope_Robust", "CI_Lower", "CI_Upper"), digits = 2)
+  ft <- colformat_double(ft, j = "P_Value", digits = 4)
+  ft <- colformat_double(ft, j = c("R_Squared", "DW_Statistic"), digits = 2)
+  ft <- fit_to_width(ft, max_width = 7)
   ft
 } else {
   knitr::kable(fixed_reg,
         col.names = c("Dəyişən", "β₁", "SE", "CI₉₅ aşağı", "CI₉₅ yuxarı", "p", "R²", "DW"),
         digits = c(0, 2, 2, 2, 2, 4, 2, 2),
-        format = "html",
-        table.attr = "class='table table-striped'")
+        booktabs = TRUE) %>%
+    kable_styling(latex_options = c("striped", "hold_position"))
 }
 ```
 
-Download sürəti üçün qiymətləndirilmiş aylıq artım tempi 0.920 Mbps-dir (robust SE = 0.121, 95% CI: [0.818, 1.022], p < 0.001). Model uyğunluğu yüksəkdir (R² = 0.808), yəni vaxt dəyişəninin tək başına səbəb olduğu variansiyanın 80.8%-i izah olunur[@montgomery2021]. Upload sürəti üçün oxşar nəticə əldə olunur: 0.922 Mbps/ay (R² = 0.820).
+Endirmə sürəti üçün aparılan təhlil, statistik baxımdan yüksək əhəmiyyətli
+ müsbət trendi təsdiqləyir; qiymətləndirilmiş modelə əsasən, orta aylıq artım 
+ tempi `r round(fixed_dl_reg$Slope, 2)` Mbps təşkil 
+ edir (robast SE = `r round(fixed_dl_reg$SE_Slope_Robust, 3)`, 95% CI: [`r round(fixed_dl_reg$CI_Lower, 3)`, 
+ `r round(fixed_dl_reg$CI_Upper, 3)`], p < 0.001). 
+ Modelin yüksək determinasiya əmsalı (R² = `r round(fixed_dl_reg$R_Squared, 3)`) göstərir ki, 
+ sürətdəki ümumi variasiyanın təxminən `r round(fixed_dl_reg$R_Squared * 100, 1)`%-i yalnız 
+ zaman faktoru ilə izah oluna bilir, bu da trendin güclü və davamlı 
+ xarakter daşıdığını göstərir [@montgomery2021]. 
+ Yükləmə sürəti üçün də oxşar nəticələr əldə olunmuşdur: 
+ orta aylıq artım `r round(fixed_ul_reg$Slope, 3)` Mbps-dir (R² = `r round(fixed_ul_reg$R_Squared, 3)`).
 
-Durbin-Watson statistikası (DW ≈ 0.11) birinci dərəcədən müsbət avtokorrelyasiyanın mövcudluğunu göstərir, buna görə robust standart xətalardan (Newey-West) istifadə edilir[@durbin1950]. Robust SE adi OLS SE-dən təxminən 2.4 dəfə böyükdür, lakin nəticə hələ də yüksək statistik əhəmiyyətlidir.
+Modelin diaqnostikası çərçivəsində hesablanmış 
+Durbin-Watson statistikası (DW ≈ `r round(fixed_dl_reg$DW_Statistic, 2)`) qalıqlarda 
+birinci tərtib müsbət avtokorrelyasiyanın mövcudluğuna işarə edir [@durbin1950]. 
+Bu problemin standart xətaların qiymətləndirilməsinə potensial təhrifedici təsirini 
+aradan qaldırmaq məqsədilə, təhlildə heteroskedastikliyə və avtokorrelyasiyaya qarşı 
+dayanıqlı (robast) Newey-West standart xətalarından istifadə edilmişdir. 
+Robast standart xətaların klassik OLS xətalarından təxminən 2.4 dəfə böyük 
+olmasına baxmayaraq, trend əmsalının statistik əhəmiyyətliliyi dəyişməz qalır.
+
 
 ## Parametrik Olmayan Trend Təsti
 
-Mann-Kendall trend testinin nəticələri xətti reqressiya fərziyyələrindən asılı olmayan təsdiq təqdim edir.
+Xətti reqressiya modelinin nəticələrini təsdiqləmək və paylanma fərziyyələrindən 
+asılı olmayan bir qiymətləndirmə təqdim etmək üçün Mann-Kendall trend testi tətbiq edilmişdir. 
+Cédvəl \@ref(tab:fixed-mannkendall)-də təqdim olunan nəticələr, 
+OLS reqressiyasının tapıntıları ilə tamamilə üst-üstə düşür.
 
-```{r fixed-mannkendall, tab.cap="Mann-Kendall trend testi nəticələri"}
+```{r fixed-mannkendall, echo=FALSE, tab.cap="Mann-Kendall trend testi nəticələri"}
 mk_results <- read_csv("../../data/processed/mann_kendall_results.csv", show_col_types = FALSE)
 
 fixed_mk <- mk_results %>%
   filter(Type == "Fixed", MetricType == "median") %>%
   select(Variable, Tau, P_Value, Trend)
 
+# Store Mann-Kendall values for inline text
+fixed_dl_mk <- fixed_mk %>% filter(Variable == "DownloadSpeed")
+
 if (is_word) {
   ft <- flextable(fixed_mk)
-  ft <- set_header_labels(ft, Variable = "Dəyişən", Tau = "τ", P_Value = "p-dəyəri", Trend = "Trend interpretasiyası")
+  ft <- set_header_labels(ft, Variable = "Dəyişən", Tau = "τ", P_Value = "p-dəyəri", 
+  Trend = "Trend interpretasiyası")
   ft <- theme_vanilla(ft)
-  ft <- colformat_num(ft, j = 2, digits = 2)
-  ft <- colformat_num(ft, j = 3, digits = 4)
+  ft <- bg(ft, bg = "#e3f2fd", part = "header")
+  ft <- colformat_double(ft, j = "Tau", digits = 2)
+  ft <- colformat_double(ft, j = "P_Value", digits = 4)
   ft <- autofit(ft)
   ft
 } else {
   knitr::kable(fixed_mk,
         col.names = c("Dəyişən", "τ", "p", "İnterpretasiya"),
         digits = c(0, 2, 4, 0),
-        format = "html",
-        table.attr = "class='table table-striped'")
+        booktabs = TRUE) %>%
+    kable_styling(latex_options = c("striped", "hold_position"))
 }
 ```
 
-Hər iki sürət göstəricisi üçün Kendall τ statistikası 0.93-dən yuxarıdır və p-dəyəri praktiki olaraq sıfırdır (p < 0.0001), bu da güclü monoton artan trendin mövcudluğunu təsdiq edir[@kendall1975]. Bu nəticə outlier-lərə və normal paylanma fərziyyəsinə həssas olmadığı üçün xətti reqressiya üçün robust təsdiq kimi xidmət edir.
+Hər iki sürət göstəricisi üçün hesablanmış 
+Kendall-ın tau (\(\tau\)) statistikası (`r round(fixed_dl_mk$Tau, 2)`) birdən çox az fərqlənir və 
+p-dəyəri statistik əhəmiyyətlilik həddindən (p < 0.0001) çox aşağıdır. 
+Bu, həm endirmə, həm də yükləmə sürətində güclü, 
+monoton artan trendin mövcudluğunu qeyri-parametrik olaraq təsdiqləyir [@kendall1975]. 
+Testin nəticələrinin kənar qiymətlərə (*outliers*) və 
+normal paylanma fərziyyəsinə qarşı dayanıqlı olması, 
+zamanla müşahidə olunan artım trendinin etibarlılığına dair əlavə sübut təmin edir.
 
 ## İllik Dinamika
 
-Şəkil 2 il-üzrə-il (YoY) artım templərini təsvir edir.
+Ümumi trendin təhlili ilə yanaşı, artım templərinin illər üzrə dəyişmə dinamikası 
+da mühüm məlumatlar təqdim edir. Şəkil \@ref(fig:fixed-yoy-plot) sabit internet 
+sürətinin illik artım templərini təsvir edir. Qrafikdən göründüyü kimi, 
+artım templəri qeyri-bərabər paylanmışdır və bəzi illərdə kəskin sıçrayışlar müşahidə olunur.
 
 ```{r fixed-yoy-plot, fig.cap="Sabit internet - illik artım templəri", fig.width=8, fig.height=5}
 yearly_data <- read_csv("../../data/processed/azerbaijan_yearly_detailed.csv", show_col_types = FALSE)
@@ -173,10 +246,16 @@ ggplot(fixed_yearly, aes(x = factor(Year), y = YoY_Download)) +
   theme_minimal(base_size = 11)
 ```
 
-2022 və 2024-cü illər ən yüksək artım templərinə malikdir. 2022-ci ildəki sıçrayış "Onlayn Azərbaycan" layihəsinin geniş tətbiq mərhələsi ilə üst-üstə düşür və bu layihənin potensial təsirini göstərir. 2024-cü ildəki artım isə tarifləşmə siyasəti dəyişikliyi ilə eyni zamana təsadüf edir. Hər iki hadisənin kauzal təsirlərinin kəmiyyət qiymətləndirilməsi Bölmə 6-da aparılacaq.
+Xüsusilə, 2022 və 2024-cü illər ən yüksək artım templəri ilə seçilir. 
+2022-ci ildəki sıçrayış, GPON texnologiyasının genişmiqyaslı tətbiqini hədəfləyən 
+"Onlayn Azərbaycan" layihəsinin ən aktiv fazası ilə eyni vaxta təsadüf edir. 
+2024-cü ildəki artım isə, həyata keçirilən tarif siyasəti dəyişikliyi ilə əlaqələndirilə bilər. 
+Bu qrafik, siyasət müdaxilələrinin və infrastruktur layihələrinin internet 
+sürətinə potensial təsirini vizual olaraq göstərir və növbəti bölmədə aparılacaq 
+səbəbiyyət təhlili üçün zəmin yaradır.
 
-## Qısa Xülasə
+### Nəticə
 
-Təsviri statistika və trend təhlili göstərir ki:
+Sabit internet sürətinə dair aparılan təsviri və inferensial statistika təhlili bir neçə mühüm nəticəni ortaya qoyur. Birincisi, 2019–2025-ci illər dövründə Azərbaycanın sabit internet şəbəkəsində kəskin və davamlı inkişaf müşahidə olunmuşdur. Median endirmə sürəti `r round(fixed_end$DownloadSpeed / fixed_start$DownloadSpeed, 1)` dəfə artaraq `r round(fixed_start$DownloadSpeed, 1)` Mbps-dən `r round(fixed_end$DownloadSpeed, 1)` Mbps-ə yüksəlmişdir. İkincisi, bu artımın statistik əhəmiyyətliliyi həm parametrik, həm də qeyri-parametrik metodlarla təsdiqlənir. Xətti reqressiya modeli ayda orta hesabla `r round(fixed_dl_reg$Slope, 2)` Mbps artım tempini qiymətləndirir (R² = `r round(fixed_dl_reg$R_Squared, 2)`), Mann-Kendall testi isə paylanma fərziyyələrindən asılı olmadan bu güclü monoton artan trendi təsdiq edir (τ = `r round(fixed_dl_mk$Tau, 2)`).
 
-2019-2025 dövründə Azərbaycanın sabit internet median download sürəti 13.4 dəfə artaraq 5.2 Mbps-dən 69.8 Mbps-ə çatmışdır. Xətti reqressiya aylıq 0.92 Mbps artım tempini qiymətləndirir (R² = 0.81, p < 0.001), Mann-Kendall testi isə güclü monoton artan trend təsdiq edir (τ = 0.94, p < 0.0001). Model diaqnostikası müsbət avtokorrelyasiya aşkar edir, lakin Newey-West robust standart xətalar statistik əhəmiyyətliliyi qoruyur. İllik dinamika heterogen artım templəri göstərir və 2022 və 2024-cü illərdə sıçrayışlar müşahidə olunur, bu da struktur dəyişikliklərinin və siyasət müdaxilələrinin potensial təsirinə işarə edir.
+Bununla yanaşı, model diaqnostikası, zaman sıraları üçün səciyyəvi olan müsbət avtokorrelyasiyanın mövcudluğunu aşkar etmişdir. Bu problemin statistik nəticələrə təsirini minimuma endirmək üçün Newey-West standart xətaları tətbiq edilmiş və trendin statistik əhəmiyyətliliyinin qorunduğu müəyyən edilmişdir. Nəhayət, illik artım templərinin təhlili göstərir ki, ümumi artım xətti olsa da, bu artım heterogen xarakter daşıyır və 2022 və 2024-cü illərdə müşahidə olunan sıçrayışlar, siyasət müdaxilələri və infrastruktur layihələri kimi struktur dəyişikliklərinin potensial təsirinə işarə edir. Bu amillərin səbəbiyyət təhlili sonrakı bölmələrdə aparılacaqdır.

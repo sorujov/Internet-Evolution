@@ -185,7 +185,7 @@ cat(sprintf("  Upload ATT: %.2f Mbps (SE = %.2f)\n\n", upload_att, upload_se))
 
 cat("Step 7: Saving results...\n")
 
-# DID results
+# DID results (ATT only)
 did_results_final <- did_coefs %>%
   filter(term == "Treated:Post") %>%
   select(term, estimate, Robust_SE, Robust_P) %>%
@@ -194,11 +194,41 @@ did_results_final <- did_coefs %>%
     Variable = "DownloadSpeed",
     CI_Lower = ATT - 1.96 * SE,
     CI_Upper = ATT + 1.96 * SE,
-    PreTrends_P = interaction_coef$p.value  # Add parallel trends test p-value
+    PreTrends_P = interaction_coef$p.value,  # Add parallel trends test p-value
+    PreTrends_Coef = interaction_coef$estimate  # Add differential trend coefficient
   )
 
 write_csv(did_results_final, "data/processed/tariff_did_results.csv")
 cat("  - Saved: tariff_did_results.csv\n")
+
+# Full DiD table with all coefficients for display in report
+did_full_table <- did_coefs %>%
+  mutate(
+    Əmsal = case_when(
+      term == "Treated" ~ "Sabit (δ)",
+      term == "Post" ~ "Post (θ)",
+      term == "Treated:Post" ~ "Sabit × Post (γ)",
+      TRUE ~ term
+    ),
+    CI_Lower = estimate - 1.96 * Robust_SE,
+    CI_Upper = estimate + 1.96 * Robust_SE
+  ) %>%
+  select(Əmsal, 
+         Qiymətləndirmə = estimate, 
+         SE = Robust_SE, 
+         p_value = Robust_P, 
+         CI_Lower, 
+         CI_Upper)
+
+# Add ATT row (duplicate of interaction term)
+att_row <- did_full_table %>% 
+  filter(Əmsal == "Sabit × Post (γ)") %>%
+  mutate(Əmsal = "Təsir Effekti (ATT)")
+
+did_full_table <- bind_rows(did_full_table, att_row)
+
+write_csv(did_full_table, "data/processed/tariff_did_full_results.csv")
+cat("  - Saved: tariff_did_full_results.csv\n")
 
 write_csv(did_means, "data/processed/tariff_prepost_means.csv")
 cat("  - Saved: tariff_prepost_means.csv\n")

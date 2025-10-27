@@ -148,11 +148,11 @@ run_mann_kendall <- function(data, type_label, metric_type_filter) {
       P_Value = mk_result$sl,
       S_Statistic = mk_result$S,
       Trend = case_when(
-        mk_result$sl < 0.01 & mk_result$tau > 0 ~ "Significant Increasing",
-        mk_result$sl < 0.01 & mk_result$tau < 0 ~ "Significant Decreasing",
-        mk_result$sl < 0.05 & mk_result$tau > 0 ~ "Moderate Increasing",
-        mk_result$sl < 0.05 & mk_result$tau < 0 ~ "Moderate Decreasing",
-        TRUE ~ "No Significant Trend"
+        mk_result$sl < 0.01 & mk_result$tau > 0 ~ "Əhəmiyyətli artım",
+        mk_result$sl < 0.01 & mk_result$tau < 0 ~ "Əhəmiyyətli azalma",
+        mk_result$sl < 0.05 & mk_result$tau > 0 ~ "Orta səviyyəli artım",
+        mk_result$sl < 0.05 & mk_result$tau < 0 ~ "Orta səviyyəli azalma",
+        TRUE ~ "Əhəmiyyətli trend yoxdur"
       )
     )
   }

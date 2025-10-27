@@ -56,11 +56,11 @@ həmçinin paylanma xarakteristikalarını və kənar qiymətləri aşkarlamağa
 - **Mərkəzi tendensiya:** orta, median
 - **Dispersiya:** standart kənarlaşma (SD), kvartillərarası diapazon (IQR)
 - **Dəyişkənlik:** variasiya əmsalı (CV = SD/Orta)
-- **Artım göstəriciləri:** illik (YoY) faiz dəyişikliyi
+- **Artım göstəriciləri:** illik artım tempi
 
-İllik artım aşağıdakı düsturla hesablanır:
-\[ \text{YoY Artım (\%)} = \left( \frac{Y_t - Y_{t-12}}{Y_{t-12}} \right) \times 100 \]
-Burada \(Y_t\) cari ayın dəyəri, \(Y_{t-12}\) isə bir il əvvəlki ayın dəyəridir. Bu göstərici mövsümi təsirləri neytrallaşdırmağa imkan verir.
+İllik artım tempi, cari ayın göstəricisini bir il əvvəlki eyni ayın göstəricisi ilə müqayisə edərək hesablanır:
+\[ \text{İllik Artım Tempi (\%)} = \left( \frac{Y_t - Y_{t-12}}{Y_{t-12}} \right) \times 100 \]
+Bu düsturda \(Y_t\) cari ayın dəyərini, \(Y_{t-12}\) isə bir il əvvəlki müvafiq ayın dəyərini ifadə edir. Bu yanaşma, zaman sırasında mövcud ola biləcək mövsümi dalğalanmaların təsirini neytrallaşdırmağa imkan verdiyi üçün artımın struktur dinamikasını daha dəqiq əks etdirir.
 
 ## Trend Təhlili Metodologiyası
 
@@ -112,8 +112,11 @@ trendin mövcudluğuna dair daha etibarlı nəticələr əldə etmək üçün t�
 son performans, dövr üzrə orta performans və artım templəri.
 
 **Sıralama növləri:**
+
 1. **Son ay üzrə sıralama** (Sentyabr 2025): İnfrastrukturun cari vəziyyətini əks etdirir.
+
 2. **Ümumi dövr üzrə sıralama** (Aprel 2019 – Sentyabr 2025): Dövr ərzindəki davamlı performansı göstərir.
+
 3. **Artım üzrə sıralama**: Ölkələrin təkmilləşmə trayektoriyasını müqayisə edir.
 
 ## Səbəbiyyət Təhlili Modelləri

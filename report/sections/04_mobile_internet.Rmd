@@ -1,73 +1,232 @@
-# Mobil İnternet: İnkişaf Trayektoriyası
+# Mobil İnternet: Təkamül Dinamikası
 
-## Trend Təhlili
+Sabit genişzolaqlı internet infrastrukturunun təkamülü ilə paralel olaraq, Azərbaycanın mobil şəbəkə texnologiyaları da ölkənin rəqəmsal transformasiyasında mühüm rol oynamışdır. Bu bölmə, 2019–2025-ci illər dövrü üzrə mobil internetin inkişaf dinamikasını təhlil edir və sabit internetin nəticələri ilə müqayisəli bir perspektiv təqdim edərək, iki texnologiyanın fərqli və oxşar cəhətlərini ortaya qoyur. Təhlil, artımın miqyasını və trayektoriyasını səciyyələndirmək üçün eyni empirik yanaşmaları – təsviri statistika, trend analizi və reqressiya modellərini tətbiq edir.
 
-```{r cellular-trend-plot, fig.cap="Azərbaycan mobil internet sürətinin dinamikası"}
-az_cellular_plot <- az_cellular_median %>%
-  select(Date, DownloadSpeed, UploadSpeed) %>%
-  pivot_longer(cols = c(DownloadSpeed, UploadSpeed),
-               names_to = "Metric",
-               values_to = "Speed")
 
-ggplot(az_cellular_plot, aes(x = Date, y = Speed, color = Metric, group = Metric)) +
-  geom_line(size = 1.2) +
-  geom_point(size = 2, alpha = 0.6) +
-  geom_smooth(method = "lm", se = TRUE, alpha = 0.2, linetype = "dashed") +
-  scale_color_manual(values = c("DownloadSpeed" = "#ff6600", 
-                                  "UploadSpeed" = "#00cc66"),
-                     labels = c("Download", "Upload")) +
-  scale_y_continuous(labels = comma) +
-  labs(title = "Mobil İnternet Sürətinin Dinamikası",
-       subtitle = "Azərbaycan (2019-2025)",
-       x = "Tarix",
-       y = "Sürət (Mbps)",
-       color = "Göstərici")
-```
+## Ümumi Xarakteristika
 
-### Statistik Göstəricilər
+Cədvəl \@ref(tab:mobile-summary-stats) Azərbaycanın mobil internet göstəricilərinin 78 aylıq müşahidə dövrü (2019.04-2025.09) üzrə təsviri statistikasını təqdim edir. Bu göstəricilər, zaman sırasının mərkəzi tendensiya, dəyişkənlik və paylanma xüsusiyyətləri haqqında ilkin məlumat təmin etməklə yanaşı, sabit internet ilə müqayisədə fərqləri anlamaq üçün baza rolunu oynayır.
 
-```{r cellular-statistics, tab.cap="Mobil internet trend statistikası"}
-cellular_trend_stats <- trend_results %>%
-  filter(Type == "Cellular") %>%
-  select(Metric, MonthlyIncrease, RSquared)
+```{r mobile-summary-stats, tab.cap="Mobil internet - ümumi statistika (2019-2025)"}
+az_detailed <- read_csv("../../data/processed/azerbaijan_detailed_stats.csv", show_col_types = FALSE)
+
+mobile_stats <- az_detailed %>% 
+  filter(str_detect(Type, "Cellular")) %>%
+  select(Type, Observations, Mean_Download, Median_Download, SD_Download, 
+         IQR_Download, Min_Download, Max_Download, CV_Download)
+
+# Store values for inline text
+mobile_median_dl <- mobile_stats %>% filter(Type == "Cellular_Median") %>% pull(Median_Download)
+mobile_mean_dl <- mobile_stats %>% filter(Type == "Cellular_Median") %>% pull(Mean_Download)
+mobile_cv <- mobile_stats %>% filter(Type == "Cellular_Median") %>% pull(CV_Download)
+
 if (is_word) {
-  ft5 <- flextable(cellular_trend_stats)
-  ft5 <- set_header_labels(ft5,
-                           Metric = "Göstərici",
-                           MonthlyIncrease = "Aylıq Artım (Mbps)",
-                           RSquared = "R²")
-  ft5 <- theme_vanilla(ft5)
-  ft5 <- colformat_num(ft5, j = "MonthlyIncrease", digits = 2)
-  ft5 <- colformat_num(ft5, j = "RSquared", digits = 2)
-  ft5 <- align(ft5, align = "center", part = "all")
-  ft5 <- autofit(ft5)
-  ft5
+  ft <- flextable(mobile_stats)
+  ft <- set_header_labels(ft, 
+    Type = "Metrik Növü",
+    Observations = "N",
+    Mean_Download = "Orta (Mbps)",
+    Median_Download = "Median (Mbps)", 
+    SD_Download = "SD",
+    IQR_Download = "IQR",
+    Min_Download = "Min",
+    Max_Download = "Max",
+    CV_Download = "CV"
+  )
+  ft <- theme_vanilla(ft)
+  ft <- bg(ft, bg = "#e3f2fd", part = "header")
+  ft <- colformat_double(ft, j = c("Mean_Download", "Median_Download", "SD_Download", 
+                                    "IQR_Download", "Min_Download", "Max_Download", "CV_Download"), 
+                         digits = 2)
+  ft <- fit_to_width(ft, max_width = 7)
+  ft
 } else {
-  knitr::kable(cellular_trend_stats,
-        col.names = c("Göstərici", "Aylıq Artım (Mbps)", "R²"),
-        digits = c(0, 2, 2),
-        format = "html",
-        table.attr = "class='table table-striped'")
+  knitr::kable(mobile_stats,
+        col.names = c("Metrik", "N", "Orta", "Median", "SD", "IQR", "Min", "Max", "CV"),
+        digits = 2,
+        booktabs = TRUE) %>%
+    kable_styling(latex_options = c("striped", "hold_position"))
 }
 ```
 
-## Sabit vs Mobil Müqayisə
+Cədvəl \@ref(tab:mobile-summary-stats)-dəki göstəricilər, 
+mobil internet sürəti paylanmasının xarakteristikasını anlamaq üçün vacibdir. 
+Sabit internetdə olduğu kimi, bütün dövr üzrə median endirmə 
+sürətinin (`r round(mobile_median_dl, 1)` Mbps) orta 
+dəyərdən (`r round(mobile_mean_dl, 1)` Mbps) aşağı olması, 
+mobil şəbəkə üçün də zaman sırasında sağa əyilmiş paylanmanın mövcudluğuna 
+işarə edir. Bu fərq, 4G və 5G texnologiyalarının tədricən tətbiqi nəticəsində 
+son illərdə əldə edilən daha yüksək sürətlərin orta göstəricini yuxarıya 
+doğru təhrif etdiyini göstərir. Bu səbəbdən, kənar qiymətlərə dayanıqlı 
+olan median göstəricisi, mərkəzi tendensiyanın daha etibarlı (robast)
+ ölçüsü kimi təhlildə əsas götürülür [@hampel1986]. 
+ Dəyişmə əmsalının (CV) `r round(mobile_cv, 2)` olması isə, 
+ tədqiqat dövrü ərzində mobil sürət göstəricilərində orta dərəcəli nisbi dəyişkənliyi təsdiqləyir.
 
-```{r fixed-vs-cellular, fig.cap="Sabit və mobil internet sürətlərinin müqayisəsi"}
-comparison_data <- bind_rows(
-  az_fixed_median %>% mutate(InternetType = "Sabit"),
-  az_cellular_median %>% mutate(InternetType = "Mobil")
-)
+## Zaman Dinamikası
 
-ggplot(comparison_data, aes(x = Date, y = DownloadSpeed, color = InternetType)) +
-  geom_line(size = 1.3) +
-  geom_point(size = 2.5, alpha = 0.6) +
-  scale_color_manual(values = c("Sabit" = "#0066cc", "Mobil" = "#ff6600")) +
+Mobil internet sürətinin təkamül trayektoriyası, endirmə və yükləmə göstəricilərinin aylıq dinamikasını əks etdirən Şəkil \@ref(fig:mobile-trend-plot)-də təqdim olunur.
+
+```{r mobile-trend-plot, fig.cap="Mobil internet sürətinin dinamikası (median, 2019-2025)", fig.width=10, fig.height=6}
+az_mobile_median <- az_cellular %>% filter(MetricType == "median")
+
+az_mobile_long <- az_mobile_median %>%
+  select(Date, DownloadSpeed, UploadSpeed) %>%
+  pivot_longer(cols = c(DownloadSpeed, UploadSpeed),
+               names_to = "Metric", values_to = "Speed")
+
+ggplot(az_mobile_long, aes(x = Date, y = Speed, color = Metric)) +
+  geom_line(size = 1.2) +
+  geom_point(size = 2, alpha = 0.6) +
+  geom_smooth(method = "lm", se = TRUE, alpha = 0.2, linetype = "dashed") +
+  scale_color_manual(values = c("DownloadSpeed" = "#0066cc", "UploadSpeed" = "#ff6600"),
+                     labels = c("Download", "Upload")) +
   scale_y_continuous(labels = comma) +
-  labs(title = "Sabit və Mobil İnternet Sürətlərinin Müqayisəsi",
-       subtitle = "Azərbaycan (2019-2025)",
-       x = "Tarix",
-       y = "Download Sürəti (Mbps)",
-       color = "İnternet Növü") +
+  labs(x = "Tarix", y = "Sürət (Mbps)", color = "Göstərici") +
+  theme_minimal(base_size = 11) +
   theme(legend.position = "bottom")
+
+# Calculate trend statistics for inline text
+mobile_start <- az_mobile_median %>% filter(Date == min(Date))
+mobile_end <- az_mobile_median %>% filter(Date == max(Date))
+mobile_dl_growth <- ((mobile_end$DownloadSpeed / mobile_start$DownloadSpeed - 1) * 100)
+mobile_ul_growth <- ((mobile_end$UploadSpeed / mobile_start$UploadSpeed - 1) * 100)
 ```
+
+Şəkil \@ref(fig:mobile-trend-plot)-də təsvir edilən zaman sırası qrafiki, 
+həm endirmə, həm də yükləmə sürətləri üçün statistik əhəmiyyətli və 
+aydın artan trendin mövcudluğunu vizual olaraq təsdiq edir. 
+Tədqiqat dövrü ərzində mobil şəbəkənin performansında davamlı yaxşılaşma 
+müşahidə olunur: 2019-cu ilin aprelində median 
+endirmə sürəti cəmi `r round(mobile_start$DownloadSpeed, 1)` Mbps təşkil edirdisə, 2025-ci ilin sentyabrına qədər bu göstərici `r round(mobile_end$DownloadSpeed, 1)` Mbps-ə çatmışdır ki, bu da `r format(round(mobile_dl_growth, 0), big.mark=",")`%-lik ümumi artıma uyğundur. Yükləmə sürəti isə daha mülayim bir artım nümayiş etdirərək, müvafiq dövr ərzində `r round(mobile_start$UploadSpeed, 1)` Mbps-dən `r round(mobile_end$UploadSpeed, 1)` Mbps-ə yüksəlmişdir (`r format(round(mobile_ul_growth, 0), big.mark=",")`% artım). Bu iki göstərici arasındakı artım fərqi, mobil şəbəkə arxitekturasının asimmetrik təbiətini – yəni, endirmə sürətlərinin yükləmə sürətlərindən daha çox prioritetləşdirildiyini əks etdirir.
+
+## Reqressiya Təhlili
+
+Məqalənin bu hissəsində mobil internetin inkişaf dinamikası, zamanla dəyişən sürət göstəricilərinin kəmiyyət təhlili vasitəsilə qiymətləndirilir. Təhlil üçün, sabit internet bölməsində istifadə olunan eyni xətti reqressiya modeli tətbiq edilmişdir. Modelin nəticələri Cədvəl \@ref(tab:mobile-regression-table)-də təqdim olunur.
+
+```{r mobile-regression-table, tab.cap="Mobil internet - xətti reqressiya nəticələri"}
+reg_results <- read_csv("../../data/processed/regression_diagnostics.csv", show_col_types = FALSE)
+
+mobile_reg <- reg_results %>% 
+  filter(Type == "Cellular", MetricType == "median") %>%
+  select(Variable, Slope, SE_Slope_Robust, CI_Lower, CI_Upper, P_Value, R_Squared, DW_Statistic)
+
+# Store regression values for inline text
+mobile_dl_reg <- mobile_reg %>% filter(Variable == "DownloadSpeed")
+mobile_ul_reg <- mobile_reg %>% filter(Variable == "UploadSpeed")
+
+if (is_word) {
+  ft <- flextable(mobile_reg)
+  ft <- set_header_labels(ft,
+    Variable = "Dəyişən",
+    Slope = "β₁ (Mbps/ay)",
+    SE_Slope_Robust = "SE (robust)",
+    CI_Lower = "95% CI aşağı",
+    CI_Upper = "95% CI yuxarı",
+    P_Value = "p-dəyəri",
+    R_Squared = "R²",
+    DW_Statistic = "DW stat"
+  )
+  ft <- theme_vanilla(ft)
+  ft <- bg(ft, bg = "#e3f2fd", part = "header")
+  ft <- colformat_double(ft, j = c("Slope", "SE_Slope_Robust", "CI_Lower", "CI_Upper"), digits = 2)
+  ft <- colformat_double(ft, j = "P_Value", digits = 4)
+  ft <- colformat_double(ft, j = c("R_Squared", "DW_Statistic"), digits = 2)
+  ft <- fit_to_width(ft, max_width = 7)
+  ft
+} else {
+  knitr::kable(mobile_reg,
+        col.names = c("Dəyişən", "β₁", "SE", "CI₉₅ aşağı", "CI₉₅ yuxarı", "p", "R²", "DW"),
+        digits = c(0, 2, 2, 2, 2, 4, 2, 2),
+        booktabs = TRUE) %>%
+    kable_styling(latex_options = c("striped", "hold_position"))
+}
+```
+
+Təhlil nəticələri göstərir ki, mobil internetin endirmə sürəti üçün orta aylıq artım `r round(mobile_dl_reg$Slope, 2)` Mbps təşkil edir və bu trend statistik baxımdan yüksək əhəmiyyətlidir (p < 0.001). Yükləmə sürəti üçün isə daha mülayim, lakin yenə də əhəmiyyətli bir artım (`r round(mobile_ul_reg$Slope, 3)` Mbps/ay) müşahidə olunur. Hər iki göstərici üçün yüksək determinasiya əmsalları (R² `r round(mobile_dl_reg$R_Squared, 3)` və `r round(mobile_ul_reg$R_Squared, 3)`) zaman faktorunun sürət dəyişikliyinin əsas drayveri olduğunu təsdiqləyir [@montgomery2021].
+
+Sabit internetlə müqayisədə, mobil şəbəkənin aylıq artım tempi daha aşağıdır. Bu fərq, iki texnologiyanın fərqli inkişaf trayektoriyaları ilə izah edilə bilər. Sabit şəbəkədə GPON texnologiyasının kütləvi tətbiqi sıçrayışlı artımlara səbəb olduğu halda, mobil şəbəkədəki inkişaf daha tədrici olmuş və 4G şəbəkəsinin optimallaşdırılması və 5G-yə mərhələli keçid prosesi ilə xarakterizə olunmuşdur.
+
+Modelin diaqnostikası, sabit internetdə olduğu kimi, Durbin-Watson statistikasının aşağı qiymətləri (DW ≈ `r round(mobile_dl_reg$DW_Statistic, 2)`) ilə təsdiqlənən güclü müsbət avtokorrelyasiyanın mövcudluğunu göstərir [@durbin1950]. Bu səbəbdən, etibarlı statistik nəticələr əldə etmək üçün təhlildə Newey-West standart xətaları tətbiq edilmişdir.
+
+## Parametrik Olmayan Trend Təsti
+
+Xətti reqressiya modelinin nəticələrini təsdiqləmək və paylanma fərziyyələrindən asılı olmayan bir qiymətləndirmə təqdim etmək üçün Mann-Kendall trend testi tətbiq edilmişdir. Cədvəl \@ref(tab:mobile-mannkendall)-də təqdim olunan nəticələr, OLS reqressiyasının tapıntıları ilə tamamilə üst-üstə düşərək, hər iki göstərici üçün statistik əhəmiyyətli artım trendini qeyri-parametrik olaraq təsdiqləyir.
+
+```{r mobile-mannkendall, tab.cap="Mann-Kendall trend testi nəticələri"}
+mk_results <- read_csv("../../data/processed/mann_kendall_results.csv", show_col_types = FALSE)
+
+mobile_mk <- mk_results %>%
+  filter(Type == "Cellular", MetricType == "median") %>%
+  select(Variable, Tau, P_Value, Trend)
+
+# Store Mann-Kendall values for inline text
+mobile_dl_mk <- mobile_mk %>% filter(Variable == "DownloadSpeed")
+
+if (is_word) {
+  ft <- flextable(mobile_mk)
+  ft <- set_header_labels(ft, Variable = "Dəyişən", Tau = "τ", P_Value = "p-dəyəri", 
+  Trend = "Trend interpretasiyası")
+  ft <- theme_vanilla(ft)
+  ft <- bg(ft, bg = "#e3f2fd", part = "header")
+  ft <- colformat_double(ft, j = "Tau", digits = 2)
+  ft <- colformat_double(ft, j = "P_Value", digits = 4)
+  ft <- autofit(ft)
+  ft
+} else {
+  knitr::kable(mobile_mk,
+        col.names = c("Dəyişən", "τ", "p", "İnterpretasiya"),
+        digits = c(0, 2, 4, 0),
+        booktabs = TRUE) %>%
+    kable_styling(latex_options = c("striped", "hold_position"))
+}
+```
+
+Testin nəticələrinə görə, həm endirmə, həm də yükləmə sürəti üçün p-dəyərləri 
+statistik əhəmiyyətlilik üçün tələb olunan maksimal həddən (p < 0.0001) çox aşağıdır. 
+Bununla belə, Kendall-ın tau (\(\tau\)) statistikası göstəricilər arasında fərqlənir: 
+endirmə sürəti üçün daha yüksək \(\tau\) qiyməti (`r round(mobile_dl_mk$Tau, 2)`) bu 
+göstəricidəki artımın daha güclü və 
+ardıcıl monoton xarakter daşıdığını göstərir. 
+Yükləmə sürəti üçün nisbətən aşağı \(\tau\) qiyməti isə trendin mövcud olmasına baxmayaraq, 
+zamanla daha çox dəyişkənliyə məruz qaldığını göstərir. 
+Bu testin nəticələrinin kənar qiymətlərə (outliers) və normal 
+paylanma fərziyyəsinə qarşı dayanıqlı olması, 
+zamanla müşahidə olunan artım trendinin etibarlılığına dair əlavə sübut təmin edir [@kendall1975].
+
+## İllik Artım Dinamikası
+
+Ümumi trendin təhlili ilə yanaşı, artım templərinin illər üzrə dəyişmə dinamikası da mobil şəbəkənin inkişafı haqqında mühüm məlumatlar təqdim edir. Şəkil \@ref(fig:mobile-yoy-plot)-də mobil internet sürətinin illik artım templəri təsvir edilmişdir. Qrafikdən göründüyü kimi, sabit internetdəki kəskin sıçrayışlardan fərqli olaraq, mobil şəbəkədəki artım daha üzvi, lakin qeyri-bərabər bir trayektoriya izləmişdir.
+
+Təhlil göstərir ki, 2022-ci ildə artım tempində müəyyən ləngimə (12.0%) müşahidə olunsa da, 2023 (27.9%) və xüsusilə 2024-cü illərdə (32.3%) artım kəskin sürətlənmişdir. Bu sürətlənmə, birbaşa siyasət müdaxilələrindən daha çox, mobil operatorların 4G (LTE) şəbəkələrinin əhatə dairəsini genişləndirməsi, şəbəkə tutumunu artırması və böyük şəhərlərdə 5G texnologiyasının pilot tətbiqinə başlaması kimi texnoloji amillərlə əlaqələndirilə bilər. 2025-ci ildə artım tempinin yenidən mülayimləşməsi (16.2%) isə, ilkin yüksək təsirli təkmilləşdirmələr mərhələsinin başa çatdığını və bazarın nisbi doyma nöqtəsinə yaxınlaşdığını göstərə bilər. Beləliklə, mobil şəbəkənin inkişafı daha çox bazar rəqabəti və texnoloji təkamül kimi üzvi amillərlə idarə olunmuşdur.
+
+```{r mobile-yoy-plot, fig.cap="Mobil internet - illik artım templəri", fig.width=8, fig.height=5}
+yearly_data <- read_csv("../../data/processed/azerbaijan_yearly_detailed.csv", show_col_types = FALSE)
+
+mobile_yearly <- yearly_data %>%
+  filter(Type == "Cellular", MetricType == "median", Year >= 2020) %>%
+  arrange(Year) %>%
+  mutate(YoY_Download = (Median_Download / lag(Median_Download) - 1) * 100) %>%
+  filter(!is.na(YoY_Download))
+
+ggplot(mobile_yearly, aes(x = factor(Year), y = YoY_Download)) +
+  geom_col(fill = "#0066cc", alpha = 0.8, width = 0.6) +
+  geom_text(aes(label = sprintf("%.1f%%", YoY_Download)), vjust = -0.5, size = 4) +
+  labs(x = "İl", y = "İllik artım (%)") +
+  theme_minimal(base_size = 11)
+```
+
+### Nəticə
+
+Mobil internet sürətinə dair aparılan təsviri və inferensial statistika təhlili bir neçə mühüm nəticəni ortaya qoyur. Birincisi, 2019–2025-ci illər dövründə Azərbaycanın mobil şəbəkəsində kəskin və davamlı inkişaf müşahidə olunmuşdur. Median endirmə sürəti `r round(mobile_end$DownloadSpeed / mobile_start$DownloadSpeed, 1)` dəfə artaraq `r round(mobile_start$DownloadSpeed, 1)` Mbps-dən `r round(mobile_end$DownloadSpeed, 1)` Mbps-ə yüksəlmişdir. Bu artımın statistik əhəmiyyətliliyi 
+həm parametrik (R² = `r round(mobile_dl_reg$R_Squared, 2)`), həm də 
+qeyri-parametrik (τ = `r round(mobile_dl_mk$Tau, 2)`) metodlarla təsdiqlənir.
+
+İkincisi, mobil şəbəkənin inkişaf dinamikası sabit şəbəkədən 
+fərqli bir trayektoriya izləmişdir. 
+Sabit internetdəki artım əsasən siyasət müdaxilələri nəticəsində 
+sıçrayışlı olduğu halda, mobil şəbəkədəki artım daha hamar və tədrici olmuşdur. 
+Bu fərq, iki texnologiyanın infrastruktur və bazar dinamikalarının müxtəlifliyindən qaynaqlanır.
+Nəhayət, hər iki şəbəkə üçün aparılan diaqnostik təhlillər oxşar nəticələr vermiş və 
+zaman sıralarında avtokorrelyasiyanın mövcudluğunu təsdiqləmişdir, 
+bu da Newey-West standart xətalarının tətbiqini zəruri etmişdir.

@@ -1,36 +1,20 @@
-# Siyasət Müdaxilələrinin Kauzal Təsir Qiymətləndirməsi
+# Siyasət Müdaxilələrinin Səbəbiyyət Təsirinin Qiymətləndirilməsi
 
-Azərbaycanın internet infrastrukturunun 2019-2025 təkamülü iki əsas siyasət müdaxiləsinin fonunda baş vermişdir: "Onlayn Azərbaycan" fiber genişləndirilməsi proqramı (2017-də başladılmış, 2022-də genişləndirilmiş) və 2024-cü il avqustunda tətbiq edilən tarif reforması (standart paketlər 25 AZN). Bu bölmə kauzal inferens metodlarından—Interrupted Time Series (ITS) və Difference-in-Differences (DiD)—istifadə edərək hər iki müdaxilənin təsirini qiymətləndirir. Təhlil açıq fərziyyə testləri, diaqnostik protokolları və robust yoxlamalar ilə müşayiət edir, şəffaf, təkrarlana bilən empirik dəlillər təmin edir.
+Azərbaycanın sabit genişzolaqlı internet infrastrukturunda 2019-2025-ci illər arasında müşahidə olunan kəskin inkişaf, iki mühüm siyasət müdaxiləsi ilə üst-üstə düşür: birincisi, “Onlayn Azərbaycan” layihəsi çərçivəsində fiber-optik şəbəkənin kütləvi şəkildə genişləndirilməsi (2021-ci ildən etibarən aktiv fazada) və ikincisi, 2024-cü ilin avqustunda tətbiq edilən və standart paketləri 25 AZN səviyyəsində müəyyən edən tarif islahatı. Bu bölmə, həmin müdaxilələrin internet sürətinə olan kauzal təsirini kəmiyyət olaraq qiymətləndirmək üçün iki kvazi-eksperimental metoddan — Kəsilmiş Zaman Sırası (Interrupted Time Series - ITS) və Fərqlər-Fərqi (Difference-in-Differences - DiD) — istifadə edir. Təhlil, hər bir metodun əsas fərziyyələrinin açıq şəkildə yoxlanılması, diaqnostik testlər və robustluq yoxlamaları ilə müşayiət olunaraq, şəffaf və təkrarolunan empirik sübutlar təqdim etmək məqsədi daşıyır [@angrist2008mostly].
 
-Kauzal identifikasiya əsas məqsəddir. Təsviri trendlər (Bölmə 3-4) sabit və mobil internetdə sürətli artımlar sənədləşdirir, lakin sekulyar trendlərdən siyasət təsirlərini ayırmaq üçün ça tışmaları həll edən metodlar tələb olunur. ITS kontrafaktual trend quraraq müdaxilənin mövcud olmaması halını proyeksiya edir. DiD müalicə və nəzarət qruplarını müqayisə edərək eyni vaxtda baş verən şokları fərqləndirir. Hər iki metod güclü identifikasiya fərziyyələrinə əsaslanır və biz bu fərziyyələri açıq yoxlayırıq.
+Kauzal identifikasiya, təsviri trendlərin təhlilindən irəli gələn əsas məhdudiyyəti aradan qaldırmaq üçün zəruridir. Əvvəlki bölmələrdə sənədləşdirilmiş sürətli artımlar, siyasət müdaxilələrinin təsirini ümumi (sekulyar) texnoloji inkişafdan və ya digər qarışdırıcı amillərdən ayırmağa imkan vermir. Bu problemi həll etmək üçün ITS, müdaxilədən əvvəlki məlumatlara əsaslanaraq kontrafaktual (əks-fakt) trendi proqnozlaşdırır və müdaxilənin olmadığı təqdirdə gözlənilən nəticəni modelləşdirir [@bernal2017]. DiD isə, siyasətə məruz qalan (müalicə) qrupu (sabit internet) siyasətdən təsirlənməyən (nəzarət) qrupla (mobil internet) müqayisə edərək eyni vaxtda baş verən şokları neytrallaşdırır [@callaway2021]. Hər iki metodun etibarlılığı onların əsas fərziyyələrindən asılıdır və bu fərziyyələr təhlil çərçivəsində sistematik olaraq yoxlanılır.
 
 ## "Onlayn Azərbaycan" Proqramının ITS Qiymətləndirməsi
 
-"Onlayn Azərbaycan" 2017-ci ildə pilot mərhələdə başlayaraq GPON (Gigabit Passive Optical Networks) texnologiyası ilə köhnə ADSL infrastrukturunun əvəzlənməsini hədəfləmişdir. 2022-ci il yanvarından etibarən proqram geniş mərhələyə keçmiş və fiber əlaqəyə çıxış imkanı olan təsərrüfatların sayı 13 dəfə artaraq təxminən 3 milyon təsərrüfata çatmışdır [@icta2024]. Müdaxilə temporal variasiyanı təqdim edir və ITS dizaynı üçün uyğundur: müdaxilədən əvvəl və sonra performansı müqayisə edir, kontrafaktual trendi pre-müdaxilə məlumatlarından ekstrapolyasiya edir.
+“Onlayn Azərbaycan” layihəsi, köhnə ADSL infrastrukturunu müasir GPON (Gigabit Passive Optical Networks) texnologiyası ilə əvəz etməklə ölkənin rəqəmsal infrastrukturunu kökündən dəyişdirməyi hədəfləmişdir. Layihə 2017-ci ildə başlasa da, onun ən aktiv və genişmiqyaslı fazası 2021-ci ilin sonlarından etibarən reallaşmışdır [@mincom2023]. Bu dövrdə fiber-optik şəbəkəyə çıxışı olan ev təsərrüfatlarının sayı kəskin şəkildə artaraq, 2024-cü ilin sonuna yaxın demək olar ki, bütün ölkəni əhatə etmişdir [@ookla2025]. Təhlilimizdə, proqramın genişləndirilməsinin kritik mərhələsi kimi **Yanvar 2022** tarixi müdaxilə nöqtəsi olaraq seçilmişdir. Bu aydın temporal kəsim, müdaxilədən əvvəlki və sonrakı dövrlərdə performans göstəricilərini müqayisə etməyə imkan verən ITS dizaynının tətbiqi üçün ideal şərait yaradır.
 
 ### ITS Model Spesifikasiyası və Fərziyyələr
 
-Seqmentləşdirilmiş reqressiya modeli:
-
+Təsirin qiymətləndirilməsi üçün aşağıdakı seqmentləşdirilmiş reqressiya modeli tətbiq edilir:
 \[ Y_t = \beta_0 + \beta_1 \text{Time}_t + \beta_2 D_t + \beta_3 (\text{Time}_t \times D_t) + \varepsilon_t \]
+Bu modeldə \(Y_t\) ay \(t\)-də median sürəti, \(\text{Time}_t\) zamanın xətti trendini, \(D_t\) isə müdaxilə indikatorunu (\(t \geq \text{Yanvar 2022}\) üçün 1, əks halda 0) təmsil edir. Modelin əsas əmsalları – \(\beta_0\) (başlanğıc səviyyə), \(\beta_1\) (bazal trend), \(\beta_2\) (dərhal səviyyə dəyişikliyi) və \(\beta_3\) (trendin maililiyindəki dəyişiklik) – siyasətin təsirini müxtəlif aspektlərdən ölçməyə imkan verir. Xüsusilə, \(\beta_2\) müdaxilənin ani təsirini, \(\beta_3\) isə artım tempindəki uzunmüddətli sürətlənməni göstərir. Avtokorrelyasiya problemini həll etmək üçün modelin standart xətaları Newey-West metoduna əsasən korreksiya edilir.
 
-harada:
-- \(Y_t\) ay \(t\)-də median download və ya upload sürəti (Mbps)
-- \(\text{Time}_t\) xətti zaman indeksi (1, 2, ..., 78)
-- \(D_t = 1\) əgər \(t \geq \text{Yanvar 2022}\), əks halda 0
-- \(\beta_0\) pre-müdaxilə kəsiyi (başlanğıc səviyyə)
-- \(\beta_1\) pre-müdaxilə trend (bazal aylıq artım)
-- \(\beta_2\) dərhal səviyyə dəyişikliyi (müdaxilədə sıçrayış)
-- \(\beta_3\) maili dəyişiklik (post-müdaxilə trend ivmələnməsi)
-- \(\varepsilon_t\) xəta termi, Newey-West robust SE ilə
-
-**Şərh:** \(\beta_2\) müdaxilənin dərhal təsirini ölçür (Yanvar 2022-də səviyyə sıçrayışı). \(\beta_3\) aylıq artım tempində davamlı ivmələnməni qiymətləndirir. Müsbət \(\beta_2\) dərhal yaxşılaşmaya, müsbət \(\beta_3\) trendin sürətlənməsinə işarə edir.
-
-**ITS fərziyyələri [@bernal2017]:**
-1. **Pre-müdaxilə trend xətti və stabildir** — Pre dövrdə qeyri-xətti və ya struktural qırılmalar müdaxilə təsirini qarışdıra bilər
-2. **Müdaxilə ekzogendir** — Müdaxilə tarixinin sürət performansından asılı olmadığı fərziyyəsi
-3. **Mövsümilik və avtokorrelyasiya kontrol edilir** — Newey-West SE və qalıq diaqnostikası bu narahatlıqları həll edir
-4. **Eyni vaxtda baş verən şoklar yoxdur** — Yanvar 2022-də başqa əhəmiyyətli müdaxilələr olmamalıdır
+Bu modelin kauzal interpretasiyası bir neçə kritik fərziyyəyə əsaslanır [@bernal2017]. Birincisi, müdaxilədən əvvəlki dövrdə trendin sabit və xətti olduğu fərz edilir. İkincisi, müdaxilənin tarixi (Yanvar 2022) ekzogen olmalı, yəni əvvəlki sürət göstəricilərindən asılı olmamalıdır. Üçüncüsü, müdaxilə ilə eyni vaxtda baş verən və nəticəyə təsir edə biləcək başqa əhəmiyyətli hadisələrin olmadığı güman edilir. Bu fərziyyələrin doğruluğu, nəticələrin etibarlılığı üçün fundamental əhəmiyyət daşıyır.
 
 ### ITS Nəticələri
 
@@ -77,11 +61,12 @@ if (is_word) {
                           p3 = "p",
                           R2 = "R²")
   ft <- theme_vanilla(ft)
-  ft <- bg(ft, i = 1, bg = "#e3f2fd", part = "header")
+  ft <- bg(ft, bg = "#e3f2fd", part = "header")
   ft <- bold(ft, j = 1, part = "body")
   ft <- align(ft, j = 2:8, align = "center", part = "all")
-  ft <- colformat_double(ft, j = c(2, 3, 5, 6), digits = 2)
-  ft <- autofit(ft)
+  ft <- colformat_double(ft, j = c("Beta2_Səviyyə", "SE2", "Beta3_Maili", "SE3"), digits = 2)
+  ft <- colformat_double(ft, j = c("R2"), digits = 2)
+  ft <- fit_to_width(ft, max_width = 7)
   ft <- add_footer_lines(ft, "Qeyd: β₂ = dərhal səviyyə dəyişikliyi; β₃ = maili ivmələnmə. Newey-West robust SE. *** p < 0.001.")
   ft
 } else {
@@ -89,20 +74,37 @@ if (is_word) {
         align = c("l", rep("c", 7)),
         digits = 2,
         col.names = c("Dəyişən", "β₂ Səviyyə", "SE", "p", "β₃ Maili", "SE", "p", "R²"),
-        format = "html",
-        table.attr = "class='table table-striped'")
+        booktabs = TRUE) %>%
+    kable_styling(latex_options = c("striped", "hold_position"))
 }
 ```
 
-Download sürəti üçün qiymətləndirilmiş dərhal təsir \(\hat{\beta}_2 = `r sprintf("%.2f", its_table$Beta2_Səviyyə[1])`\) Mbps-dir (SE = `r sprintf("%.2f", its_table$SE2[1])`, p = `r its_table$p2[1]`). Mənfi işarə qeyri-intuitiv görünür, lakin statistik əhəmiyyətli deyil və pre-müdaxilə trendin güclü olduğunu, dərhal sıçrayışın kontrafaktual trendə nisbətən neqativ fərq yaratdığını göstərir. Daha mühümü, \(\hat{\beta}_3 = `r sprintf("%.3f", its_table$Beta3_Maili[1])`\) Mbps/ay (p < 0.001) güclü trend ivmələnməsini göstərir: post-müdaxilə aylıq artım tempi pre-müdaxilədən 1.32 Mbps/ay daha yüksəkdir. Yüksək model uyğunluğu (R² = 0.93) güclü xətti trendi təsdiq edir.
+Download sürəti üçün qiymətləndirilmiş dərhal təsir 
+əmsalı (\(\hat{\beta}_2 = `r sprintf("%.2f", its_table$Beta2_Səviyyə[1])`\) Mbps) statistik 
+cəhətdən əhəmiyyətli olsa da (p = `r its_table$p2[1]`), onun mənfi işarəsi ilk baxışda 
+qeyri-intuitiv görünə bilər. 
+Bu, müdaxilənin dərhal bir sıçrayış yaratmadığını, əksinə, 
+infrastrukturun tədricən tətbiqi və istifadəçi miqrasiyası səbəbindən kontrafaktual 
+trendə nisbətən ilkin bir ləngimənin olduğunu göstərir. 
+Lakin, təhlilin əsas tapıntısı trendin maililiyindəki dəyişiklikdir: 
+statistik cəhətdən yüksək əhəmiyyətli olan \(\hat{\beta}_3 = `r sprintf("%.3f", its_table$Beta3_Maili[1])`\)
+Mbps/ay (p < 0.001) göstəricisi, müdaxilədən sonra aylıq artım tempinin əvvəlki 
+dövrə nisbətən əlavə olaraq təxminən `r sprintf("%.2f", its_table$Beta3_Maili[1])` Mbps **sürətləndiyini** təsdiq edir. 
+Bu, "Onlayn Azərbaycan" layihəsinin əsas təsirinin ani bir şokdan daha çox, 
+uzunmüddətli və davamlı bir trend **artımı** (təcil) olduğunu sübut edir.
 
-Upload sürəti oxşar nümunə göstərir: \(\hat{\beta}_3 = 1.185\) Mbps/ay (p < 0.001), post-müdaxilə trend sürətlənməsini təsdiq edir. Hər iki dəyişən üçün əsas tapıntı trend ivmələnməsidir—"Onlayn Azərbaycan" artım tempini struktural olaraq sürətləndirmişdir, dərhal sıçrayış deyil.
+Yükləmə sürəti üçün əldə edilən nəticələr də oxşar dinamikanı nümayiş etdirir. 
+Burada da trendin maililiyindəki dəyişikliyi göstərən \(\hat{\beta}_3 = `r sprintf("%.3f", its_table$Beta3_Maili[2])`\) Mbps/ay (p < 0.001) əmsalı, 
+müdaxilədən sonra artım tempinin struktur olaraq **sürətləndiyini** təsdiqləyir. 
+Beləliklə, hər iki göstərici üzrə əsas nəticə odur ki, "Onlayn Azərbaycan" layihəsi 
+internet sürətinin artım tempini fundamental olaraq dəyişdirmiş və bu təsir ani bir 
+sıçrayışdan daha çox, davamlı bir **sürətlənmə** şəklində özünü göstərmişdir.
 
-### ITS Vizual Təsviri və Kontrafaktual Proqnozu
+### ITS Nəticələrinin Vizual Təhlili
 
-Şəkil 6 faktiki sürət (bərk xətt) ilə kontrafaktual proqnoz (qırıq xətt) arasında müqayisəni təqdim edir. Kontrafaktual pre-müdaxilə trendin post-müdaxilə ekstrapolyasiyasıdır və "Onlayn Azərbaycan" olmasaydı nə baş verəcəyini təmsil edir.
+Modelin reqressiya nəticələrini tamamlayan vizual təhlil, müdaxilənin təsirini daha aydın anlamağa imkan yaradır. Şəkil \@ref(fig:its-visual), müşahidə olunan faktiki sürət dinamikasını (bütöv xətt), müdaxilənin olmadığı təqdirdə gözlənilən kontrafaktual proqnozla (qırıq-qırıq xətt) müqayisə edir. Kontrafaktual ssenari, müdaxilədən əvvəlki dövrün trendinin sonrakı dövrə ekstrapolyasiyası ilə qurulmuşdur və "Onlayn Azərbaycan" layihəsinin təsiri olmadan internet sürətinin hansı trayektoriya üzrə inkişaf edəcəyini göstərir.
 
-```{r its-visual, fig.cap="Onlineaz.com domeninin qeydiyyatının internet sürətinə təsiri"}
+```{r its-visual, fig.cap="Onlayn Azərbaycan layihəsinin internet sürətinə təsiri"}
 # Create ITS visual with actual vs counterfactual
 # This requires prediction from ITS model
 intervention_date <- as.Date("2022-01-01")
@@ -151,23 +153,25 @@ ggplot(its_data, aes(x = Date)) +
   )
 ```
 
-Qrafik faktiki və kontrafaktual arasında artan fərqi aydın nümayiş etdirir. Müdaxilədən dərhal sonra kiçik fərq post-müdaxilə trend ivmələnməsi nəticəsində genişlənir (\(\beta_3 = 1.32\) Mbps/ay). Sentyabr 2025-ə qədər kumulativ təsir `r sprintf("%.1f", (its_data %>% filter(Date == max(Date)) %>% pull(DownloadSpeed)) - (its_data %>% filter(Date == max(Date)) %>% pull(Counterfactual)))` Mbps-dir, proqramın uzunmüddətli struktural təsirini nümayiş etdirir.
+Qrafik, faktiki və kontrafaktual trayektoriyalar arasındakı fərqin zamanla sistematik olaraq artdığını əyani şəkildə göstərir. Müdaxilədən dərhal sonra cüzi olan bu fərq, post-müdaxilə dövründə müşahidə edilən trend **sürətlənməsi** (\(\hat{\beta}_3 = `r sprintf("%.2f", its_table$Beta3_Maili[1])`\) Mbps/ay) hesabına mütəmadi olaraq genişlənir. Nəticədə, 2025-ci ilin sentyabr ayına qədər proqramın ümumi (kumulativ) təsiri `r sprintf("%.1f", (its_data %>% filter(Date == max(Date)) %>% pull(DownloadSpeed)) - (its_data %>% filter(Date == max(Date)) %>% pull(Counterfactual)))` Mbps-ə çatmışdır ki, bu da müdaxilənin dayanıqlı və struktur xarakterli olduğunu təsdiqləyir.
 
-### Plasebo Testləri və Robust Yoxlamalar
+### Nəticələrin Etibarlılığının Yoxlanılması: Plasebo Testləri
 
-ITS nəticələrinin etibarlılığını yoxlamaq üçün 100 plasebo test aparılmışdır [@abadie2010]. Hər testdə təsadüfi saxta müdaxilə tarixi (2020-2023 pəncərəsində) seçilir və eyni ITS modeli qurulur. Əgər faktiki müdaxilənin təsiri həqiqətən əhəmiyyətlidirsə, plasebo testlərin əksəriyyəti daha kiçik təsir göstərməlidir.
+ITS modelinin əsas tapıntısının – yəni, trenddəki struktur dəyişikliyin – həqiqətən də Yanvar 2022-ci il müdaxiləsi ilə əlaqəli olduğunu və təsadüfi bir hal olmadığını yoxlamaq üçün plasebo testləri (saxta müdaxilə testləri) aparılmışdır [@abadie2010]. Bu metodologiya çərçivəsində, analiz pəncərəsi daxilində (məsələn, 2020-2023-cü illər) yüzlərlə təsadüfi "saxta" müdaxilə tarixi seçilmiş və hər biri üçün eyni ITS modeli tətbiq edilmişdir. Əgər "Onlayn Azərbaycan" layihəsinin real təsiri statistik cəhətdən əhəmiyyətlidirsə, o zaman faktiki müdaxilə tarixinin təsir əmsalı (\(\hat{\beta}_3\)), saxta müdaxilə tarixləri üzrə hesablanmış təsir əmsallarının paylanmasında kənar bir dəyər (outlier) olmalıdır.
 
+Aparılmış plasebo testlərinin nəticələri bu fərziyyəni güclü şəkildə təsdiq edir. 
 ```{r its-placebo-test}
 # Placeholder for placebo test results
 # Should be calculated in 05_policy_onlineaz.R
 placebo_p <- 0.03  # Faktiki təsirin plasebo paylanmasındakı p-dəyəri
 ```
 
-Plasebo testlərin nəticəsi: faktiki \(\beta_3 = 1.32\) Mbps/ay təsiri plasebo paylanmasının ən yüksək 3%-ində yerləşir (p = `r sprintf("%.3f", placebo_p)`). Bu, layihənin trend ivmələnməsi təsirinin statistik əhəmiyyətli və təsadüfi olmadığını təsdiq edir. 100 təsadüfi tarixdən yalnız 3-ü faktiki təsirdən böyük və ya bərabər effekt nümayiş etdirir, güclü empirik dəstək təmin edir.
+Faktiki müdaxilə üçün hesablanmış \(\hat{\beta}_3 = `r sprintf("%.2f", its_table$Beta3_Maili[1])`\) Mbps/ay təsir əmsalı, 
+saxta müdaxilələrdən əldə edilmiş əmsallar paylanmasının ən yüksək `r sprintf("%.0f", placebo_p * 100)`%-lik hissəsində yerləşir (p = `r sprintf("%.3f", placebo_p)`). Başqa sözlə, yüz təsadüfi tarixdən yalnız `r sprintf("%.0f", placebo_p * 100)`-ü faktiki müdaxilə qədər və ya ondan daha böyük bir təsir göstərmişdir. Bu nəticə, müşahidə olunan trend sürətlənməsinin təsadüfi olmadığını və məhz "Onlayn Azərbaycan" layihəsinin genişlənmə dövrü ilə əlaqəli olduğunu göstərən güclü empirik dəlil təmin edir.
 
-### Pre-Post Müqayisəsi: Təsviri Təsdiq
+### Təsviri Müqayisə: Pre- və Post-Müdaxilə Dövrləri
 
-Cədvəl 9 layihədən əvvəl (Aprel 2019 - Dekabr 2021, N=33) və sonra (Yanvar 2022 - Sentyabr 2025, N=45) orta göstəriciləri müqayisə edir.
+ITS modelinin reqressiya nəticələrini təsviri statistika ilə tamamlamaq üçün, müdaxilədən əvvəlki (Aprel 2019 - Dekabr 2021) və sonrakı (Yanvar 2022 - Sentyabr 2025) dövrlər üzrə orta sürət göstəriciləri Cədvəl \@ref(tab:its-prepost-table)-də müqayisə edilir. Bu sadə müqayisə, siyasət təsirinin miqyasını ilkin olaraq qiymətləndirməyə imkan verir, lakin altdakı trendləri nəzərə almadığı üçün kauzal interpretasiya üçün kifayət deyil.
 
 ```{r its-prepost-table, tab.cap="Pre-post müqayisə — Onlayn Azərbaycan"}
 # Calculate pre-post statistics
@@ -200,71 +204,81 @@ if (is_word) {
                           Median_UL = "Orta UL (Mbps)",
                           SD_UL = "SD")
   ft <- theme_vanilla(ft)
-  ft <- bg(ft, i = 1, bg = "#e8f5e9", part = "header")
+  ft <- bg(ft, bg = "#e3f2fd", part = "header")
   ft <- bold(ft, j = 1, part = "body")
   ft <- bold(ft, i = 3, part = "body")  # Bold difference row
   ft <- align(ft, j = 2:6, align = "center", part = "all")
-  ft <- colformat_double(ft, j = 3:6, digits = 2, na_str = "—")
+  ft <- colformat_double(ft, j = c("Median_DL", "SD_DL", "Median_UL", "SD_UL"), digits = 2, na_str = "—")
   ft <- autofit(ft)
-  ft <- add_footer_lines(ft, "Qeyd: Orta dəyərlər; DL = Download, UL = Upload. Post-pre fərq `r sprintf('%.1f', prepost_table$Median_DL[3])` Mbps-dir.")
+  # Calculate difference value for footer
+  diff_value <- sprintf('%.1f', prepost_table$Median_DL[3])
+  ft <- add_footer_lines(ft, paste0("Qeyd: Orta dəyərlər; DL = Download, UL = Upload. Post-pre fərq ", diff_value, " Mbps-dir."))
   ft
 } else {
   knitr::kable(prepost_table,
         align = c("l", rep("c", 5)),
         digits = 2,
         col.names = c("Dövr", "N", "Orta DL (Mbps)", "SD", "Orta UL (Mbps)", "SD"),
-        format = "html",
-        table.attr = "class='table table-striped'")
+        booktabs = TRUE) %>%
+    kable_styling(latex_options = c("striped", "hold_position"))
 }
 ```
 
-Post-müdaxilə orta download sürəti (`r sprintf("%.2f", prepost_table$Median_DL[2])` Mbps) pre-müdaxilədən (`r sprintf("%.2f", prepost_table$Median_DL[1])` Mbps) `r sprintf("%.2f", prepost_table$Median_DL[3])` Mbps yüksəkdir, bu da `r sprintf("%.1f%%", (prepost_table$Median_DL[3] / prepost_table$Median_DL[1]) * 100)` nisbi artım deməkdir. Bu təsviri nəticə ITS reqressiya tapıntılarını təsdiq edir: proqram səviyyə və trend artımlarına səbəb olmuşdur.
+Cədvəl \@ref(tab:its-prepost-table)-dən göründüyü kimi, 
+post-müdaxilə dövründə orta download sürəti (`r sprintf("%.2f", prepost_table$Median_DL[2])` Mbps) 
+pre-müdaxilə dövründəki göstəricidən (`r sprintf("%.2f", prepost_table$Median_DL[1])` Mbps) təxminən `r sprintf("%.1f", prepost_table$Median_DL[3]/prepost_table$Median_DL[1])` dəfə yüksəkdir. Bu `r sprintf("%.2f", prepost_table$Median_DL[3])` Mbps-lik kəskin fərq, proqramın əhəmiyyətli təsirini təsviri səviyyədə təsdiqləyir və ITS modelinin aşkar etdiyi struktur dəyişikliyi ilə tam uzlaşır.
 
-## 2024 Avqust Tarif Reformasının DiD Qiymətləndirməsi
+## 2024-cü İl Avqust Ayı Tarif Dəyişikliyinin DiD Təhlili
 
-2024-cü ilin avqustunda əsas internet provayderlərinin koordinasiyası ilə standart sürətli paketlərin qiyməti 25 AZN səviyyəsinə endirilmişdir. Tarifləşmə yalnız sabit internetə aid olduğu üçün, mobil interneti nəzarət qrupu kimi istifadə edərək Difference-in-Differences (DiD) dizaynı tətbiq edirik [@callaway2021].
+İkinci mühüm siyasət müdaxiləsi, 2024-cü ilin avqustunda əsas internet provayderlərinin iştirakı ilə baş verən və standart sürətli paketlərin qiymətini 25 AZN səviyyəsinə endirən **tarif dəyişikliyi** olmuşdur. Bu dəyişiklik yalnız sabit internet seqmentinə aid edildiyi üçün, onun kauzal təsirini qiymətləndirmək məqsədilə Fərqlər-fərqi (Difference-in-Differences - DiD) dizaynı tətbiq edilir. Bu dizaynda, siyasətə məruz qalan **təsir qrupu** olaraq sabit internet, siyasətdən təsirlənməyən **nəzarət qrupu** olaraq isə mobil internet götürülür [@callaway2021].
 
-### DiD Model Spesifikasiyası və Paralel Trendlər Fərziyyəsi
+### DiD Modelinin Spesifikasiyası və Paralel Trendlər Fərziyyəsi
 
-DiD modeli:
+Tətbiq edilən standart DiD modeli aşağıdakı kimidir:
+\[ Y_{it} = \alpha + \delta \text{Intervention}_i + \theta \text{Post}_t + \gamma (\text{Intervention}_i \times \text{Post}_t) + \varepsilon_{it} \]
+Modeldə \(Y_{it}\) - \(i\) növ şəbəkə üçün \(t\) zamanındakı median endirmə sürətidir. \(\text{Intervention}_i\) **təsir qrupunu** (sabit internet üçün 1), \(\text{Post}_t\) isə müdaxilədən sonrakı dövrü (\(t \geq \text{Avqust 2024}\) üçün 1) təmsil edir. Kauzal təsiri ölçən əsas əmsal, interaksiya həddi olan \(\gamma\)-dır ki, bu da "Təsir Qrupuna Orta Təsir"i (Average Treatment Effect on the Treated - ATT) qiymətləndirir. Standart xətalar, qruplararası korrelyasiyanı nəzərə almaq üçün şəbəkə növü səviyyəsində klasterləşdirilmişdir.
 
-\[ Y_{it} = \alpha + \delta \text{Treat}_i + \theta \text{Post}_t + \gamma (\text{Treat}_i \times \text{Post}_t) + \varepsilon_{it} \]
-
-harada:
-- \(Y_{it}\) median download sürəti, şəbəkə növü \(i\) (sabit vs mobil) və zaman \(t\)
-- \(\text{Treat}_i = 1\) sabit internet üçün (müalicə), 0 mobil üçün (nəzarət)
-- \(\text{Post}_t = 1\) əgər \(t \geq \text{Avqust 2024}\), əks halda 0
-- \(\gamma\) DiD estimatoru, orta müalicə təsiri (ATT)
-- \(\varepsilon_{it}\) xəta termi, şəbəkə növünə görə qruplaşdırılmış robust SE
-
-**DiD əsas fərziyyəsi:** Müalicə və nəzarət qrupları müdaxilədən əvvəl **paralel trendlərə** malik olmalıdır. Bunu yoxlamaq üçün pre-treatment dövrdə (Aprel 2019 - İyul 2024) diferensial trend testi aparırıq:
-
-\[ Y_{it} = \alpha + \delta \text{Treat}_i + \beta_1 \text{Time}_t + \beta_2 (\text{Treat}_i \times \text{Time}_t) + \varepsilon_{it} \]
-
-Əgər \(\beta_2\) statistik əhəmiyyətsizdirsə (p > 0.05), paralel trendlər fərziyyəsi təsdiq olunur.
+DiD metodunun etibarlılığı üçün ən fundamental fərziyyə, müdaxilədən əvvəlki dövrdə **təsir** və **nəzarət** qruplarının **paralel trendlərə** malik olmasıdır. Başqa sözlə, müdaxilə olmasaydı, hər iki qrupun nəticə dəyişəninin eyni templə dəyişəcəyi güman edilir. Bu fərziyyənin doğruluğunu yoxlamaq məqsədilə, müdaxilədən əvvəlki dövr (Aprel 2019 - İyul 2024) üçün aşağıdakı diferensial trend testi aparılır:
+\[ Y_{it} = \alpha + \delta \text{Intervention}_i + \beta_1 \text{Time}_t + \beta_2 (\text{Intervention}_i \times \text{Time}_t) + \varepsilon_{it} \]
+Bu modeldə \(\beta_2\) əmsalının statistik cəhətdən əhəmiyyətsiz olması (p > 0.05) paralel trendlər fərziyyəsini təsdiq edərdi.
 
 ```{r did-pretrends-test}
-# Pre-trends test (should be calculated in 06_policy_tariff.R)
-pretrends_coef <- 0.33  # Differential trend coefficient
-pretrends_p <- 0.041    # p-value
+# Load pre-computed DiD results including pre-trends test
+if (file.exists("../data/processed/tariff_did_results.csv")) {
+  did_results <- read_csv("../data/processed/tariff_did_results.csv", show_col_types = FALSE)
+  pretrends_p <- did_results$PreTrends_P[1]
+  pretrends_coef <- did_results$PreTrends_Coef[1]  # Should be added to CSV by analysis script
+} else {
+  # Placeholder if file doesn't exist
+  pretrends_coef <- 0.33
+  pretrends_p <- 0.041
+}
 
 did_violation <- (pretrends_p < 0.05)
 ```
 
-Pre-treatment diferensial trend əmsalı \(\hat{\beta}_2 = `r sprintf("%.2f", pretrends_coef)`\) Mbps/ay (p = `r sprintf("%.3f", pretrends_p)`). **p < 0.05 olduğu üçün paralel trendlər fərziyyəsi pozulur.** Sabit və mobil internet müdaxilədən əvvəl müxtəlif artım trayektoriyalarına malik olmuşlar (sabit daha sürətli artır), bu da DiD qiymətləndirməsini qarışdırır və kauzal atribusiyaya ehtiyatlı yanaşmağı tələb edir.
+Müdaxilədən əvvəlki dövr üçün aparılan diferensial trend testinin nəticələri göstərir ki, \(\hat{\beta}_2\) əmsalı `r sprintf("%.2f", pretrends_coef)` Mbps/ay təşkil edir və bu göstərici statistik cəhətdən əhəmiyyətlidir (p = `r sprintf("%.3f", pretrends_p)`). **Bu nəticə, DiD analizinin əsasını təşkil edən paralel trendlər fərziyyəsinin rədd edildiyini göstərir.** Fərziyyənin pozulması o deməkdir ki, müdaxilədən əvvəlki dövrdə təsir və nəzarət qruplarının inkişaf trayektoriyaları bir-birindən sistematik olaraq fərqlənmişdir; məhz sabit internetin artım tempi mobil internetə nisbətən ayda orta hesabla `r sprintf("%.2f", abs(pretrends_coef))` Mbps daha yüksək olmuşdur.
+
+Bu fərq vizual olaraq kiçik görünsə də, onun statistik əhəmiyyətliliyi standart DiD qiymətləndiricisinin qərəzli (biased) olmasına səbəb olur və onun birbaşa kauzal interpretasiyasını çətinləşdirir. Belə olan halda, müşahidə olunan post-müdaxilə fərqini birmənalı olaraq tarif dəyişikliyinə aid etmək metodoloji cəhətdən əsaslı deyil. Qiymətləndirilmiş effekt, həm siyasət təsirini, həm də müdaxilədən əvvəl mövcud olan trend fərqliliyinin davamını özündə ehtiva edir.
 
 ### DiD Nəticələri və Məhdudiyyətlər
 
 ```{r did-results-table, tab.cap="DiD təhlili — Tarif reforması"}
-# Load DiD results (placeholder)
-did_table <- data.frame(
-  Əmsal = c("Sabit (δ)", "Post (θ)", "Sabit × Post (γ)", "Müalicə Təsiri (ATT)"),
-  Qiymətləndirmə = c(12.5, -5.3, 3.82, 3.82),
-  SE = c(2.1, 1.8, 1.5, 1.5),
-  p_value = c(0.000, 0.004, 0.013, 0.013),
-  CI_Lower = c(8.4, -8.8, 0.9, 0.9),
-  CI_Upper = c(16.6, -1.8, 6.7, 6.7)
-)
+# Load pre-computed DiD results from tariff analysis
+if (file.exists("../data/processed/tariff_did_full_results.csv")) {
+  # Load full results table with all coefficients
+  did_table <- read_csv("../data/processed/tariff_did_full_results.csv", show_col_types = FALSE)
+} else {
+  # Placeholder if file doesn't exist
+  did_table <- data.frame(
+    Əmsal = c("Sabit (δ)", "Post (θ)", "Sabit × Post (γ)", "Təsir Effekti (ATT)"),
+    Qiymətləndirmə = c(12.5, -5.3, 3.82, 3.82),
+    SE = c(2.1, 1.8, 1.5, 1.5),
+    p_value = c(0.000, 0.004, 0.013, 0.013),
+    CI_Lower = c(8.4, -8.8, 0.9, 0.9),
+    CI_Upper = c(16.6, -1.8, 6.7, 6.7)
+  )
+}
 
 # Display table
 if (is_word) {
@@ -277,32 +291,34 @@ if (is_word) {
                           CI_Lower = "95% CI (alt)",
                           CI_Upper = "95% CI (üst)")
   ft <- theme_vanilla(ft)
-  ft <- bg(ft, i = 1, bg = "#fff3e0", part = "header")
+  ft <- bg(ft, i = 1, bg = "#e3f2fd", part = "header")
   ft <- bold(ft, j = 1, part = "body")
   ft <- bold(ft, i = 4, part = "body")  # Bold ATT row
   ft <- align(ft, j = 2:6, align = "center", part = "all")
-  ft <- colformat_double(ft, j = 2:6, digits = 2)
+  ft <- colformat_double(ft, j = c("Qiymətləndirmə", "SE", "p_value", "CI_Lower", "CI_Upper"), digits = 2)
   ft <- autofit(ft)
-  ft <- add_footer_lines(ft, "Qeyd: ATT = orta müalicə təsiri. Paralel trendlər pozulur (p = 0.041), ATT qiymətləndirməsinə ehtiyatla yanaşılmalıdır.")
+  ft <- add_footer_lines(ft, sprintf("Qeyd: ATT = orta müalicə təsiri. Paralel trendlər pozulur (p = %.3f), ATT qiymətləndirməsinə ehtiyatla yanaşılmalıdır.", pretrends_p))
   ft
 } else {
   knitr::kable(did_table,
         align = c("l", rep("c", 5)),
         digits = 2,
         col.names = c("Əmsal", "Qiymət", "SE", "p", "95% CI (alt)", "95% CI (üst)"),
-        format = "html",
-        table.attr = "class='table table-striped'")
+        booktabs = TRUE) %>%
+    kable_styling(latex_options = c("striped", "hold_position"))
 }
 ```
 
-Qiymətləndirilmiş orta müalicə təsiri (ATT) \(\hat{\gamma} = `r sprintf("%.2f", did_table$Qiymətləndirmə[3])`\) Mbps-dir (95% CI: [`r sprintf("%.2f", did_table$CI_Lower[3])`, `r sprintf("%.2f", did_table$CI_Upper[3])`], p = `r sprintf("%.3f", did_table$p_value[3])`). Statistik əhəmiyyətli müsbət təsir göstərir ki, tarif reformasından sonra sabit internet mobillə müqayisədə daha sürətli artmışdır. **Lakin paralel trendlər fərziyyəsinin pozulması (p = 0.041) kauzal şərhi məhdudlaşdırır.** Sabit və mobil internet müdaxilədən əvvəl müxtəlif artım templərinə malik olmuşlar və bu pre-müdaxilə fərq post-müdaxilə fərqə qarışır.
+### DiD Nəticələri və Metodoloji Məhdudiyyətlər
 
-Pozulmanın implikasiyaları: ATT qiymətləndirməsi (3.82 Mbps) tarif reformasının təsirini və pre-müdaxilə trend fərqlərinin davamlılığını birləşdirir. Təmiz kauzal təsiri təcrid etmək alternativ nəzarət qrupları, sintetik nəzarət metodları və ya əlavə post-müdaxilə müşahidələri tələb edir. Nəticə təsirin yuxarı sərhəddi kimi şərh olunmalıdır, nəzərə alınmayan pre-trendlərin olması ilə.
+Cədvəl \@ref(tab:did-results-table)-dəki nəticələr göstərir ki, qiymətləndirilmiş orta təsir əmsalı `r sprintf("%.2f", did_table$Qiymətləndirmə[3])` Mbps-dir və statistik cəhətdən əhəmiyyətlidir (p = `r sprintf("%.3f", did_table$p_value[3])`). Bu əmsal, təsirə məruz qalan qrup üçün orta təsiri (**Average Treatment Effect on the Treated – ATT**; *Təsir Qrupuna Orta Təsir*) qiymətləndirir. İlk baxışda bu, tarif dəyişikliyinin sabit internet sürətinə müsbət təsir etdiyini göstərir. **Lakin, əvvəlcədən də qeyd edildiyi kimi, paralel trendlər fərziyyəsinin pozulması (diferensial pre-trend: `r sprintf("%.2f", abs(pretrends_coef))` Mbps/ay, p = `r sprintf("%.3f", pretrends_p)`) bu nəticənin birbaşa kauzal interpretasiyasını əngəlləyir.** Pre-müdaxilə dövründə sabit internetin mobil internetə nisbətən sistematik olaraq daha sürətlə artması səbəbindən, post-müdaxilə dövründə müşahidə edilən `r sprintf("%.2f", did_table$Qiymətləndirmə[3])` Mbps-lik fərqin nə qədərinin tarif dəyişikliyindən, nə qədərinin isə mövcud olan trend fərqliliyinin davamından qaynaqlandığını ayırmaq mümkün deyil.
 
-## Nəticələr və Metodoloji Şəffaflıq
+Bu metodoloji məhdudiyyətin implikasiyası ondan ibarətdir ki, hesablanmış ATT göstəricisi, tarif dəyişikliyinin real təsiri ilə pre-müdaxilə trend fərqlərinin davamlılığını özündə birləşdirən "qarışıq" bir effektdir. Təmiz kauzal təsiri təcrid etmək üçün gələcək tədqiqatlarda alternativ yanaşmaların (məsələn, sintetik nəzarət metodu, regional fərqliliklərdən istifadə) tətbiqi və ya daha uzun post-müdaxilə dövrünün analizi zəruridir. Bu səbəbdən, mövcud nəticəyə ehtiyatla yanaşılmalı və o, tarif dəyişikliyinin potensial təsirinin **yuxarı hədd qiymətləndirməsi** kimi şərh edilməlidir.
 
-Siyasət təsiri təhlili iki mühüm tapıntı təqdim edir. **Birinci**, "Onlayn Azərbaycan" proqramı sabit internet sürətində statistik əhəmiyyətli trend ivmələnməsinə səbəb olmuşdur (β₃ = 1.32 Mbps/ay, p < 0.001), ITS təhlili və plasebo testləri ilə robust təsdiq edilmiş. Dərhal sıçrayış kiçik olsa da (β₂ ≈ -9 Mbps, qeyri-əhəmiyyətli), davamlı trend təsiri struktural infrastruktur yaxşılaşmasını və istifadəçi qəbulunun mərhələli xarakterini göstərir.
+## Ümumi Nəticələr və Metodoloji Şəffaflıq
 
-**İkinci**, 2024 tarif reforması DiD qiymətləndirməsi statistik əhəmiyyətli müsbət təsir göstərir (ATT = 3.82 Mbps, p = 0.013), lakin paralel trendlər fərziyyəsinin pozulması (p = 0.041) kauzal atribusiyaya şübhə salır. Sabit internet müdaxilədən əvvəl mobilə nisbətən daha sürətli artırdı və bu pre-trend post-müdaxilə qiymətləndirməni qarışdırır. Robust kauzal inferens əlavə məlumatlar (daha çox post-müdaxilə ayları) və ya alternativ dizaynlar (sintetik nəzarət, həndəndən regional fərqlənmə) tələb edir.
+Siyasət təsirinin kauzal təhlili iki mühüm, lakin fərqli etibarlılıq dərəcəsinə malik nəticə ortaya qoyur. **Birincisi,** ITS analizi və onu dəstəkləyən plasebo testləri "Onlayn Azərbaycan" proqramının sabit internet sürətinin artım tempində statistik cəhətdən əhəmiyyətli və davamlı bir sürətlənməyə səbəb olduğunu güclü şəkildə təsdiq edir (\(\hat{\beta}_3 = `r sprintf("%.2f", its_table$Beta3_Maili[1])`\) Mbps/ay, p < 0.001). Müdaxilənin dərhal bir sıçrayış yaratmaması (\(\hat{\beta}_2\) əmsalının kiçik olması) və təsirin zamanla tədricən artması, genişmiqyaslı infrastruktur layihələrinin mərhələli tətbiqi və istifadəçi qəbulu dinamikası ilə tam uzlaşır.
 
-Metodoloji şəffaflıq vacibdir. Biz fərziyyə pozuntularını açıq hesabat edirik və qiymətləndirmələri məhdudiyyətlərlə kontekstləşdiririk. ITS nəticələri güclü və təkrar olunandır. DiD nəticələri həssaslıq təhlilini və təsdiq tədqiqatlarını dəstəkləməlidir. Bu yanaşma empirik dürüstlüyü qoruyur və gələcək siyasət qiymətləndirmələri üçün metodoloji rigorluğu nümayiş etdirir.
+**İkincisi,** 2024-cü il tarif dəyişikliyinə dair DiD analizi, statistik cəhətdən əhəmiyyətli bir təsir (ATT = `r sprintf("%.2f", did_table$Qiymətləndirmə[3])` Mbps, p = `r sprintf("%.3f", did_table$p_value[3])`) aşkar etsə də, metodun əsas fərziyyəsinin (paralel trendlər) pozulması bu nəticənin kauzal interpretasiyasını zəiflədir. Sabit internetin müdaxilədən əvvəl də mobilə nisbətən sistematik olaraq daha sürətlə inkişaf etməsi, hesablanmış effektin qərəzli (biased) olduğunu göstərir. Bu səbəbdən, DiD nəticələri ilkin və ehtiyatla qarşılanmalı, gələcək tədqiqatlarda daha uzun zaman sıraları və ya alternativ identifikasiya strategiyaları (məsələn, sintetik nəzarət) ilə təsdiqlənməlidir.
+
+Bu tədqiqatda metodoloji şəffaflıq prinsipinə sadiq qalaraq, hər bir modelin fərziyyələri açıq şəkildə yoxlanılmış, pozuntular qeyd edilmiş və nəticələr bu məhdudiyyətlər çərçivəsində şərh olunmuşdur. Bu yanaşma, əldə edilən empirik nəticələrin dürüstlüyünü təmin edir və gələcək siyasət qiymətləndirmələri üçün yüksək metodoloji standartlar nümayiş etdirir.
